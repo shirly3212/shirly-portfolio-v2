@@ -111,7 +111,6 @@
       75% { transform: translateY(-5px) scale(1.05) rotate(2deg); }
       100% { transform: translateY(0) scale(1) rotate(0deg); }
     }
-  </style>
 
 
 body {
