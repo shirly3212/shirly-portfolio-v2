@@ -7,10 +7,51 @@
   <title>Shirly Ben Nun | Portfolio</title>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <style>
+    .character-inline {
+      margin-left: 2rem;
+    }
+    .me-icon {
+      width: 120px;
+      height: auto;
+    }
+    #HANDPENCIL, #HAND-L, #SHIRT, #SHIRTBODY, #SHIRT-L, #HEAD {
+      transform-origin: left center;
+      animation: handMotion 1.5s ease-in-out infinite alternate;
+    }
+    #PLANT-R, #PLANT-L {
+      animation: floatPlant 1.8s ease-in-out infinite alternate;
+      transform-origin: top;
+    }
+    #LINEPAINT {
+      stroke-dasharray: 200;
+      stroke-dashoffset: 200;
+      animation: drawLine 3s ease-out forwards;
+    }
+    @keyframes drawLine {
+      to { stroke-dashoffset: 0; }
+    }
+    @keyframes handMotion {
+      from { transform: rotateZ(1deg); }
+      to { transform: rotateZ(0); }
+    }
+    @keyframes floatPlant {
+      from { transform: translateY(0); }
+      to { transform: translateY(-10px); }
+    }
+    .splash-svg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: -1;
+    }
+  </style>
 </head>
-
-
 <body>
+  <div class="splash-svg">
+    <img src="img new/splash.svg" alt="background" />
+  </div>
   <header class="main-head">
     <nav>
       <div class="logo">
@@ -59,10 +100,6 @@
     </nav>
   </header>
 
-  <div class="splash-svg">
-    <img src="img new/splash.svg" alt="background"/>
-  </div>
-
   <section class="intro">
     <div class="intro-text">
       <h2>Hi, I'm Shirly</h2>
@@ -78,18 +115,21 @@
   <section class="categories">
     <div class="category">
       <a href="web/index.html">
+        <img src="img new/web-bg.jpg" alt="Web" style="width:100%; border-radius: 1rem;">
         <h4>Web Development</h4>
         <p>Explore websites I've built with HTML, CSS, and JavaScript.</p>
       </a>
     </div>
     <div class="category">
       <a href="design/index.html">
+        <img src="img new/design-bg.jpg" alt="Design" style="width:100%; border-radius: 1rem;">
         <h4>Graphic Design</h4>
         <p>Branding, posters, and visual compositions.</p>
       </a>
     </div>
     <div class="category">
       <a href="motion/index.html">
+        <img src="img new/motion-bg.jpg" alt="Motion" style="width:100%; border-radius: 1rem;">
         <h4>Motion & Animation</h4>
         <p>Videos, animated assets, and visual storytelling.</p>
       </a>
