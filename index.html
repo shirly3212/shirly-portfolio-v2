@@ -8,6 +8,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <style>
+    ul, ul li {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
     .me {
       max-width: 100%;
       height: auto;
@@ -15,6 +21,7 @@
       transform-origin: bottom center;
       opacity: 0;
       position: relative;
+      text-align: center;
     }
     @keyframes drawTablet {
       0% {
@@ -32,6 +39,40 @@
         opacity: 1;
       }
     }
+
+    svg #HANDPENCIL {
+      animation: handPencilMove 1.5s ease-in-out infinite alternate;
+      transform-origin: left center;
+    }
+    @keyframes handPencilMove {
+      0% { transform: rotate(-2deg); }
+      100% { transform: rotate(3deg); }
+    }
+
+    svg #LINEPAINT {
+      stroke-dasharray: 2000;
+      stroke-dashoffset: 2000;
+      animation: drawLine 3s ease-in forwards;
+    }
+    @keyframes drawLine {
+      to { stroke-dashoffset: 0; }
+    }
+
+    svg #PLANT-R {
+      animation: plantR 2s ease-in-out infinite alternate;
+    }
+    svg #PLANT-L {
+      animation: plantL 2s ease-in-out infinite alternate;
+    }
+    @keyframes plantR {
+      from { transform: translateY(0); }
+      to { transform: translateY(-10px); }
+    }
+    @keyframes plantL {
+      from { transform: translateY(0); }
+      to { transform: translateY(-10px); }
+    }
+
     .svg-decor {
       position: absolute;
       opacity: 0;
@@ -64,31 +105,15 @@
       filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.8));
     }
     @keyframes popIn {
-      from {
-        transform: scale(0.5);
-        opacity: 0;
-      }
-      to {
-        transform: scale(1);
-        opacity: 1;
-      }
+      from { transform: scale(0.5); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
     }
     @keyframes floatDecor {
-      0% {
-        transform: translateY(0) scale(1) rotate(0deg);
-      }
-      25% {
-        transform: translateY(-5px) scale(1.05) rotate(2deg);
-      }
-      50% {
-        transform: translateY(-10px) scale(1.1) rotate(3deg);
-      }
-      75% {
-        transform: translateY(-5px) scale(1.05) rotate(2deg);
-      }
-      100% {
-        transform: translateY(0) scale(1) rotate(0deg);
-      }
+      0% { transform: translateY(0) scale(1) rotate(0deg); }
+      25% { transform: translateY(-5px) scale(1.05) rotate(2deg); }
+      50% { transform: translateY(-10px) scale(1.1) rotate(3deg); }
+      75% { transform: translateY(-5px) scale(1.05) rotate(2deg); }
+      100% { transform: translateY(0) scale(1) rotate(0deg); }
     }
   </style>
 </head>
@@ -143,7 +168,16 @@
   </section>
 
   <div class="me">
-    <object type="image/svg+xml" data="me.svg"></object>
+    <!-- Embedded SVG Character -->
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1124 923">
+      <g id="HANDPENCIL">
+        <path d="M673.141 780.791L674.713 767.626L777.794 539.406C779.502 535.626 783.779 534.045 787.328 535.883C790.878 537.72 792.376 542.292 790.669 546.071L687.633 774.191L678.924 783.785C677.893 784.915 676.365 785.199 675.03 784.508C673.696 783.817 672.955 782.358 673.141 780.791Z" fill="#3F3D56"/>
+      </g>
+      <path id="LINEPAINT" d="M826.649 790.16C833.773 790.756..." fill="#38A5D2"/>
+      <g id="PLANT-L"><circle cx="100" cy="800" r="30" fill="#38A5D2"/></g>
+      <g id="PLANT-R"><circle cx="1020" cy="800" r="30" fill="#38A5D2"/></g>
+    </svg>
+
     <img src="new icons/star.svg" alt="Star" class="svg-decor star">
     <img src="new icons/dot.svg" alt="Dot" class="svg-decor dot">
     <img src="new icons/spark.svg" alt="Spark" class="svg-decor spark">
