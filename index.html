@@ -17,15 +17,39 @@
         <div class="character-inline">
           <!-- Animated Character SVG -->
           <svg class="me-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1124 923">
-            <g id="HEAD" class="animated-part"></g>
-            <g id="HANDPENCIL" class="animated-part"></g>
-            <g id="HAND-L" class="animated-part"></g>
-            <g id="SHIRT" class="animated-part"></g>
-            <g id="SHIRTBODY" class="animated-part"></g>
-            <g id="SHIRT-L" class="animated-part"></g>
-            <g id="LINEPAINT" class="animated-part"></g>
-            <g id="PLANT-R" class="animated-part"></g>
-            <g id="PLANT-L" class="animated-part"></g>
+            <g id="HEAD" class="animated-part">
+              <circle cx="562" cy="100" r="40" fill="#ffcccb" />
+            </g>
+            <g id="HANDPENCIL" class="animated-part">
+              <rect x="540" y="500" width="12" height="80" fill="#3F3D56" transform="rotate(-20 540 500)"/>
+            </g>
+            <g id="HAND-L" class="animated-part">
+              <rect x="520" y="480" width="15" height="70" fill="#f1a9a0"/>
+            </g>
+            <g id="SHIRT" class="animated-part">
+              <rect x="490" y="550" width="80" height="60" fill="#5dade2"/>
+            </g>
+            <g id="SHIRTBODY" class="animated-part">
+              <rect x="500" y="600" width="60" height="100" fill="#3498db"/>
+            </g>
+            <g id="SHIRT-L" class="animated-part">
+              <rect x="470" y="600" width="20" height="100" fill="#2980b9"/>
+            </g>
+            <g id="LINEPAINT" class="animated-part">
+              <line x1="580" y1="680" x2="680" y2="750" stroke="#38A5D2" stroke-width="6" stroke-dasharray="200" stroke-dashoffset="200">
+                <animate attributeName="stroke-dashoffset" from="200" to="0" dur="2s" fill="freeze"/>
+              </line>
+            </g>
+            <g id="PLANT-R" class="animated-part">
+              <circle cx="800" cy="850" r="20" fill="#2ecc71">
+                <animateTransform attributeName="transform" attributeType="XML" type="translate" values="0 0; 0 -10; 0 0" dur="1.8s" repeatCount="indefinite"/>
+              </circle>
+            </g>
+            <g id="PLANT-L" class="animated-part">
+              <circle cx="300" cy="850" r="20" fill="#27ae60">
+                <animateTransform attributeName="transform" attributeType="XML" type="translate" values="0 0; 0 -10; 0 0" begin="0.6s" dur="1.8s" repeatCount="indefinite"/>
+              </circle>
+            </g>
           </svg>
         </div>
       </div>
