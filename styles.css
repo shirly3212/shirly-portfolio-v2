@@ -302,11 +302,12 @@
 </style>
 
 <div class="me">
-  <!-- FULL CHARACTER SVG START -->
-  <object type="image/svg+xml" data="me.svg"></object>
-  <!-- FULL CHARACTER SVG END -->
-
-  <!-- Decorative floating elements -->
+  <svg width="1124" height="923" viewBox="0 0 1124 923" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g id="HANDPENCIL">
+      <path d="M673.141 780.791L674.713 767.626L777.794 539.406C779.502 535.626 783.779 534.045 787.328 535.883C790.878 537.72 792.376 542.292 790.669 546.071L687.633 774.191L678.924 783.785C677.893 784.915 676.365 785.199 675.03 784.508C673.696 783.817 672.955 782.358 673.141 780.791Z" fill="#3F3D56"/>
+    </g>
+    <path id="LINEPAINT" d="M826.649 790.16C833.773 790.756..." fill="#38A5D2"/>
+  </svg>
   <img src="new icons/star.svg" alt="Star" class="svg-decor star">
   <img src="new icons/dot.svg" alt="Dot" class="svg-decor dot">
   <img src="new icons/spark.svg" alt="Spark" class="svg-decor spark">
