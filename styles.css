@@ -1,116 +1,53 @@
-/* Paste your <style> block from the canvas into a separate CSS file (styles_updated.css) */
-.me {
-  max-width: 100%;
-  height: auto;
-  animation: drawTablet 3s ease-in-out forwards;
-  transform-origin: bottom center;
-  opacity: 0;
-}
 
-@keyframes drawTablet {
-  0% {
-    transform: translateY(40px) scale(0.8) rotate(-5deg);
-    opacity: 0;
-    filter: blur(6px);
-  }
-  50% {
-    opacity: 1;
-    transform: translateY(-10px) scale(1.02);
-    filter: blur(0px);
-  }
-  100% {
-    transform: translateY(0) scale(1) rotate(0deg);
-    opacity: 1;
-  }
-}
-
-.me svg #HANDPENCIL {
-  transform-origin: left center;
-  animation: drawHand 1.2s ease-in-out infinite alternate;
-}
-
-@keyframes drawHand {
-  0% {
-    transform: rotate(-1deg) translateY(0);
-  }
-  100% {
-    transform: rotate(2deg) translateY(-1.5px);
-  }
-}
-
-.me svg #LINEPAINT {
-  stroke-dasharray: 1500;
-  stroke-dashoffset: 1500;
-  animation: drawLine 3s ease-out forwards;
-}
-
-@keyframes drawLine {
-  to {
-    stroke-dashoffset: 0;
-  }
-}
-
-.svg-decor {
-  position: absolute;
-  opacity: 0;
-  animation: popIn 0.5s ease forwards, floatDecor var(--duration, 6s) ease-in-out infinite;
-  transition: transform 0.3s ease, filter 0.3s ease;
-}
-
-.svg-decor.star {
-  width: 40px;
-  top: 5%;
-  left: 80%;
-  animation-delay: 1s, 2s;
-  --duration: 5.5s;
-}
-
-.svg-decor.dot {
-  width: 20px;
-  top: 60%;
-  left: 90%;
-  animation-delay: 1.4s, 2.4s;
-  --duration: 6.2s;
-}
-
-.svg-decor.spark {
-  width: 30px;
-  top: 25%;
-  left: 75%;
-  animation-delay: 1.8s, 2.8s;
-  --duration: 7s;
-}
-
-.svg-decor:hover {
-  transform: scale(1.25) rotate(10deg);
-  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.8));
-}
-
-@keyframes popIn {
-  from {
-    transform: scale(0.5);
-    opacity: 0;
-  }
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
-@keyframes floatDecor {
-  0% {
-    transform: translateY(0) scale(1) rotate(0deg);
-  }
-  25% {
-    transform: translateY(-5px) scale(1.05) rotate(2deg);
-  }
-  50% {
-    transform: translateY(-10px) scale(1.1) rotate(3deg);
-  }
-  75% {
-    transform: translateY(-5px) scale(1.05) rotate(2deg);
-  }
-  100% {
-    transform: translateY(0) scale(1) rotate(0deg);
-  }
-}
+    .me {
+      max-width: 100%;
+      height: auto;
+      animation: drawTablet 3s ease-in-out forwards;
+      transform-origin: bottom center;
+      opacity: 0;
+    }
+    @keyframes drawTablet {
+      0% { transform: translateY(40px) scale(0.8) rotate(-5deg); opacity: 0; filter: blur(6px); }
+      50% { opacity: 1; transform: translateY(-10px) scale(1.02); filter: blur(0px); }
+      100% { transform: translateY(0) scale(1) rotate(0deg); opacity: 1; }
+    }
+    .me svg #HANDPENCIL {
+      transform-origin: left center;
+      animation: drawHand 1.2s ease-in-out infinite alternate;
+    }
+    @keyframes drawHand {
+      0% { transform: rotate(-1deg) translateY(0); }
+      100% { transform: rotate(2deg) translateY(-1.5px); }
+    }
+    .me svg #LINEPAINT {
+      stroke-dasharray: 1500;
+      stroke-dashoffset: 1500;
+      animation: drawLine 3s ease-out forwards;
+    }
+    @keyframes drawLine {
+      to { stroke-dashoffset: 0; }
+    }
+    .svg-decor {
+      position: absolute;
+      opacity: 0;
+      animation: popIn 0.5s ease forwards, floatDecor var(--duration, 6s) ease-in-out infinite;
+      transition: transform 0.3s ease, filter 0.3s ease;
+    }
+    .svg-decor.star { width: 40px; top: 5%; left: 80%; animation-delay: 1s, 2s; --duration: 5.5s; }
+    .svg-decor.dot { width: 20px; top: 60%; left: 90%; animation-delay: 1.4s, 2.4s; --duration: 6.2s; }
+    .svg-decor.spark { width: 30px; top: 25%; left: 75%; animation-delay: 1.8s, 2.8s; --duration: 7s; }
+    .svg-decor:hover {
+      transform: scale(1.25) rotate(10deg);
+      filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.8));
+    }
+    @keyframes popIn {
+      from { transform: scale(0.5); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+    @keyframes floatDecor {
+      0% { transform: translateY(0) scale(1) rotate(0deg); }
+      25% { transform: translateY(-5px) scale(1.05) rotate(2deg); }
+      50% { transform: translateY(-10px) scale(1.1) rotate(3deg); }
+      75% { transform: translateY(-5px) scale(1.05) rotate(2deg); }
+      100% { transform: translateY(0) scale(1) rotate(0deg); }
+    }
