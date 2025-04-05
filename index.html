@@ -58,13 +58,76 @@
     </div>
   </section>
 
+<style>
+    .me {
+      max-width: 100%;
+      height: auto;
+      animation: drawTablet 3s ease-in-out forwards;
+      transform-origin: bottom center;
+      opacity: 0;
+    }
+    @keyframes drawTablet {
+      0% { transform: translateY(40px) scale(0.8) rotate(-5deg); opacity: 0; filter: blur(6px); }
+      50% { opacity: 1; transform: translateY(-10px) scale(1.02); filter: blur(0px); }
+      100% { transform: translateY(0) scale(1) rotate(0deg); opacity: 1; }
+    }
+    .me svg #HANDPENCIL {
+      transform-origin: left center;
+      animation: drawHand 1.2s ease-in-out infinite alternate;
+    }
+    @keyframes drawHand {
+      0% { transform: rotate(-1deg) translateY(0); }
+      100% { transform: rotate(2deg) translateY(-1.5px); }
+    }
+    .me svg #LINEPAINT {
+      stroke-dasharray: 1500;
+      stroke-dashoffset: 1500;
+      animation: drawLine 3s ease-out forwards;
+    }
+    @keyframes drawLine {
+      to { stroke-dashoffset: 0; }
+    }
+    .svg-decor {
+      position: absolute;
+      opacity: 0;
+      animation: popIn 0.5s ease forwards, floatDecor var(--duration, 6s) ease-in-out infinite;
+      transition: transform 0.3s ease, filter 0.3s ease;
+    }
+    .svg-decor.star { width: 40px; top: 5%; left: 80%; animation-delay: 1s, 2s; --duration: 5.5s; }
+    .svg-decor.dot { width: 20px; top: 60%; left: 90%; animation-delay: 1.4s, 2.4s; --duration: 6.2s; }
+    .svg-decor.spark { width: 30px; top: 25%; left: 75%; animation-delay: 1.8s, 2.8s; --duration: 7s; }
+    .svg-decor:hover {
+      transform: scale(1.25) rotate(10deg);
+      filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.8));
+    }
+    @keyframes popIn {
+      from { transform: scale(0.5); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+    @keyframes floatDecor {
+      0% { transform: translateY(0) scale(1) rotate(0deg); }
+      25% { transform: translateY(-5px) scale(1.05) rotate(2deg); }
+      50% { transform: translateY(-10px) scale(1.1) rotate(3deg); }
+      75% { transform: translateY(-5px) scale(1.05) rotate(2deg); }
+      100% { transform: translateY(0) scale(1) rotate(0deg); }
+    }
+</style>
+<div class="me">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1124 923">
+  <g id="HANDPENCIL">
+    <path d="M673.141 780.791L674.713 767.626L777.794 539.406C779.502 535.626 783.779 534.045 787.328 535.883C790.878 537.72 792.376 542.292 790.669 546.071L687.633 774.191L678.924 783.785C677.893 784.915 676.365 785.199 675.03 784.508C673.696 783.817 672.955 782.358 673.141 780.791Z" fill="#3F3D56" />
+  </g>
+  <path id="LINEPAINT" d="M826.649 790.16C833.773 790.756..." fill="#38A5D2"/>
+</svg>
+</div>
   <footer>
-    <h4>Shirly Ben Nun &copy; 2024</h4>
+    <h4>Shirly Ben Nun &copy; 2025</h4>
     <ul>
       <li><a href="#"><img src="shirly-ben-nun-portfolio/new icons/instagram 1.svg" alt="Instagram"></a></li>
       <li><a href="#"><img src="shirly-ben-nun-portfolio/new icons/twitter 1.svg" alt="Twitter"></a></li>
       <li><a href="https://www.youtube.com/channel/UCmoA-WifFijhY71DV90qi0w"><img src="shirly-ben-nun-portfolio/new icons/youtube-symbol 1.svg" alt="YouTube"></a></li>
     </ul>
+
   </footer>
   <script src="/script.js"></script>
 </body>
