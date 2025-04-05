@@ -1,0 +1,16 @@
+body { font-family: Manrope, sans-serif; background: #fff; margin: 0; padding: 2rem; }
+header { text-align: center; margin-bottom: 2rem; }
+.scroll-gallery {
+  display: flex;
+  overflow-x: scroll;
+  gap: 2rem;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 2rem;
+}
+.scroll-gallery img {
+  flex: 0 0 auto;
+  height: 400px;
+  border-radius: 1rem;
+  scroll-snap-align: start;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+}
