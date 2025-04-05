@@ -7,6 +7,97 @@
   <title>Shirly Ben Nun | Portfolio</title>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <style>
+    .me {
+      max-width: 100%;
+      height: auto;
+      animation: drawTablet 3s ease-in-out forwards;
+      transform-origin: bottom center;
+      opacity: 0;
+    }
+
+    @keyframes drawTablet {
+      0% {
+        transform: translateY(40px) scale(0.8) rotate(-5deg);
+        opacity: 0;
+        filter: blur(6px);
+      }
+      50% {
+        opacity: 1;
+        transform: translateY(-10px) scale(1.02);
+        filter: blur(0px);
+      }
+      100% {
+        transform: translateY(0) scale(1) rotate(0deg);
+        opacity: 1;
+      }
+    }
+
+    .svg-decor {
+      position: absolute;
+      opacity: 0;
+      animation: popIn 0.5s ease forwards, floatDecor var(--duration, 6s) ease-in-out infinite;
+      transition: transform 0.3s ease, filter 0.3s ease;
+    }
+
+    .svg-decor.star {
+      width: 40px;
+      top: 5%;
+      left: 80%;
+      animation-delay: 1s, 2s;
+      --duration: 5.5s;
+    }
+
+    .svg-decor.dot {
+      width: 20px;
+      top: 60%;
+      left: 90%;
+      animation-delay: 1.4s, 2.4s;
+      --duration: 6.2s;
+    }
+
+    .svg-decor.spark {
+      width: 30px;
+      top: 25%;
+      left: 75%;
+      animation-delay: 1.8s, 2.8s;
+      --duration: 7s;
+    }
+
+    .svg-decor:hover {
+      transform: scale(1.25) rotate(10deg);
+      filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.8));
+    }
+
+    @keyframes popIn {
+      from {
+        transform: scale(0.5);
+        opacity: 0;
+      }
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    @keyframes floatDecor {
+      0% {
+        transform: translateY(0) scale(1) rotate(0deg);
+      }
+      25% {
+        transform: translateY(-5px) scale(1.05) rotate(2deg);
+      }
+      50% {
+        transform: translateY(-10px) scale(1.1) rotate(3deg);
+      }
+      75% {
+        transform: translateY(-5px) scale(1.05) rotate(2deg);
+      }
+      100% {
+        transform: translateY(0) scale(1) rotate(0deg);
+      }
+    }
+  </style>
 </head>
 <body>
   <header class="main-head">
@@ -35,8 +126,11 @@
         <a href="https://www.linkedin.com/in/shirly-ben-nun-a93766278" target="_blank"><img src="new icons/linked-in.svg" alt="LinkedIn"></a>
       </div>
     </div>
-    <div class="intro-images">
+    <div class="intro-images" style="position: relative;">
       <img class="me" src="img new/me.svg" alt="Shirly SVG Illustration">
+      <img src="img new/star.svg" alt="star" class="svg-decor star">
+      <img src="img new/dot.svg" alt="dot" class="svg-decor dot">
+      <img src="img new/spark.svg" alt="spark" class="svg-decor spark">
     </div>
   </section>
 
