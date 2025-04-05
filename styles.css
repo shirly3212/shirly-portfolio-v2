@@ -133,53 +133,67 @@ nav ul li a:hover {
   transform: scale(1.2);
 }
 
-    .character-inline {
-      margin-left: 2rem;
-    }
-    .me-icon {
-      width: 120px;
-      height: auto;
-    }
-    #HANDPENCIL, #HAND-L, #SHIRT, #SHIRTBODY, #SHIRT-L, #HEAD {
-      transform-origin: left center;
-      animation: handMotion 1.5s ease-in-out infinite alternate;
-    }
-    #PLANT-R, #PLANT-L {
-      animation: floatPlant 1.8s ease-in-out infinite alternate;
-      transform-origin: top;
-    }
-    #LINEPAINT {
-      stroke-dasharray: 200;
-      stroke-dashoffset: 200;
-      animation: drawLine 3s ease-out forwards;
-    }
-    @keyframes drawLine {
-      to { stroke-dashoffset: 0; }
-    }
-    @keyframes handMotion {
-      from { transform: rotateZ(1deg); }
-      to { transform: rotateZ(0); }
-    }
-    @keyframes floatPlant {
-      from { transform: translateY(0); }
-      to { transform: translateY(-10px); }
-    }
+.character-inline {
+  margin-left: 2rem;
+}
+.me-icon {
+  width: 120px;
+  height: auto;
+}
+#HANDPENCIL, #HAND-L, #SHIRT, #SHIRTBODY, #SHIRT-L, #HEAD {
+  transform-origin: left center;
+  animation: handMotion 1.5s ease-in-out infinite alternate;
+}
+#PLANT-R, #PLANT-L {
+  animation: floatPlant 1.8s ease-in-out infinite alternate;
+  transform-origin: top;
+}
+#LINEPAINT {
+  stroke-dasharray: 200;
+  stroke-dashoffset: 200;
+  animation: drawLine 3s ease-out forwards;
+}
 
-
-/* Character SVG */
 .me {
   width: 100%;
   text-align: center;
   margin: 4rem 0;
 }
 
-.me svg {
-  width: 80%;
-  max-width: 500px;
-  height: auto;
-  animation: drawTablet 3s ease-out forwards;
+.svg-decor {
+  position: absolute;
   opacity: 0;
-  transform-origin: bottom center;
+  animation: popIn 0.5s ease forwards, floatDecor var(--duration, 6s) ease-in-out infinite;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.svg-decor.star {
+  width: 40px;
+  top: 5%;
+  left: 80%;
+  animation-delay: 1s, 2s;
+  --duration: 5.5s;
+}
+
+.svg-decor.dot {
+  width: 20px;
+  top: 60%;
+  left: 90%;
+  animation-delay: 1.4s, 2.4s;
+  --duration: 6.2s;
+}
+
+.svg-decor.spark {
+  width: 30px;
+  top: 25%;
+  left: 75%;
+  animation-delay: 1.8s, 2.8s;
+  --duration: 7s;
+}
+
+.svg-decor:hover {
+  transform: scale(1.25) rotate(10deg);
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.8));
 }
 
 /* Categories */
@@ -221,43 +235,6 @@ footer ul li img {
   width: 32px;
 }
 
-/* SVG Decorations */
-.svg-decor {
-  position: absolute;
-  opacity: 0;
-  animation: popIn 0.5s ease forwards, floatDecor var(--duration, 6s) ease-in-out infinite;
-  transition: transform 0.3s ease, filter 0.3s ease;
-}
-
-.svg-decor.star {
-  width: 40px;
-  top: 5%;
-  left: 80%;
-  animation-delay: 1s, 2s;
-  --duration: 5.5s;
-}
-
-.svg-decor.dot {
-  width: 20px;
-  top: 60%;
-  left: 90%;
-  animation-delay: 1.4s, 2.4s;
-  --duration: 6.2s;
-}
-
-.svg-decor.spark {
-  width: 30px;
-  top: 25%;
-  left: 75%;
-  animation-delay: 1.8s, 2.8s;
-  --duration: 7s;
-}
-
-.svg-decor:hover {
-  transform: scale(1.25) rotate(10deg);
-  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.8));
-}
-
 /* Animations */
 @keyframes fadeInFromBottom {
   from { opacity: 0; transform: translateY(-75%); }
@@ -267,12 +244,6 @@ footer ul li img {
 @keyframes fadeInFromLeft {
   from { opacity: 0; transform: translateX(-25%); }
   to { opacity: 1; transform: translateX(0); }
-}
-
-@keyframes drawTablet {
-  0% { transform: translateY(40px) scale(0.8) rotate(-5deg); opacity: 0; filter: blur(6px); }
-  50% { transform: translateY(-10px) scale(1.02); filter: blur(0); opacity: 1; }
-  100% { transform: translateY(0) scale(1) rotate(0deg); }
 }
 
 @keyframes drawLine {
@@ -291,26 +262,9 @@ footer ul li img {
   75% { transform: translateY(-5px) scale(1.05) rotate(2deg); }
 }
 
-/* SVG Animations */
-#PLANT-R, #PLANT-L {
-  animation: floatPlant 1.8s ease-in-out infinite alternate;
-  transform-origin: top;
-}
-
-#HANDPENCIL, #HAND-L, #SHIRT, #SHIRTBODY, #SHIRT-L, #HEAD {
-  transform-origin: left center;
-  animation: handMotion 1.5s ease-in-out infinite alternate;
-}
-
-#LINEPAINT {
-  stroke-dasharray: 1500;
-  stroke-dashoffset: 1500;
-  animation: drawLine 3s ease-out forwards;
-}
-
 @keyframes floatPlant {
   from { transform: translateY(0); }
-  to { transform: translateY(-50%); }
+  to { transform: translateY(-10px); }
 }
 
 @keyframes handMotion {
