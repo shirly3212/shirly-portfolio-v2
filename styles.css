@@ -24,52 +24,165 @@
   transform-origin: top;
 }
 
-.me {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
-  background-color: #f5f5f5;
+.intro-social {
+  margin-top: 4rem;
 }
 
-.character svg {
-  max-width: 100%;
-  height: auto;
+.intro-social a {
+  margin-right: 5rem;
 }
 
-    .me {
-      max-width: 100%;
-      height: auto;
-      animation: drawTablet 3s ease-in-out forwards;
-      transform-origin: bottom center;
-      opacity: 0;
-      position: relative;
-      text-align: center;
-    }
-    @keyframes drawTablet {
-      0% {
-        transform: translateY(40px) scale(0.8) rotate(-5deg);
-        opacity: 0;
-        filter: blur(6px);
-      }
-      50% {
-        opacity: 1;
-        transform: translateY(-10px) scale(1.02);
-        filter: blur(0px);
-      }
-      100% {
-        transform: translateY(0) scale(1) rotate(0deg);
-        opacity: 1;
-      }
-    }
-    svg #HANDPENCIL, svg #HAND-L, svg #SHIRT, svg #SHIRTBODY, svg #SHIRT-L, svg #HEAD {
-      animation: handMotion 1.5s ease-in-out infinite alternate;
-      transform-origin: left center;
-    }
-    @keyframes handMotion {
-      0% { transform: rotate(-1deg); }
-      100% { transform: rotate(2deg); }
-    }
+.active {
+  background: #2c2c2c;
+  color: white;
+  padding: 1rem 3rem;
+  border-radius: 2rem;
+}
+
+.intro-text, .intro-images {
+  flex: 1 1 40rem;
+}
+
+/* Animation */
+#PLANT-R {
+  animation: PLANT-R 1.8s ease infinite alternate;
+}
+
+#PLANT-L {
+  animation: PLANT-L 1.8s ease infinite alternate 0.6s;
+}
+
+@keyframes PLANT-R {
+  from {
+    transform: translateY(0%);
+  }
+  to {
+    transform: translateY(-50%);
+  }
+}
+
+@keyframes PLANT-L {
+  from {
+    transform: translateY(0%);
+  }
+  to {
+    transform: translateY(-50%);
+  }
+}
+
+#HANDPENCIL {
+  animation: HANDPENCIL 1.5s infinite alternate;
+}
+
+@keyframes HANDPENCIL {
+  from {
+    transform: rotateZ(2.7deg);
+  }
+  to {
+    transform: rotateZ(0deg);
+  }
+}
+
+#HAND-L {
+  animation: HAND-L 1.5s infinite alternate;
+}
+
+@keyframes HAND-L {
+  from {
+    transform: rotateZ(1deg);
+  }
+  to {
+    transform: rotateZ(0deg);
+  }
+}
+
+#SHIRT {
+  animation: SHIRT 1.5s infinite alternate;
+}
+
+@keyframes SHIRT {
+  from {
+    transform: rotateZ(1deg);
+  }
+  to {
+    transform: rotateZ(0deg);
+  }
+}
+
+#SHIRTBODY {
+  animation: SHIRTBODY 1.5s infinite alternate;
+}
+
+@keyframes SHIRTBODY {
+  from {
+    transform: rotateZ(0.7deg);
+  }
+  to {
+    transform: rotateZ(0deg);
+  }
+}
+
+#SHIRT-L {
+  animation: SHIRT-L 1.5s infinite alternate;
+}
+
+@keyframes SHIRT-L {
+  from {
+    transform: rotateZ(0.6deg);
+  }
+  to {
+    transform: rotateZ(0deg);
+  }
+}
+
+#HEAD {
+  animation: HEAD 1.5s infinite alternate;
+}
+
+@keyframes HEAD {
+  from {
+    transform: rotateZ(0.7deg);
+  }
+  to {
+    transform: rotateZ(0deg);
+  }
+}
+
+.intro-text h2 {
+  opacity: 0;
+  transform: translateY(-75%);
+  animation: fadeInFromBottom 1.5s ease-in-out forwards;
+}
+
+@keyframes fadeInFromBottom {
+  from {
+    opacity: 0;
+    transform: translateY(-75%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.intro-text p, .intro-text h3 {
+  opacity: 0;
+  transform: translateX(-25%);
+  animation: fadeInFromLeft 1.75s ease-in-out forwards;
+  animation-delay: 0.75s;
+}
+
+@keyframes fadeInFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-25%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
     svg #LINEPAINT {
       stroke-dasharray: 2000;
       stroke-dashoffset: 2000;
@@ -78,20 +191,7 @@
     @keyframes drawLine {
       to { stroke-dashoffset: 0; }
     }
-    svg #PLANT-R {
-      animation: plantR 2s ease-in-out infinite alternate;
-    }
-    svg #PLANT-L {
-      animation: plantL 2s ease-in-out infinite alternate;
-    }
-    @keyframes plantR {
-      from { transform: translateY(0); }
-      to { transform: translateY(-10px); }
-    }
-    @keyframes plantL {
-      from { transform: translateY(0); }
-      to { transform: translateY(-10px); }
-    }
+ 
     .svg-decor {
       position: absolute;
       opacity: 0;
