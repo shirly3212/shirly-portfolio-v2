@@ -1,0 +1,77 @@
+
+/* Splash Background */
+.splash-svg {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: -1;
+  width: 100%;
+  height: auto;
+}
+
+/* Character Positioning */
+.character-inline {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 4rem;
+  position: relative;
+}
+
+.character-inline.large svg {
+  max-width: 600px;
+  width: 100%;
+  height: auto;
+}
+
+/* Decor Elements */
+.me {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  pointer-events: none;
+}
+
+.svg-decor {
+  position: absolute;
+  animation: popIn 0.5s ease forwards, floatDecor 6s ease-in-out infinite;
+}
+
+.svg-decor.star {
+  top: 5%;
+  left: 80%;
+}
+
+.svg-decor.dot {
+  top: 50%;
+  left: 90%;
+}
+
+.svg-decor.spark {
+  top: 25%;
+  left: 75%;
+}
+
+/* Categories */
+.categories {
+  margin-top: 6rem;
+  padding: 0 5%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4rem;
+}
+
+/* Animations */
+@keyframes popIn {
+  from { transform: scale(0.5); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes floatDecor {
+  0%, 100% { transform: translateY(0) scale(1) rotate(0); }
+  25% { transform: translateY(-5px) scale(1.05) rotate(2deg); }
+  50% { transform: translateY(-10px) scale(1.1) rotate(3deg); }
+  75% { transform: translateY(-5px) scale(1.05) rotate(2deg); }
+}
