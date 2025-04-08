@@ -133,9 +133,11 @@ nav ul li a:hover {
   transform: scale(1.2);
 }
 
-  .me {position: absolute;
-      top: 0;
-      right: 0;}
+.me {
+ position: absolute;
+ top: 0;
+  right: 0;
+  transform-origin: top;}
 
 .splash {
   position: absolute;
