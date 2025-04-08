@@ -83,6 +83,7 @@ nav ul li a:hover {
   border-radius: 2rem;
 }
 
+
 /* Intro Section */
 .intro {
   display: flex;
@@ -91,7 +92,7 @@ nav ul li a:hover {
   flex-wrap: wrap;
   min-height: 90vh;
   width: 90%;
-  margin: auto;
+  margin-bottom: 2rem;
   position: relative;
 }
 
@@ -338,6 +339,8 @@ nav ul li a:hover {
   margin: 4rem auto;
   top:500px;
   width: 90%;
+  margin-top: 0;
+  padding-top: 0;
 }
 
 .category {
@@ -356,18 +359,18 @@ footer {
   align-items: center;
   background: linear-gradient(rgba(255, 102, 0, 0.44), rgba(255, 0, 123, 0.55));
   color: white;
-  min-height: 7vh;
   padding: 1rem 5%;
+  height: 6rem; /* Fixed height instead of min-height */
 }
 
-footer ul {
-  display: flex;
-  gap: 1rem;
+footer h4 {
+  font-size: 3rem;
 }
 
 footer ul li img {
-  width: 60px;
+  width: 28px; /* slightly smaller icons for balance */
 }
+
 
 /* Animations */
 @keyframes fadeInFromBottom {
