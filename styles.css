@@ -137,7 +137,7 @@ nav ul li a:hover {
 .splash {
   position: absolute;
   top: 0;
-  right: 0;
+  right: 50px;
   height: 100%;
   z-index: -1;
   transform-origin: top;
@@ -334,7 +334,7 @@ nav ul li a:hover {
   justify-content: center;
   gap: 4rem;
   margin: 4rem auto;
-  top:70%;
+  top:100%;
   width: 90%;
 }
 
