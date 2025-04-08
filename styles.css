@@ -84,18 +84,19 @@ nav ul li a:hover {
 }
 
 /* Intro Section */
+.intro {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 90vh;
+  width: 90%;
+  margin: auto;
+}
 
-intro {
-      position: relative;
-      padding: 5rem 2rem 10rem;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      max-width: 1200px;
-      margin: 0 auto;
-      z-index: 1;
-    }
-
+.intro-text {
+  flex: 1 1 40rem;
+}
 
 .intro-text h2 {
   font-size: 6rem;
@@ -132,31 +133,20 @@ intro {
   transform: scale(1.2);
 }
 
-    .splash {
-      position: absolute;
+
+.splash {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  z-index: -1;
+  transform-origin: top;
+}
+
+.me {position: absolute;
+      top: 0;
       right: 0;
-      bottom: 0;
-      width: 40%;
-      max-width: 400px;
-      z-index: 0;
-    }
-
-    .character {
-      position: absolute;
-      right: 5%;
-      bottom: 0;
-      width: 25%;
-      max-width: 100px;
-      z-index: 1;
-    }
-
-    .categories {
-      position: relative;
-      z-index: 2;
-      margin-top: -6rem;
-      padding: 2rem;
-    }
-
+width: 30%;}
 
 /* Animation */
 #PLANT-R {
@@ -299,6 +289,7 @@ intro {
 }
 
 
+
 .svg-decor {
   position: absolute;
   opacity: 0;
@@ -335,6 +326,19 @@ intro {
   filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.8));
 }
 
+/* Categories */
+.categories {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4rem;
+  margin: 4rem auto;
+  width: 90%;
+}
+
+.category {
+  text-align: center;
+}
 
 .category h4 {
   font-size: 2.5rem;
@@ -396,6 +400,11 @@ footer ul li img {
   nav {
     flex-direction: column;
     text-align: center;
+  }
+
+
+  .splash {
+    display: none;
   }
 
   nav ul {
