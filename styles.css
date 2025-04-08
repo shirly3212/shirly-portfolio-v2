@@ -143,10 +143,11 @@ nav ul li a:hover {
   transform-origin: top;
 }
 
-.me {position: absolute;
-      top: 0;
-      right: 0;
-width: 10%;}
+.me {position: relative;
+ height: auto;
+ top: 0;
+ right: 20px;
+ width: 450px;}
 
 /* Animation */
 #PLANT-R {
@@ -299,14 +300,14 @@ width: 10%;}
 
 .svg-decor.star {
   width: 40px;
-  top: 5%;
+  top: 15%;
   left: 80%;
   animation-delay: 1s, 2s;
   --duration: 5.5s;
 }
 
 .svg-decor.dot {
-  width: 20px;
+  width: 30px;
   top: 60%;
   left: 90%;
   animation-delay: 1.4s, 2.4s;
@@ -316,7 +317,7 @@ width: 10%;}
 .svg-decor.spark {
   width: 30px;
   top: 40%;
-  left: 75%;
+  left: 55%;
   animation-delay: 1.8s, 2.8s;
   --duration: 7s;
 }
