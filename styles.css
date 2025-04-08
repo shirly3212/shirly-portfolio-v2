@@ -142,42 +142,33 @@ nav ul li a:hover {
   margin-bottom: 1rem;
 }
 
-/* Splash + Character Container */
-.splash-container {
-  position: relative;
-  width: 100%;
-  max-width: 1200px;
-  margin: 4rem auto;
-  aspect-ratio: 16 / 9;
-  overflow: visible;
-}
 
-.splash-bg {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-.me-character {
+.splash {
   position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 30%;
-  max-width: 200px;
-  height: auto;
+  top: 0;
+  right: 0;
+  height: 100%;
+  z-index: -1;
+  transform-origin: top;
+}
+.splash-bg {
+   position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  z-index: -1;
+  transform-origin: top;
+}
+
+.me-character {position: absolute;
+      top: 0;
+      right: 0;}
 }
 
 @media screen and (max-width: 768px) {
   .me-character {
     width: 40%;
   }
-}
-
-/* Character SVG Section */
-.me {
-  text-align: center;
-  margin: 4rem auto;
 }
 
 .me svg {
