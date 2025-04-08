@@ -146,7 +146,7 @@ nav ul li a:hover {
 .me {position: absolute;
  height: auto;
  top: 0;
- right: 70px;
+ right: 110px;
  width: 450px;}
 
 /* Animation */
@@ -334,7 +334,7 @@ nav ul li a:hover {
   justify-content: center;
   gap: 4rem;
   margin: 4rem auto;
-  top:40%;
+  top:70%;
   width: 90%;
 }
 
