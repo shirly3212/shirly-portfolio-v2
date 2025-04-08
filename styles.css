@@ -143,7 +143,7 @@ nav ul li a:hover {
   transform-origin: top;
 }
 
-.me {position: relative;
+.me {position: absolute;
  height: auto;
  top: 0;
  right: 20px;
