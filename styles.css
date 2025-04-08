@@ -146,7 +146,7 @@ nav ul li a:hover {
 .me {position: absolute;
  height: auto;
  top: 0;
- right: 20px;
+ right: 70px;
  width: 450px;}
 
 /* Animation */
@@ -317,7 +317,7 @@ nav ul li a:hover {
 .svg-decor.spark {
   width: 30px;
   top: 40%;
-  left: 55%;
+  left: 30%;
   animation-delay: 1.8s, 2.8s;
   --duration: 7s;
 }
@@ -334,6 +334,7 @@ nav ul li a:hover {
   justify-content: center;
   gap: 4rem;
   margin: 4rem auto;
+  top:40%;
   width: 90%;
 }
 
