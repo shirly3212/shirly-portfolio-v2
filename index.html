@@ -1,116 +1,800 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Shirly Ben Nun - Motion Designer, Graphic Designer, and Web Developer">
-  <title>Shirly Ben Nun | Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio: Shirly Herscovici</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Import Retro/Bold Fonts */
+        @import url('https://fonts.googleapis.com/css2?family=VT323&family=Bebas+Neue&display=swap');
+        
+        body {
+            font-family: 'VT323', monospace, sans-serif; 
+            direction: ltr; /* Left-to-Right for English */
+        }
+        /* Override Tailwind RTL issues for specific elements that must be LTR */
+        .ltr {
+            direction: ltr;
+        }
+
+        /* --- Global Background (Blue Grid) --- */
+        .grid-bg {
+            background-color: #4A7DEB; /* Blue */
+            background-image: 
+                linear-gradient(0deg, transparent 24%, rgba(255, 255, 255, 0.08) 25%, rgba(255, 255, 255, 0.08) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, 0.08) 75%, rgba(255, 255, 255, 0.08) 76%, transparent 77%), 
+                linear-gradient(90deg, transparent 24%, rgba(255, 255, 255, 0.08) 25%, rgba(255, 255, 255, 0.08) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, 0.08) 75%, rgba(255, 255, 255, 0.08) 76%, transparent 77%);
+            background-size: 40px 40px; 
+            perspective: 1000px;
+        }
+
+        /* --- Header: Profile Card Emoji Bubble Animation --- */
+        .animated-bubble {
+            font-size: 3rem; 
+            width: 4.5rem; 
+            height: 4.5rem;
+            border: 4px solid black; 
+            box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.5); 
+            display: flex;
+            align-items: center; 
+            justify-content: center;
+            overflow: hidden; 
+        }
+        
+        .emoji-layer-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .emoji-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            animation: layer-fade-cycle 25s infinite;
+            transition: opacity 0.8s ease-in-out; 
+        }
+
+        .emoji-layer:nth-child(1) { animation-delay: 0s; }
+        .emoji-layer:nth-child(2) { animation-delay: 5s; }
+        .emoji-layer:nth-child(3) { animation-delay: 10s; }
+        .emoji-layer:nth-child(4) { animation-delay: 15s; }
+        .emoji-layer:nth-child(5) { animation-delay: 20s; }
+        
+        @keyframes layer-fade-cycle {
+            0% { opacity: 0; }
+            4% { opacity: 1; }
+            20% { opacity: 1; } 
+            96% { opacity: 0; }
+            100% { opacity: 0; }
+        }
+        
+        /* --- Header: Floating Elements (Background Parallax) --- */
+        @keyframes slow-float {
+            0% { transform: translate(0, 0) rotate(0deg); opacity: 0.6; }
+            33% { transform: translate(10px, -5px) rotate(2deg); opacity: 0.7; }
+            66% { transform: translate(-10px, 5px) rotate(-2deg); opacity: 0.9; }
+            100% { transform: translate(0, 0) rotate(0deg); opacity: 0.6; }
+        }
+
+        .floating-element {
+            position: absolute;
+            z-index: 1; 
+            animation: slow-float 8s ease-in-out infinite alternate;
+            opacity: 0.6; 
+            /* Will be controlled by JS for parallax */
+            transition: transform 0.1s linear; 
+        }
+        
+        .floating-element.dot {
+             opacity: 0.8;
+        }
+
+        .delay-1 { animation-delay: 1.5s; animation-duration: 9s; }
+        .delay-2 { animation-delay: 0.5s; animation-duration: 7s; }
+        .delay-3 { animation-delay: 2.8s; animation-duration: 10s; }
+        .delay-4 { animation-delay: 4.0s; animation-duration: 6s; }
+        
+        /* --- Header: Main Title (Bebas Neue + Big Shadow) --- */
+        @keyframes fade-in-up {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        
+        .huge-text {
+            font-family: 'Bebas Neue', 'Impact', sans-serif; 
+            line-height: 0.85; 
+            font-weight: 400; 
+            letter-spacing: 0.02em; 
+            color: #F87CA9; /* Pink */
+            text-shadow: 
+                -8px -8px 0px #FFF, /* White border */
+                -1px -1px 0 #F87CA9, 
+                1px -1px 0 #F87CA9, 
+                -1px 1px 0 #F87CA9, 
+                1px 1px 0 #F87CA9,
+                -2px -2px 0 #F87CA9, 
+                6px 6px 0px #000; /* Black main shadow */ 
+            opacity: 0; 
+            animation: fade-in-up 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.5s forwards; 
+        }
+        
+        .huge-text-size {
+            font-size: 3.5rem; 
+        }
+        
+        @media (min-width: 640px) {
+            .huge-text-size { font-size: 6rem; }
+        }
+
+        @media (min-width: 1024px) {
+            .huge-text-size { font-size: 9rem; }
+        }
+        
+        /* --- General Cartoon Shadows/Styles --- */
+        .text-cartoon-shadow {
+            text-shadow: 5px 5px 0px #000; 
+        }
+        
+        /* Waving Hand Icon */
+        .cartoon-hand {
+            display: inline-block;
+            background-color: white; 
+            border: 4px solid black; 
+            border-radius: 50%; 
+            padding: 8px 12px;
+            color: black; 
+            font-size: 3rem; 
+            box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.5); 
+            line-height: 1;
+        }
+
+        @keyframes wave-hand {
+            0%, 100% { transform: translate(0, 0) rotate(6deg); }
+            50% { transform: translate(-5px, 0) rotate(8deg); }
+        }
+        .animated-hand-wrapper {
+            animation: wave-hand 2s ease-in-out infinite; 
+            position: absolute; 
+            bottom: -50px; 
+            left: -30px; 
+            transform-origin: bottom center; 
+            z-index: 20; 
+        }
+
+        /* Profile Card Styling */
+        .profile-card {
+            max-width: 280px; 
+            transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
+            transform-style: preserve-3d;
+        }
+        .card-cartoon-shadow {
+            box-shadow: 8px 8px 0px #000; 
+        }
+
+        @media (min-width: 768px) {
+            .profile-card {
+                max-width: 320px; 
+            }
+        }
+        
+        /* Color Variables */
+        .accent-color { color: #FFB954; } /* Yellow */
+        .border-accent { border-color: #FFB954; }
+        .bg-card-yellow { background-color: #FFB954; }
+
+        /* ======================================= */
+        /* --- PROJECT COLLAGE STYLES --- */
+        /* ======================================= */
+
+        .collage-section-layout {
+            display: flex;
+            flex-direction: column; 
+            align-items: center;
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        @media (min-width: 1024px) {
+            .collage-section-layout {
+                flex-direction: row; 
+                align-items: flex-start;
+                height: 800px; 
+                justify-content: space-between;
+                padding-left: 2rem; 
+            }
+        }
+
+        /* Vertical Headline - Added clear border and fixed placement */
+        .collage-headline-vertical {
+            font-family: 'Bebas Neue', sans-serif;
+            line-height: 0.8;
+            letter-spacing: 0.05em;
+            color: #4A7DEB; /* Blue */
+            text-shadow: 8px 8px 0px #F87CA9; /* Pink shadow for impact */
+            white-space: nowrap;
+            
+            /* Mobile (Horizontal) */
+            font-size: 3rem; 
+            text-align: center;
+            width: 100%;
+            margin-bottom: 2rem; /* Increased margin for separation */
+            border-bottom: 4px solid #F87CA9; /* Clear separation line */
+            padding-bottom: 1rem;
+
+
+            /* Desktop (Vertical) */
+            @media (min-width: 1024px) {
+                writing-mode: vertical-rl;
+                text-orientation: mixed;
+                font-size: 8rem; 
+                margin-left: 0; 
+                margin-bottom: 0;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                transform: rotate(180deg); 
+                border-right: 4px solid #F87CA9; /* Vertical separation line */
+                border-bottom: none; /* Remove bottom border on desktop */
+                padding-bottom: 0;
+                padding-right: 1rem;
+            }
+        }
+
+        /* Small Subtitle - Positioned Absolutely on Desktop */
+        .collage-subtitle-small {
+            font-family: 'VT323', monospace;
+            font-size: 1.5rem;
+            color: #4A7DEB; 
+            letter-spacing: 0.1em;
+            text-align: center;
+            margin-bottom: 0.5rem;
+            width: 100%;
+            @media (min-width: 1024px) {
+                position: absolute; 
+                top: 50px; 
+                left: 30px; 
+                text-align: left;
+                width: auto;
+                z-index: 20;
+            }
+        }
+
+        .collage-content-area {
+            width: 100%;
+            max-width: 800px; 
+            position: relative;
+            @media (min-width: 1024px) {
+                flex-grow: 1; 
+                height: 100%;
+                padding-right: 200px; 
+            }
+        }
+
+        .collage-content-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); 
+            grid-template-rows: repeat(3, auto); 
+            gap: 1.5rem;
+            height: 100%; 
+        }
+
+        /* Specific item placement for the collage look (Desktop) */
+        @media (min-width: 1024px) {
+            .collage-img-1 { grid-column: 1 / 2; grid-row: 1 / 2; height: 250px; }
+            .collage-img-2 { grid-column: 2 / 3; grid-row: 1 / 3; height: 400px; }
+            .collage-img-3 { grid-column: 1 / 2; grid-row: 2 / 3; height: 300px; }
+            .collage-img-4 { grid-column: 2 / 3; grid-row: 3 / 4; height: 250px; }
+            .collage-text-box { 
+                grid-column: 1 / 2;
+                grid-row: 3 / 4;
+                padding: 1rem;
+                text-align: left;
+                font-family: 'VT323', monospace;
+                font-size: 1.1rem;
+                line-height: 1.4;
+                color: #374151;
+                display: flex; 
+                align-items: flex-end;
+            }
+        }
+
+        /* Mobile adjustments: stack all items vertically */
+        @media (max-width: 1023px) {
+            .collage-content-grid {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto;
+            }
+            .collage-content-area {
+                width: 100%;
+            }
+            .collage-img-1, .collage-img-2, .collage-img-3, .collage-img-4, .collage-text-box {
+                grid-column: 1 / -1;
+                grid-row: auto;
+                height: auto;
+            }
+            .collage-img-2 {
+                height: 300px;
+            }
+        }
+        
+        .text-box-cartoon {
+            border: 4px solid black;
+            border-radius: 0.75rem; 
+            box-shadow: 6px 6px 0px #F87CA9; 
+            padding: 1.5rem;
+            background-color: white;
+            height: 100%; 
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-item {
+            border: 4px solid black;
+            border-radius: 0.75rem;
+            box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.4);
+            overflow: hidden;
+            background-color: white;
+            height: 100%;
+            position: relative;
+        }
+        
+        .project-item-images {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .project-item-images img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 1.2s ease-in-out;
+            min-height: 100%; 
+            /* Set a default background for placeholder effect */
+            background-color: #f0f0f0; 
+        }
+        
+        .project-item-images img.active {
+            opacity: 1;
+        }
+        
+        /* Style for the Placeholder Image text (always visible if image fails) */
+        .placeholder-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #333;
+            font-size: 1.2rem;
+            text-align: center;
+            font-family: 'Bebas Neue', sans-serif;
+            pointer-events: none; /* Make sure it doesn't interfere with clicks */
+            z-index: 5;
+        }
+    </style>
 </head>
-<body>
-  <div class="splash-svg">
-    <img src="img new/splash.svg" alt="background" />
-  </div>
+<body class="bg-gray-100">
 
-  <header class="main-head">
-    <nav>
-      <div class="logo">
-        <img src="new icons/code.svg" alt="logo">
-        <h1>Shirly Ben Nun</h1>
-      </div>
-      <ul>
-        <li><a class="active" href="index.html">Home</a></li>
-        <li><a href="web/index.html">Web</a></li>
-        <li><a href="design/index.html">Design</a></li>
-        <li><a href="motion/index.html">Motion</a></li>
-        <li><a href="contact/index.html">Contact</a></li>
-      </ul>
-    </nav>
-  </header>
+    <!-- HEADER SECTION (HERO) -->
+    <header id="mainHeader" class="grid-bg text-white pt-10 pb-8 px-4 sm:px-8 lg:px-16 overflow-hidden relative">
+        <!-- Floating Elements Background -->
+        <div class="absolute inset-0 z-0">
+            <svg class="floating-element delay-1 w-10 h-10" style="top: 15%; right: 10%;" data-speed="10" viewBox="0 0 100 100">
+                <line x1="10" y1="50" x2="90" y2="50" stroke="white" stroke-width="4" stroke-linecap="round"/>
+                <line x1="50" y1="10" x2="50" y2="90" stroke="white" stroke-width="4" stroke-linecap="round"/>
+                <line x1="25" y1="25" x2="75" y2="75" stroke="white" stroke-width="3" stroke-linecap="round"/>
+                <line x1="75" y1="25" x2="25" y2="75" stroke="white" stroke-width="3" stroke-linecap="round"/>
+            </svg>
+            
+            <div class="floating-element dot delay-2 w-3 h-3 rounded-full bg-white" style="top: 35%; left: 5%;" data-speed="5"></div>
+            
+            <svg class="floating-element delay-3 w-8 h-8" style="bottom: 10%; left: 40%;" data-speed="12" viewBox="0 0 100 100">
+                <line x1="10" y1="50" x2="90" y2="50" stroke="white" stroke-width="4" stroke-linecap="round"/>
+                <line x1="50" y1="10" x2="50" y2="90" stroke="white" stroke-width="4" stroke-linecap="round"/>
+                <line x1="25" y1="25" x2="75" y2="75" stroke="white" stroke-width="3" stroke-linecap="round"/>
+                <line x1="75" y1="25" x2="25" y2="75" stroke="white" stroke-width="3" stroke-linecap="round"/>
+            </svg>
 
-  <section class="intro">
-    <div class="intro-text">
-      <h2>Hi, I'm Shirly</h2>
-      <h3>Web Developer • Graphic Designer • Motion Artist</h3>
-      <p>I design and develop beautiful, functional visuals and interfaces with motion, creativity and clean code.</p>
-      <div class="intro-social">
-        <a href="https://github.com/shirly3212" target="_blank"><img src="new icons/github.svg" alt="GitHub"></a>
-        <a href="https://www.linkedin.com/in/shirly-ben-nun-a93766278" target="_blank"><img src="new icons/linked-in.svg" alt="LinkedIn"></a>
-      </div>
-    </div>
-  </section>
+            <div class="floating-element dot w-4 h-4 rounded-full bg-white" style="top: 25%; left: 80%;" data-speed="8"></div>
 
-  <div class="character-inline large">
-    <svg class="me-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1124 923">
-      <g id="HEAD">
-        <circle cx="562" cy="100" r="40" fill="#ffcccb" />
-      </g>
-      <g id="HANDPENCIL">
-        <rect x="540" y="500" width="12" height="80" fill="#3F3D56" transform="rotate(-20 540 500)"/>
-      </g>
-      <g id="HAND-L">
-        <rect x="520" y="480" width="15" height="70" fill="#f1a9a0"/>
-      </g>
-      <g id="SHIRT">
-        <rect x="490" y="550" width="80" height="60" fill="#5dade2"/>
-      </g>
-      <g id="SHIRTBODY">
-        <rect x="500" y="600" width="60" height="100" fill="#3498db"/>
-      </g>
-      <g id="SHIRT-L">
-        <rect x="470" y="600" width="20" height="100" fill="#2980b9"/>
-      </g>
-      <g id="LINEPAINT">
-        <line x1="580" y1="680" x2="680" y2="750" stroke="#38A5D2" stroke-width="6" />
-      </g>
-      <g id="PLANT-R">
-        <circle cx="800" cy="850" r="20" fill="#2ecc71" />
-      </g>
-      <g id="PLANT-L">
-        <circle cx="300" cy="850" r="20" fill="#27ae60" />
-      </g>
-    </svg>
-    <div class="me">
-      <img src="img new/star.svg" alt="Star" class="svg-decor star">
-      <img src="img new/dot.svg" alt="Dot" class="svg-decor dot">
-      <img src="img new/spark.svg" alt="Spark" class="svg-decor spark">
-    </div>
-  </div>
+            <svg class="floating-element delay-2 w-5 h-5" style="bottom: 25%; right: 20%;" data-speed="6" viewBox="0 0 100 100">
+                <line x1="10" y1="50" x2="90" y2="50" stroke="white" stroke-width="4" stroke-linecap="round"/>
+                <line x1="50" y1="10" x2="50" y2="90" stroke="white" stroke-width="4" stroke-linecap="round"/>
+                <line x1="25" y1="25" x2="75" y2="75" stroke="white" stroke-width="3" stroke-linecap="round"/>
+                <line x1="75" y1="25" x2="25" y2="75" stroke="white" stroke-width="3" stroke-linecap="round"/>
+            </svg>
+            
+            <div class="floating-element dot delay-4 w-2 h-2 rounded-full bg-white" style="bottom: 5%; right: 50%;" data-speed="4"></div>
 
-  <section class="categories">
-    <div class="category">
-      <a href="web/index.html">
-        <img src="img new/web-bg.jpg" alt="Web" style="width:100%; border-radius: 1rem;">
-        <h4>Web Development</h4>
-        <p>Explore websites I've built with HTML, CSS, and JavaScript.</p>
-      </a>
-    </div>
-    <div class="category">
-      <a href="design/index.html">
-        <img src="img new/design-bg.jpg" alt="Design" style="width:100%; border-radius: 1rem;">
-        <h4>Graphic Design</h4>
-        <p>Branding, posters, and visual compositions.</p>
-      </a>
-    </div>
-    <div class="category">
-      <a href="motion/index.html">
-        <img src="img new/motion-bg.jpg" alt="Motion" style="width:100%; border-radius: 1rem;">
-        <h4>Motion & Animation</h4>
-        <p>Videos, animated assets, and visual storytelling.</p>
-      </a>
-    </div>
-  </section>
+            <svg class="floating-element w-10 h-10" style="top: 10%; left: 30%; animation-duration: 9.5s;" data-speed="15" viewBox="0 0 100 100">
+                <rect x="10" y="10" width="80" height="80" fill="none" stroke="white" stroke-width="5" stroke-dasharray="10 10" />
+            </svg>
+            
+            <svg class="floating-element w-16 h-16" style="bottom: 20%; left: 10%; animation-delay: 3.5s; animation-duration: 7s;" data-speed="7" viewBox="0 0 100 100">
+                <path d="M 10 50 A 40 40 0 0 1 90 50" fill="none" stroke="white" stroke-width="6" stroke-dasharray="10 10" stroke-linecap="round"/>
+            </svg>
+        </div>
+        
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="flex justify-between items-start mb-10">
+                <span class="text-white text-sm font-bold tracking-widest">SHIRLY STUDIO</span>
+                <div class="text-white text-5xl hidden sm:block">&#8594;</div>
+            </div>
 
-  <footer>
-    <h4>Shirly Ben Nun &copy; 2025</h4>
-    <ul>
-      <li><a href="#"><img src="new icons/instagram 1.svg" alt="Instagram"></a></li>
-      <li><a href="#"><img src="new icons/twitter 1.svg" alt="Twitter"></a></li>
-      <li><a href="https://www.youtube.com/channel/UCmoA-WifFijhY71DV90qi0w"><img src="new icons/youtube-symbol 1.svg" alt="YouTube"></a></li>
-    </ul>
-  </footer>
+            <div class="flex flex-wrap lg:flex-nowrap gap-8 lg:gap-4 items-end relative z-10">
+                <!-- Left Column (Text) -->
+                <div class="w-full lg:w-3/5 order-1 relative z-10">
+                    <div id="hugeText" class="huge-text huge-text-size mb-4">
+                        GRAPHIC<br>DESIGNER
+                    </div>
+                    <h2 class="text-4xl sm:text-5xl font-normal text-white tracking-wider mt-4 text-cartoon-shadow">
+                        SHIRLY HERSCOVICI
+                    </h2>
+                </div>
 
-  <script src="script.js"></script>
+                <!-- Right Column (Profile Card) -->
+                <div class="w-full lg:w-2/5 flex justify-end order-2">
+                    <div id="profileCard" class="bg-card-yellow p-4 sm:p-6 rounded-3xl -rotate-3 card-cartoon-shadow relative w-full profile-card z-0">
+                        <!-- Waving Hand Icon -->
+                        <div class="animated-hand-wrapper hidden sm:block">
+                            <span class="cartoon-hand">&#9996;</span>
+                        </div>
+                        
+                        <!-- Emoji Bubble Animation -->
+                        <div id="emojiContainer" class="absolute top-[-40px] right-[-20px] bg-white rounded-full p-2 text-4xl animated-bubble">
+                            <div class="emoji-layer-container">
+                                <span class="emoji-layer">😊</span>
+                                <span class="emoji-layer">😆</span>
+                                <span class="emoji-layer">😍</span>
+                                <span class="emoji-layer">🤩</span>
+                                <span class="emoji-layer">😺</span>
+                            </div>
+                        </div>
+
+                        <img 
+                            src="https://placehold.co/300x400/F87CA9/FFFFFF?text=PROFILE+PHOTO" 
+                            onerror="this.onerror=null;this.src='https://placehold.co/300x400/F87CA9/FFFFFF?text=PROFILE';" 
+                            alt="Shirly's Profile Picture"
+                            class="w-full h-auto object-cover rounded-xl shadow-lg border-4 border-white"
+                        >
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Info -->
+            <div class="flex justify-start text-sm text-white font-normal mt-8 space-x-8"> 
+                <div class="ltr">
+                    <span class="block">Website:</span>
+                    <a href="#" class="hover:underline">www.yourportfolio.com</a>
+                </div>
+                <div class="ltr">
+                    <span class="block">Email:</span>
+                    <a href="mailto:shirly@example.com" class="hover:underline">shirly@example.com</a>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <main class="max-w-7xl mx-auto px-4 sm:px-8 lg:px-16 py-16">
+        <!-- ABOUT SECTION -->
+        <section class="mb-20">
+            <h2 class="text-4xl font-normal text-gray-800 mb-6 border-b-4 border-accent pb-2 inline-block">About Me</h2>
+            <p class="text-gray-700 text-lg max-w-3xl leading-relaxed">
+                Hello, I'm Shirly, a graphic designer with a passion for creating unique and memorable visual brands and user experiences. I believe in the power of the pixel to transform an abstract idea into inspiring reality. Here you can find a selection of my work from recent years.
+            </p>
+        </section>
+
+        <!-- FEATURED PROJECT SECTION (UPDATED TO COLLAGE LAYOUT) -->
+        <section id="featuredProject" class="mb-24">
+            <div class="collage-section-layout">
+                
+                <!-- Vertical Headline (Improved styling for separation) -->
+                <div class="collage-headline-vertical">
+                    MAGAZINE<br>DESIGN
+                </div>
+                
+                <!-- Small Subtitle - Positioned Absolutely on Desktop -->
+                <div class="collage-subtitle-small">
+                    SPRING 2030 / FASHION BRAND
+                </div>
+                
+                <!-- Content Area: Images and Text -->
+                <div class="collage-content-area">
+                    <div class="collage-content-grid">
+                    
+                        <!-- Image 1 (Carousel) -->
+                        <div class="collage-img-1 project-item is-carousel" data-images='[
+                            {"src": "WhatsApp Image 2025-04-03 at 22.42.45.jpeg", "alt": "Magazine Cover 1", "text": "COVER"}
+                        ]'> 
+                            <div class="project-item-images">
+                                <!-- Placeholders are generated dynamically by JS for carousel items -->
+                            </div>
+                        </div>
+
+                        <!-- Image 2 (Carousel) -->
+                        <div class="collage-img-2 project-item is-carousel" data-images='[
+                            {"src": "WhatsApp Image 2025-04-03 at 23.32.23.jpeg", "alt": "Magazine Spread", "text": "SPREAD"}
+                        ]'> 
+                            <div class="project-item-images">
+                                <!-- Placeholders are generated dynamically by JS for carousel items -->
+                            </div>
+                        </div>
+
+                        <!-- Image 3 (Carousel) -->
+                        <div class="collage-img-3 project-item is-carousel" data-images='[
+                            {"src": "WhatsApp Image 2025-04-03 at 23.32.11.jpeg", "alt": "Magazine Image 1", "text": "IMAGE 1"},
+                            {"src": "WhatsApp Image 2025-04-03 at 23.31.48.jpeg", "alt": "Magazine Image 2", "text": "IMAGE 2"}
+                        ]'> 
+                            <div class="project-item-images">
+                                <!-- Placeholders are generated dynamically by JS for carousel items -->
+                            </div>
+                        </div>
+
+                        <!-- Image 4 (Carousel) -->
+                        <div class="collage-img-4 project-item is-carousel" data-images='[
+                            {"src": "WhatsApp Image 2025-04-03 at 23.31.59.jpeg", "alt": "Magazine Image 3", "text": "IMAGE 3"},
+                            {"src": "WhatsApp Image 2025-04-03 at 23.05.18.jpeg", "alt": "Magazine Image 4", "text": "IMAGE 4"}
+                        ]'> 
+                            <div class="project-item-images">
+                                <!-- Placeholders are generated dynamically by JS for carousel items -->
+                            </div>
+                        </div>
+                        
+                        <!-- Text Area (Bottom Left) -->
+                        <div class="collage-text-box">
+                            <p class="mb-2 text-base md:text-lg">
+                                This project involved branding and magazine design for a military-focused current affairs brand, utilizing a bold visual language and unconventional compositions. The work includes creating spreads, covers, and selecting typography that combines seriousness with impactful communication. The design aims for a unique, unforgettable look while maintaining a clean, engaging graphic line.
+                            </p>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Button remains outside the collage grid for standard layout -->
+            <div class="flex justify-center mt-12">
+                <a href="#" class="bg-blue-600 text-white text-xl font-bold py-3 px-8 rounded-full border-4 border-black card-cartoon-shadow hover:bg-blue-700 transition duration-300 transform hover:-translate-y-1">
+                    View Full Project Details &rarr;
+                </a>
+            </div>
+        </section>
+
+        <!-- OTHER PROJECTS SECTION -->
+        <section>
+            <h2 class="text-4xl font-normal text-gray-800 mb-8 border-b-4 border-accent pb-2 inline-block">Other Projects</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden transform hover:-translate-y-2 hover:shadow-2xl transition duration-300">
+                    <img 
+                        src="https://placehold.co/600x400/F0F0F0/222222?text=Branding+for+Startup" 
+                        alt="Branding Project" 
+                        class="w-full h-48 object-cover"
+                    >
+                    <div class="p-6">
+                        <h3 class="text-2xl font-normal text-gray-900 mb-2">Tech Company Branding</h3>
+                        <p class="text-gray-600 mb-4">Developed a full visual language, including logo, color palette, and typography.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-blue-200 text-blue-800 text-sm font-bold px-3 py-1 rounded-full">Branding</span>
+                            <span class="bg-gray-200 text-gray-800 text-sm font-bold px-3 py-1 rounded-full">Logo</span>
+                        </div>
+                        <a href="#" class="accent-color font-normal hover:text-amber-600 transition">View Project &rarr;</a>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden transform hover:-translate-y-2 hover:shadow-2xl transition duration-300">
+                    <img 
+                        src="https://placehold.co/600x400/E5E7EB/222222?text=Website+Design" 
+                        alt="Website Design Project" 
+                        class="w-full h-48 object-cover"
+                    >
+                    <div class="p-6">
+                        <h3 class="text-2xl font-normal text-gray-900 mb-2">App UI/UX Design</h3>
+                        <p class="text-gray-600 mb-4">Designed mockups, user screens, and User Flows for a financial application.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-green-200 text-green-800 text-sm font-bold px-3 py-1 rounded-full">UI/UX</span>
+                            <span class="bg-purple-200 text-purple-800 text-sm font-bold px-3 py-1 rounded-full">Applications</span>
+                        </div>
+                        <a href="#" class="accent-color font-normal hover:text-amber-600 transition">View Project &rarr;</a>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden transform hover:-translate-y-2 hover:shadow-2xl transition duration-300">
+                    <img 
+                        src="https://placehold.co/600x400/D1D5DB/222222?text=Digital+Campaign" 
+                        alt="Digital Campaign" 
+                        class="w-full h-48 object-cover"
+                    >
+                    <div class="p-6">
+                        <h3 class="text-2xl font-normal text-gray-900 mb-2">Digital Ad Campaign</h3>
+                        <p class="text-gray-600 mb-4">Created banners and social media videos for a fashion brand.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-pink-200 text-pink-800 text-sm font-bold px-3 py-1 rounded-full">Social</span>
+                            <span class="bg-yellow-200 text-yellow-800 text-sm font-bold px-3 py-1 rounded-full">Creative</span>
+                        </div>
+                        <a href="#" class="accent-color font-normal hover:text-amber-600 transition">View Project &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT SECTION (COMPLETED) -->
+        <section id="contact" class="my-24">
+            <h2 class="text-4xl font-normal text-gray-800 mb-8 border-b-4 border-accent pb-2 inline-block">Get In Touch</h2>
+            <div class="max-w-2xl mx-auto bg-white p-8 rounded-xl border-4 border-black" style="box-shadow: 8px 8px 0px #F87CA9;">
+                <p class="text-gray-700 mb-6">Have a crazy project idea? Want to collaborate? Send me a message, and I'll get back to you soon!</p>
+                
+                <form id="contactForm">
+                    <!-- Name Field -->
+                    <div class="mb-4">
+                        <label for="name" class="block text-gray-700 font-bold mb-2">Full Name:</label>
+                        <input type="text" id="name" name="name" class="w-full p-3 rounded-lg border-4 border-black shadow-md focus:ring-4 focus:ring-pink-300 transition duration-150" required>
+                    </div>
+                    <!-- Email Field -->
+                    <div class="mb-4">
+                        <label for="email" class="block text-gray-700 font-bold mb-2">Email:</label>
+                        <input type="email" id="email" name="email" class="w-full p-3 rounded-lg border-4 border-black shadow-md focus:ring-4 focus:ring-pink-300 transition duration-150" required>
+                    </div>
+                    <!-- Message Field -->
+                    <div class="mb-6">
+                        <label for="message" class="block text-gray-700 font-bold mb-2">Your Message:</label>
+                        <textarea id="message" name="message" rows="4" class="w-full p-3 rounded-lg border-4 border-black shadow-md focus:ring-4 focus:ring-pink-300 transition duration-150" required></textarea>
+                    </div>
+                    <!-- Submit Button -->
+                    <button type="submit" class="w-full bg-blue-600 text-white text-2xl font-bold py-3 rounded-xl border-4 border-black card-cartoon-shadow hover:bg-blue-700 transition duration-300 transform hover:-translate-y-1">
+                        Send Message! &#10148;
+                    </button>
+                </form>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER SECTION -->
+    <footer class="grid-bg text-white py-8 px-4 sm:px-8 lg:px-16 text-center border-t-8 border-accent">
+        <div class="max-w-7xl mx-auto">
+            <p class="text-lg mb-2">© 2025 Shirly Herscovici Studio. All rights reserved.</p>
+            <div class="flex justify-center space-x-4 text-3xl mt-4">
+                <a href="#" class="hover:text-pink-300 transition duration-200" title="Instagram">
+                    <span class="text-3xl">📸</span>
+                </a>
+                <a href="#" class="hover:text-pink-300 transition duration-200" title="LinkedIn">
+                    <span class="text-3xl">🔗</span>
+                </a>
+                <a href="mailto:shirly@example.com" class="hover:text-pink-300 transition duration-200" title="Email">
+                    <span class="text-3xl">📧</span>
+                </a>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- INTERACTIVITY JAVASCRIPT -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // --- 1. Image Carousel Logic for Featured Projects ---
+            const carouselItems = document.querySelectorAll('.project-item.is-carousel');
+
+            // 1a. Function to initialize carousel items
+            const initCarousel = (item) => {
+                const container = item.querySelector('.project-item-images');
+                // The data-images now uses reliable placeholder URLs
+                const imagesData = JSON.parse(item.getAttribute('data-images'));
+                
+                // Clear existing content (important for re-running)
+                container.innerHTML = '';
+                
+                let currentIndex = 0;
+
+                // Create the actual image and placeholder elements
+                imagesData.forEach((data, index) => {
+                    // Create Placeholder Text
+                    const placeholder = document.createElement('span');
+                    placeholder.className = 'placeholder-text';
+                    placeholder.textContent = data.text;
+                    container.appendChild(placeholder);
+                    
+                    // Create Image Element
+                    const img = document.createElement('img');
+                    img.src = data.src;
+                    img.alt = data.alt;
+                    // Removed the redundant onerror since the source is a reliable placeholder URL.
+
+                    // Set first image as active
+                    if (index === 0) {
+                        img.classList.add('active');
+                    }
+                    container.appendChild(img);
+                });
+                
+                const images = container.querySelectorAll('img');
+
+                // 1b. Start cycling for carousel items
+                if (images.length > 1) {
+                    const cycleImages = () => {
+                        // Fade out current image
+                        images[currentIndex].classList.remove('active');
+                        
+                        // Calculate next index
+                        currentIndex = (currentIndex + 1) % images.length;
+                        
+                        // Fade in next image
+                        images[currentIndex].classList.add('active');
+                    };
+
+                    // Start cycling every 4 seconds
+                    setInterval(cycleImages, 4000);
+                }
+            };
+            
+            // Initialize all carousel items
+            carouselItems.forEach(initCarousel);
+
+
+            // --- 2. Floating Element / Parallax Logic for Header ---
+            const floatingElements = document.querySelectorAll('.floating-element');
+            const header = document.getElementById('mainHeader');
+
+            if (header) {
+                header.addEventListener('mousemove', (e) => {
+                    const rect = header.getBoundingClientRect();
+                    const centerX = rect.left + rect.width / 2;
+                    const centerY = rect.top + rect.height / 2;
+                    const offsetX = e.clientX - centerX;
+                    const offsetY = e.clientY - centerY;
+
+                    floatingElements.forEach(el => {
+                        const speed = el.getAttribute('data-speed') || 5;
+                        const maxMovement = 15; 
+                        
+                        const translateX = (offsetX * speed / 2000) * maxMovement;
+                        const translateY = (offsetY * speed / 2000) * maxMovement;
+
+                        el.style.transform = `translate(${translateX}px, ${translateY}px)`;
+                    });
+                });
+            }
+            
+            // --- 3. Profile Card Tilt Effect ---
+            const profileCard = document.getElementById('profileCard');
+            if (profileCard) {
+                profileCard.addEventListener('mousemove', (e) => {
+                    const rect = profileCard.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    const middleX = rect.width / 2;
+                    const middleY = rect.height / 2;
+                    
+                    const rotateY = ((x - middleX) / middleX) * -3; 
+                    const rotateX = ((y - middleY) / middleY) * 3;
+                    
+                    const moveX = ((x - middleX) / middleX) * 5;
+                    const moveY = ((y - middleY) / middleY) * 5;
+
+                    profileCard.style.transform = `rotate(0deg) perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translate(${moveX}px, ${moveY}px)`;
+                });
+
+                profileCard.addEventListener('mouseleave', () => {
+                    profileCard.style.transform = 'rotate(-3deg)';
+                });
+            }
+        });
+    </script>
 </body>
 </html>
+
