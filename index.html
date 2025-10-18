@@ -1,801 +1,449 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio: Shirly Herscovici</title>
-    <title>Portfolio: Shirly Herscovici</title>
-<base href="https://shirly3212.github.io/shirly-portfolio-v2/">
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        /* Import Retro/Bold Fonts */
-        @import url('https://fonts.googleapis.com/css2?family=VT323&family=Bebas+Neue&display=swap');
-        
-        body {
-            font-family: 'VT323', monospace, sans-serif; 
-            direction: ltr; /* Left-to-Right for English */
-        }
-        /* Override Tailwind RTL issues for specific elements that must be LTR */
-        .ltr {
-            direction: ltr;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shirly Herscovici - Portfolio</title>
+  <!-- Google Font: Playfair Display and Lato -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    /* Global Reset and Base Styles */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
-        /* --- Global Background (Blue Grid) --- */
-        .grid-bg {
-            background-color: #4A7DEB; /* Blue */
-            background-image: 
-                linear-gradient(0deg, transparent 24%, rgba(255, 255, 255, 0.08) 25%, rgba(255, 255, 255, 0.08) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, 0.08) 75%, rgba(255, 255, 255, 0.08) 76%, transparent 77%), 
-                linear-gradient(90deg, transparent 24%, rgba(255, 255, 255, 0.08) 25%, rgba(255, 255, 255, 0.08) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, 0.08) 75%, rgba(255, 255, 255, 0.08) 76%, transparent 77%);
-            background-size: 40px 40px; 
-            perspective: 1000px;
-        }
+    body {
+      font-family: 'Lato', sans-serif;
+      background-color: #111;
+      color: #fff;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
 
-        /* --- Header: Profile Card Emoji Bubble Animation --- */
-        .animated-bubble {
-            font-size: 3rem; 
-            width: 4.5rem; 
-            height: 4.5rem;
-            border: 4px solid black; 
-            box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.5); 
-            display: flex;
-            align-items: center; 
-            justify-content: center;
-            overflow: hidden; 
-        }
-        
-        .emoji-layer-container {
-            position: relative;
-            width: 100%;
-            height: 100%;
-        }
+    /* === HEADER SECTION (Hero) === */
+    header {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      /* הרקע המקורי - כמעט שחור */
+      background-color: #0d0d0d; 
+      padding: 5rem 10%;
+      min-height: 85vh;
+      overflow: hidden; 
 
-        .emoji-layer {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            animation: layer-fade-cycle 25s infinite;
-            transition: opacity 0.8s ease-in-out; 
-        }
-
-        .emoji-layer:nth-child(1) { animation-delay: 0s; }
-        .emoji-layer:nth-child(2) { animation-delay: 5s; }
-        .emoji-layer:nth-child(3) { animation-delay: 10s; }
-        .emoji-layer:nth-child(4) { animation-delay: 15s; }
-        .emoji-layer:nth-child(5) { animation-delay: 20s; }
-        
-        @keyframes layer-fade-cycle {
-            0% { opacity: 0; }
-            4% { opacity: 1; }
-            20% { opacity: 1; } 
-            96% { opacity: 0; }
-            100% { opacity: 0; }
-        }
-        
-        /* --- Header: Floating Elements (Background Parallax) --- */
-        @keyframes slow-float {
-            0% { transform: translate(0, 0) rotate(0deg); opacity: 0.6; }
-            33% { transform: translate(10px, -5px) rotate(2deg); opacity: 0.7; }
-            66% { transform: translate(-10px, 5px) rotate(-2deg); opacity: 0.9; }
-            100% { transform: translate(0, 0) rotate(0deg); opacity: 0.6; }
-        }
-
-        .floating-element {
-            position: absolute;
-            z-index: 1; 
-            animation: slow-float 8s ease-in-out infinite alternate;
-            opacity: 0.6; 
-            /* Will be controlled by JS for parallax */
-            transition: transform 0.1s linear; 
-        }
-        
-        .floating-element.dot {
-             opacity: 0.8;
-        }
-
-        .delay-1 { animation-delay: 1.5s; animation-duration: 9s; }
-        .delay-2 { animation-delay: 0.5s; animation-duration: 7s; }
-        .delay-3 { animation-delay: 2.8s; animation-duration: 10s; }
-        .delay-4 { animation-delay: 4.0s; animation-duration: 6s; }
-        
-        /* --- Header: Main Title (Bebas Neue + Big Shadow) --- */
-        @keyframes fade-in-up {
-            0% { opacity: 0; transform: translateY(20px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
-        
-        .huge-text {
-            font-family: 'Bebas Neue', 'Impact', sans-serif; 
-            line-height: 0.85; 
-            font-weight: 400; 
-            letter-spacing: 0.02em; 
-            color: #F87CA9; /* Pink */
-            text-shadow: 
-                -8px -8px 0px #FFF, /* White border */
-                -1px -1px 0 #F87CA9, 
-                1px -1px 0 #F87CA9, 
-                -1px 1px 0 #F87CA9, 
-                1px 1px 0 #F87CA9,
-                -2px -2px 0 #F87CA9, 
-                6px 6px 0px #000; /* Black main shadow */ 
-            opacity: 0; 
-            animation: fade-in-up 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.5s forwards; 
-        }
-        
-        .huge-text-size {
-            font-size: 3.5rem; 
-        }
-        
-        @media (min-width: 640px) {
-            .huge-text-size { font-size: 6rem; }
-        }
-
-        @media (min-width: 1024px) {
-            .huge-text-size { font-size: 9rem; }
-        }
-        
-        /* --- General Cartoon Shadows/Styles --- */
-        .text-cartoon-shadow {
-            text-shadow: 5px 5px 0px #000; 
-        }
-        
-        /* Waving Hand Icon */
-        .cartoon-hand {
-            display: inline-block;
-            background-color: white; 
-            border: 4px solid black; 
-            border-radius: 50%; 
-            padding: 8px 12px;
-            color: black; 
-            font-size: 3rem; 
-            box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.5); 
-            line-height: 1;
-        }
-
-        @keyframes wave-hand {
-            0%, 100% { transform: translate(0, 0) rotate(6deg); }
-            50% { transform: translate(-5px, 0) rotate(8deg); }
-        }
-        .animated-hand-wrapper {
-            animation: wave-hand 2s ease-in-out infinite; 
-            position: absolute; 
-            bottom: -50px; 
-            left: -30px; 
-            transform-origin: bottom center; 
-            z-index: 20; 
-        }
-
-        /* Profile Card Styling */
-        .profile-card {
-            max-width: 280px; 
-            transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
-            transform-style: preserve-3d;
-        }
-        .card-cartoon-shadow {
-            box-shadow: 8px 8px 0px #000; 
-        }
-
-        @media (min-width: 768px) {
-            .profile-card {
-                max-width: 320px; 
-            }
-        }
-        
-        /* Color Variables */
-        .accent-color { color: #FFB954; } /* Yellow */
-        .border-accent { border-color: #FFB954; }
-        .bg-card-yellow { background-color: #FFB954; }
-
-        /* ======================================= */
-        /* --- PROJECT COLLAGE STYLES --- */
-        /* ======================================= */
-
-        .collage-section-layout {
-            display: flex;
-            flex-direction: column; 
-            align-items: center;
-            position: relative;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        @media (min-width: 1024px) {
-            .collage-section-layout {
-                flex-direction: row; 
-                align-items: flex-start;
-                height: 800px; 
-                justify-content: space-between;
-                padding-left: 2rem; 
-            }
-        }
-
-        /* Vertical Headline - Added clear border and fixed placement */
-        .collage-headline-vertical {
-            font-family: 'Bebas Neue', sans-serif;
-            line-height: 0.8;
-            letter-spacing: 0.05em;
-            color: #4A7DEB; /* Blue */
-            text-shadow: 8px 8px 0px #F87CA9; /* Pink shadow for impact */
-            white-space: nowrap;
-            
-            /* Mobile (Horizontal) */
-            font-size: 3rem; 
-            text-align: center;
-            width: 100%;
-            margin-bottom: 2rem; /* Increased margin for separation */
-            border-bottom: 4px solid #F87CA9; /* Clear separation line */
-            padding-bottom: 1rem;
-
-
-            /* Desktop (Vertical) */
-            @media (min-width: 1024px) {
-                writing-mode: vertical-rl;
-                text-orientation: mixed;
-                font-size: 8rem; 
-                margin-left: 0; 
-                margin-bottom: 0;
-                height: 100%;
-                display: flex;
-                align-items: center;
-                justify-content: flex-start;
-                transform: rotate(180deg); 
-                border-right: 4px solid #F87CA9; /* Vertical separation line */
-                border-bottom: none; /* Remove bottom border on desktop */
-                padding-bottom: 0;
-                padding-right: 1rem;
-            }
-        }
-
-        /* Small Subtitle - Positioned Absolutely on Desktop */
-        .collage-subtitle-small {
-            font-family: 'VT323', monospace;
-            font-size: 1.5rem;
-            color: #4A7DEB; 
-            letter-spacing: 0.1em;
-            text-align: center;
-            margin-bottom: 0.5rem;
-            width: 100%;
-            @media (min-width: 1024px) {
-                position: absolute; 
-                top: 50px; 
-                left: 30px; 
-                text-align: left;
-                width: auto;
-                z-index: 20;
-            }
-        }
-
-        .collage-content-area {
-            width: 100%;
-            max-width: 800px; 
-            position: relative;
-            @media (min-width: 1024px) {
-                flex-grow: 1; 
-                height: 100%;
-                padding-right: 200px; 
-            }
-        }
-
-        .collage-content-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr); 
-            grid-template-rows: repeat(3, auto); 
-            gap: 1.5rem;
-            height: 100%; 
-        }
-
-        /* Specific item placement for the collage look (Desktop) */
-        @media (min-width: 1024px) {
-            .collage-img-1 { grid-column: 1 / 2; grid-row: 1 / 2; height: 250px; }
-            .collage-img-2 { grid-column: 2 / 3; grid-row: 1 / 3; height: 400px; }
-            .collage-img-3 { grid-column: 1 / 2; grid-row: 2 / 3; height: 300px; }
-            .collage-img-4 { grid-column: 2 / 3; grid-row: 3 / 4; height: 250px; }
-            .collage-text-box { 
-                grid-column: 1 / 2;
-                grid-row: 3 / 4;
-                padding: 1rem;
-                text-align: left;
-                font-family: 'VT323', monospace;
-                font-size: 1.1rem;
-                line-height: 1.4;
-                color: #374151;
-                display: flex; 
-                align-items: flex-end;
-            }
-        }
-
-        /* Mobile adjustments: stack all items vertically */
-        @media (max-width: 1023px) {
-            .collage-content-grid {
-                grid-template-columns: 1fr;
-                grid-template-rows: auto;
-            }
-            .collage-content-area {
-                width: 100%;
-            }
-            .collage-img-1, .collage-img-2, .collage-img-3, .collage-img-4, .collage-text-box {
-                grid-column: 1 / -1;
-                grid-row: auto;
-                height: auto;
-            }
-            .collage-img-2 {
-                height: 300px;
-            }
-        }
-        
-        .text-box-cartoon {
-            border: 4px solid black;
-            border-radius: 0.75rem; 
-            box-shadow: 6px 6px 0px #F87CA9; 
-            padding: 1.5rem;
-            background-color: white;
-            height: 100%; 
-            display: flex;
-            flex-direction: column;
-        }
-
-        .project-item {
-            border: 4px solid black;
-            border-radius: 0.75rem;
-            box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.4);
-            overflow: hidden;
-            background-color: white;
-            height: 100%;
-            position: relative;
-        }
-        
-        .project-item-images {
-            position: relative;
-            width: 100%;
-            height: 100%;
-        }
-        
-        .project-item-images img {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0;
-            transition: opacity 1.2s ease-in-out;
-            min-height: 100%; 
-            /* Set a default background for placeholder effect */
-            background-color: #f0f0f0; 
-        }
-        
-        .project-item-images img.active {
-            opacity: 1;
-        }
-        
-        /* Style for the Placeholder Image text (always visible if image fails) */
-        .placeholder-text {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: #333;
-            font-size: 1.2rem;
-            text-align: center;
-            font-family: 'Bebas Neue', sans-serif;
-            pointer-events: none; /* Make sure it doesn't interfere with clicks */
-            z-index: 5;
-        }
-    </style>
-</head>
-<body class="bg-gray-100">
-
-    <!-- HEADER SECTION (HERO) -->
-    <header id="mainHeader" class="grid-bg text-white pt-10 pb-8 px-4 sm:px-8 lg:px-16 overflow-hidden relative">
-        <!-- Floating Elements Background -->
-        <div class="absolute inset-0 z-0">
-            <svg class="floating-element delay-1 w-10 h-10" style="top: 15%; right: 10%;" data-speed="10" viewBox="0 0 100 100">
-                <line x1="10" y1="50" x2="90" y2="50" stroke="white" stroke-width="4" stroke-linecap="round"/>
-                <line x1="50" y1="10" x2="50" y2="90" stroke="white" stroke-width="4" stroke-linecap="round"/>
-                <line x1="25" y1="25" x2="75" y2="75" stroke="white" stroke-width="3" stroke-linecap="round"/>
-                <line x1="75" y1="25" x2="25" y2="75" stroke="white" stroke-width="3" stroke-linecap="round"/>
-            </svg>
-            
-            <div class="floating-element dot delay-2 w-3 h-3 rounded-full bg-white" style="top: 35%; left: 5%;" data-speed="5"></div>
-            
-            <svg class="floating-element delay-3 w-8 h-8" style="bottom: 10%; left: 40%;" data-speed="12" viewBox="0 0 100 100">
-                <line x1="10" y1="50" x2="90" y2="50" stroke="white" stroke-width="4" stroke-linecap="round"/>
-                <line x1="50" y1="10" x2="50" y2="90" stroke="white" stroke-width="4" stroke-linecap="round"/>
-                <line x1="25" y1="25" x2="75" y2="75" stroke="white" stroke-width="3" stroke-linecap="round"/>
-                <line x1="75" y1="25" x2="25" y2="75" stroke="white" stroke-width="3" stroke-linecap="round"/>
-            </svg>
-
-            <div class="floating-element dot w-4 h-4 rounded-full bg-white" style="top: 25%; left: 80%;" data-speed="8"></div>
-
-            <svg class="floating-element delay-2 w-5 h-5" style="bottom: 25%; right: 20%;" data-speed="6" viewBox="0 0 100 100">
-                <line x1="10" y1="50" x2="90" y2="50" stroke="white" stroke-width="4" stroke-linecap="round"/>
-                <line x1="50" y1="10" x2="50" y2="90" stroke="white" stroke-width="4" stroke-linecap="round"/>
-                <line x1="25" y1="25" x2="75" y2="75" stroke="white" stroke-width="3" stroke-linecap="round"/>
-                <line x1="75" y1="25" x2="25" y2="75" stroke="white" stroke-width="3" stroke-linecap="round"/>
-            </svg>
-            
-            <div class="floating-element dot delay-4 w-2 h-2 rounded-full bg-white" style="bottom: 5%; right: 50%;" data-speed="4"></div>
-
-            <svg class="floating-element w-10 h-10" style="top: 10%; left: 30%; animation-duration: 9.5s;" data-speed="15" viewBox="0 0 100 100">
-                <rect x="10" y="10" width="80" height="80" fill="none" stroke="white" stroke-width="5" stroke-dasharray="10 10" />
-            </svg>
-            
-            <svg class="floating-element w-16 h-16" style="bottom: 20%; left: 10%; animation-delay: 3.5s; animation-duration: 7s;" data-speed="7" viewBox="0 0 100 100">
-                <path d="M 10 50 A 40 40 0 0 1 90 50" fill="none" stroke="white" stroke-width="6" stroke-dasharray="10 10" stroke-linecap="round"/>
-            </svg>
-        </div>
-        
-        <div class="max-w-7xl mx-auto relative z-10">
-            <div class="flex justify-between items-start mb-10">
-                <span class="text-white text-sm font-bold tracking-widest">SHIRLY STUDIO</span>
-                <div class="text-white text-5xl hidden sm:block">&#8594;</div>
-            </div>
-
-            <div class="flex flex-wrap lg:flex-nowrap gap-8 lg:gap-4 items-end relative z-10">
-                <!-- Left Column (Text) -->
-                <div class="w-full lg:w-3/5 order-1 relative z-10">
-                    <div id="hugeText" class="huge-text huge-text-size mb-4">
-                        GRAPHIC<br>DESIGNER
-                    </div>
-                    <h2 class="text-4xl sm:text-5xl font-normal text-white tracking-wider mt-4 text-cartoon-shadow">
-                        SHIRLY HERSCOVICI
-                    </h2>
-                </div>
-
-                <!-- Right Column (Profile Card) -->
-                <div class="w-full lg:w-2/5 flex justify-end order-2">
-                    <div id="profileCard" class="bg-card-yellow p-4 sm:p-6 rounded-3xl -rotate-3 card-cartoon-shadow relative w-full profile-card z-0">
-                        <!-- Waving Hand Icon -->
-                        <div class="animated-hand-wrapper hidden sm:block">
-                            <span class="cartoon-hand">&#9996;</span>
-                        </div>
-                        
-                        <!-- Emoji Bubble Animation -->
-                        <div id="emojiContainer" class="absolute top-[-40px] right-[-20px] bg-white rounded-full p-2 text-4xl animated-bubble">
-                            <div class="emoji-layer-container">
-                                <span class="emoji-layer">😊</span>
-                                <span class="emoji-layer">😆</span>
-                                <span class="emoji-layer">😍</span>
-                                <span class="emoji-layer">🤩</span>
-                                <span class="emoji-layer">😺</span>
-                            </div>
-                        </div>
-
-                        <img 
-                            src="img_new/img_new_portfolio.jpg" 
-                            onerror="this.onerror=null;this.src='https://placehold.co/300x400/F87CA9/FFFFFF?text=PROFILE';" 
-                            alt="Shirly's Profile Picture"
-                            class="w-full h-auto object-cover rounded-xl shadow-lg border-4 border-white"
-                        >
-                    </div>
-                </div>
-            </div>
-
-            <!-- Contact Info -->
-            <div class="flex justify-start text-sm text-white font-normal mt-8 space-x-8"> 
-                <div class="ltr">
-                    <span class="block">Website:</span>
-                    <a href="#" class="hover:underline">https://shirly3212.github.io/Shirly_portfolio/</a>
-                </div>
-                <div class="ltr">
-                    <span class="block">Email:</span>
-                    <a href="mailto:shirly3212@gmail.com" class="hover:underline">shirly@example.com</a>
-                </div>
-            </div>
-        </div>
-    </header>
+      /* --- NEW: רקע רשת (Grid Background) --- */
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+      background-size: 30px 30px; /* גודל המשבצת */
+    }
     
-    <main class="max-w-7xl mx-auto px-4 sm:px-8 lg:px-16 py-16">
-        <!-- ABOUT SECTION -->
-        <section class="mb-20">
-            <h2 class="text-4xl font-normal text-gray-800 mb-6 border-b-4 border-accent pb-2 inline-block">About Me</h2>
-            <p class="text-gray-700 text-lg max-w-3xl leading-relaxed">
-                Hello, I'm Shirly, a graphic designer with a passion for creating unique and memorable visual brands and user experiences. I believe in the power of the pixel to transform an abstract idea into inspiring reality. Here you can find a selection of my work from recent years.
-            </p>
-        </section>
+    /* --- FLOATING VECTORS STYLES (הווקטורים) --- */
+    .vector { 
+      position: absolute; 
+      opacity: 0.5; 
+      animation: float 7s ease-in-out infinite; 
+      z-index: 0; /* נשאר ברקע */
+    }
+    /* שימוש בצבעים הקיימים עבור צורות חדשות */
+    .vector circle { stroke: #a3ff00; stroke-width: 2; fill: none; }
+    .vector triangle polygon { stroke: #fff; stroke-width: 2; fill: none; }
+    .vector square rect { stroke: #00b4d8; stroke-width: 2; fill: none; }
+    
+    @keyframes float { 0%,100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-15px) rotate(10deg); } }
 
-        <!-- FEATURED PROJECT SECTION (UPDATED TO COLLAGE LAYOUT) -->
-        <section id="featuredProject" class="mb-24">
-            <div class="collage-section-layout">
 
+    .header-text { max-width: 50%; z-index: 2; }
+    
+    /* Main Name/Title */
+    .header-text h1 { 
+      font-size: clamp(3rem, 7vw, 4rem); 
+      font-weight: 300; 
+      margin-bottom: 0.5rem; 
+      line-height: 1.1; 
+      /* Delayed appearance for all text */
+      opacity: 0;
+      animation: fadeIn 0.8s ease-out 1.5s forwards; 
+    }
+    .header-text h1 strong { display: block; font-weight: 700; }
 
-                <!-- Vertical Headline (Improved styling for separation) -->
-                <div class="collage-headline-vertical">
-                    MAGAZINE<br>DESIGN
-                </div>
+    /* Animated Role (The Green Highlighted Text) */
+    #role-wrapper {
+        margin-bottom: 2rem;
+        /* Animation: Delayed fade in for the wrapper */
+        opacity: 0;
+        animation: fadeIn 0.8s ease-out 1.5s forwards; 
+        /* Ensure we can clip the sliding text */
+        overflow: hidden; 
+        line-height: 1.5; 
+        height: clamp(2.5rem, 6vw, 3.5rem); 
+    }
 
-                <!-- Small Subtitle - Positioned Absolutely on Desktop -->
-                <div class="collage-subtitle-small">
-                    SPRING 2030 / FASHION BRAND
-                </div>
-                
-                <!-- Content Area: Images and Text -->
-                <div class="collage-content-area">
-                    <div class="collage-content-grid">
-
-                        <section class="collage">
-  <!-- Image 1 -->
-  <div class="collage-img-1 project-item is-carousel" 
-       data-images='[
-         {"src": "img_new/img_new_001.png", "alt": "Magazine Cover 1", "text": "COVER"}
-       ]'>
-    <div class="project-item-images"></div>
-  </div>
-
-  <!-- Image 2 -->
-  <div class="collage-img-2 project-item is-carousel" 
-       data-images='[
-         {"src": "img_new/img_new_002.jpeg", "alt": "Magazine Spread", "text": "SPREAD"}
-       ]'>
-    <div class="project-item-images"></div>
-  </div>
-
-  <!-- Image 3 -->
-  <div class="collage-img-3 project-item is-carousel" 
-       data-images='[
-         {"src": "img_new/img_new_003.jpeg", "alt": "Magazine Image 1", "text": "IMAGE 1"},
-         {"src": "img_new/img_new_004.jpeg", "alt": "Magazine Image 2", "text": "IMAGE 2"}
-       ]'>
-    <div class="project-item-images"></div>
-  </div>
-
-  <!-- Image 4 -->
-  <div class="collage-img-4 project-item is-carousel" 
-       data-images='[
-         {"src": "img_new/img_new_005.jpeg", "alt": "Magazine Image 3", "text": "IMAGE 3"},
-         {"src": "img_new/img_new_006.jpeg", "alt": "Magazine Image 4", "text": "IMAGE 4"}
-       ]'>
-    <div class="project-item-images"></div>
-  </div>
-</section>
+    #role {
+      display: inline-block;
+      color: #a3ff00;
+      font-weight: 700;
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      white-space: nowrap;
+      padding: 0 5px; 
       
-                        <!-- Text Area (Bottom Left) -->
-                        <div class="collage-text-box">
-                            <p class="mb-2 text-base md:text-lg">
-                                This project involved branding and magazine design for a military-focused current affairs brand, utilizing a bold visual language and unconventional compositions. The work includes creating spreads, covers, and selecting typography that combines seriousness with impactful communication. The design aims for a unique, unforgettable look while maintaining a clean, engaging graphic line.
-                            </p>
-                        </div>
-                        
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Button remains outside the collage grid for standard layout -->
-            <div class="flex justify-center mt-12">
-                <a href="#" class="bg-blue-600 text-white text-xl font-bold py-3 px-8 rounded-full border-4 border-black card-cartoon-shadow hover:bg-blue-700 transition duration-300 transform hover:-translate-y-1">
-                    View Full Project Details &rarr;
-                </a>
-            </div>
-        </section>
+      /* Transition for Slide Up */
+      transition: opacity 0.5s ease-out, transform 0.5s ease-out; 
+      transform: translateY(0); /* Initial position */
+    }
 
-        <!-- OTHER PROJECTS SECTION -->
-        <section>
-            <h2 class="text-4xl font-normal text-gray-800 mb-8 border-b-4 border-accent pb-2 inline-block">Other Projects</h2>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="bg-white rounded-xl shadow-lg overflow-hidden transform hover:-translate-y-2 hover:shadow-2xl transition duration-300">
-                    <img 
-                        src="https://placehold.co/600x400/F0F0F0/222222?text=Branding+for+Startup" 
-                        alt="Branding Project" 
-                        class="w-full h-48 object-cover"
-                    >
-                    <div class="p-6">
-                        <h3 class="text-2xl font-normal text-gray-900 mb-2">Tech Company Branding</h3>
-                        <p class="text-gray-600 mb-4">Developed a full visual language, including logo, color palette, and typography.</p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="bg-blue-200 text-blue-800 text-sm font-bold px-3 py-1 rounded-full">Branding</span>
-                            <span class="bg-gray-200 text-gray-800 text-sm font-bold px-3 py-1 rounded-full">Logo</span>
-                        </div>
-                        <a href="#" class="accent-color font-normal hover:text-amber-600 transition">View Project &rarr;</a>
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-xl shadow-lg overflow-hidden transform hover:-translate-y-2 hover:shadow-2xl transition duration-300">
-                    <img 
-                        src="https://placehold.co/600x400/E5E7EB/222222?text=Website+Design" 
-                        alt="Website Design Project" 
-                        class="w-full h-48 object-cover"
-                    >
-                    <div class="p-6">
-                        <h3 class="text-2xl font-normal text-gray-900 mb-2">App UI/UX Design</h3>
-                        <p class="text-gray-600 mb-4">Designed mockups, user screens, and User Flows for a financial application.</p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="bg-green-200 text-green-800 text-sm font-bold px-3 py-1 rounded-full">UI/UX</span>
-                            <span class="bg-purple-200 text-purple-800 text-sm font-bold px-3 py-1 rounded-full">Applications</span>
-                        </div>
-                        <a href="#" class="accent-color font-normal hover:text-amber-600 transition">View Project &rarr;</a>
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-xl shadow-lg overflow-hidden transform hover:-translate-y-2 hover:shadow-2xl transition duration-300">
-                    <img 
-                        src="https://placehold.co/600x400/D1D5DB/222222?text=Digital+Campaign" 
-                        alt="Digital Campaign" 
-                        class="w-full h-48 object-cover"
-                    >
-                    <div class="p-6">
-                        <h3 class="text-2xl font-normal text-gray-900 mb-2">Digital Ad Campaign</h3>
-                        <p class="text-gray-600 mb-4">Created banners and social media videos for a fashion brand.</p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="bg-pink-200 text-pink-800 text-sm font-bold px-3 py-1 rounded-full">Social</span>
-                            <span class="bg-yellow-200 text-yellow-800 text-sm font-bold px-3 py-1 rounded-full">Creative</span>
-                        </div>
-                        <a href="#" class="accent-color font-normal hover:text-amber-600 transition">View Project &rarr;</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- CONTACT SECTION (COMPLETED) -->
-        <section id="contact" class="my-24">
-            <h2 class="text-4xl font-normal text-gray-800 mb-8 border-b-4 border-accent pb-2 inline-block">Get In Touch</h2>
-            <div class="max-w-2xl mx-auto bg-white p-8 rounded-xl border-4 border-black" style="box-shadow: 8px 8px 0px #F87CA9;">
-                <p class="text-gray-700 mb-6">Have a crazy project idea? Want to collaborate? Send me a message, and I'll get back to you soon!</p>
-                
-                <form id="contactForm">
-                    <!-- Name Field -->
-                    <div class="mb-4">
-                        <label for="name" class="block text-gray-700 font-bold mb-2">Full Name:</label>
-                        <input type="text" id="name" name="name" class="w-full p-3 rounded-lg border-4 border-black shadow-md focus:ring-4 focus:ring-pink-300 transition duration-150" required>
-                    </div>
-                    <!-- Email Field -->
-                    <div class="mb-4">
-                        <label for="email" class="block text-gray-700 font-bold mb-2">Email:</label>
-                        <input type="email" id="email" name="email" class="w-full p-3 rounded-lg border-4 border-black shadow-md focus:ring-4 focus:ring-pink-300 transition duration-150" required>
-                    </div>
-                    <!-- Message Field -->
-                    <div class="mb-6">
-                        <label for="message" class="block text-gray-700 font-bold mb-2">Your Message:</label>
-                        <textarea id="message" name="message" rows="4" class="w-full p-3 rounded-lg border-4 border-black shadow-md focus:ring-4 focus:ring-pink-300 transition duration-150" required></textarea>
-                    </div>
-                    <!-- Submit Button -->
-                    <button type="submit" class="w-full bg-blue-600 text-white text-2xl font-bold py-3 rounded-xl border-4 border-black card-cartoon-shadow hover:bg-blue-700 transition duration-300 transform hover:-translate-y-1">
-                        Send Message! &#10148;
-                    </button>
-                </form>
-
-            </div>
-        </section>
-
-    </main>
-
-    <!-- FOOTER SECTION -->
-    <footer class="grid-bg text-white py-8 px-4 sm:px-8 lg:px-16 text-center border-t-8 border-accent">
-        <div class="max-w-7xl mx-auto">
-            <p class="text-lg mb-2">© 2025 Shirly Herscovici Studio. All rights reserved.</p>
-            <div class="flex justify-center space-x-4 text-3xl mt-4">
-                <a href="#" class="hover:text-pink-300 transition duration-200" title="Instagram">
-                    <span class="text-3xl">📸</span>
-                </a>
-                <a href="#" class="hover:text-pink-300 transition duration-200" title="LinkedIn">
-                    <span class="text-3xl">🔗</span>
-                </a>
-                <a href="mailto:shirly@example.com" class="hover:text-pink-300 transition duration-200" title="Email">
-                    <span class="text-3xl">📧</span>
-                </a>
-            </div>
-        </div>
-    </footer>
+    .header-text p { 
+        margin-bottom: 0; /* כדי לוודא שאין מרווח תחתון שיוצר קו */
+        font-size: 1.1rem; 
+        color: #aaa; 
+        /* Delayed appearance */
+        opacity: 0;
+        animation: fadeIn 0.8s ease-out 2s forwards;
+    }
     
-    <!-- INTERACTIVITY JAVASCRIPT -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
+    /* מרווח בין הפיסקה לקישורים */
+    .header-text p:last-of-type { 
+        margin-bottom: 2rem;
+    }
+
+    /* Contact Links */
+    .contact { 
+        display: flex; gap: 1.5rem; font-size: 1rem; flex-wrap: wrap; 
+        /* Delayed appearance */
+        opacity: 0;
+        animation: fadeIn 0.8s ease-out 2.2s forwards;
+    }
+    .contact a { 
+        color: #ccc; 
+        text-decoration: none; 
+        border: 1px solid #555; 
+        padding: 0.75rem 1.25rem; 
+        border-radius: 8px; 
+        transition: all 0.3s; 
+    }
+    .contact a:hover { 
+        color: #111; 
+        background-color: #a3ff00; 
+        border-color: #a3ff00; 
+        box-shadow: 0 0 15px rgba(163, 255, 0, 0.4);
+    }
+
+    /* Profile Picture Container - Base Styles */
+    .profile-pic { 
+        position: relative; 
+        z-index: 1; 
+        /* Initial appearance using general fadeIn, delayed */
+        opacity: 0;
+        animation: fadeIn 0.8s ease-out 0.5s forwards; 
+        /* Enable smooth transitions for hover effect */
+        transition: all 0.5s ease-in-out;
+    }
+
+    /* Interactive Hover Effect: Shrink 70% and Change Position (NO BOX-SHADOW) */
+    .profile-pic:hover {
+        /* Scale down to 70% and translate/rotate */
+        transform: scale(0.7) translate(10%, -5%) rotate(-2deg); 
+    }
+
+    .profile-pic img { 
+      width: clamp(300px, 35vw, 380px); 
+      height: auto;
+      border-radius: 20px; 
+      box-shadow: 0 0 25px rgba(255,255,255,0.1); 
+      position: relative; 
+      z-index: 2; 
+    }
+    
+    /* --- TRANSFORM SQUARES STYLES (המשבצות) --- */
+    .transform-square { 
+      position: absolute; 
+      width: 16px; 
+      height: 16px; 
+      background: #fff; 
+      /* שמירת ההדגשה מהבקשה הקודמת */
+      border: 3px solid #a3ff00; 
+      opacity: 0.9; z-index: 3; 
+      /* Continuous movement */
+      animation: squareMovement 3s ease-in-out 1.2s infinite alternate; 
+    }
+    .transform-square.tl { top: -10px; left: -10px; animation-direction: normal; } 
+    .transform-square.tr { top: -10px; right: -10px; animation-direction: reverse; } 
+    .transform-square.bl { bottom: -10px; left: -10px; animation-direction: reverse; } 
+    .transform-square.br { bottom: -10px; right: -10px; animation-direction: normal; } 
+
+
+    /* === ANIMATIONS === */
+
+    /* Animation: General Fade In for text elements */
+    @keyframes fadeIn {
+        to { opacity: 1; }
+    }
+    
+    /* Animation: Subtle float and rotation for the transform squares */
+    @keyframes squareMovement {
+        0%, 100% { transform: translate(0, 0) rotate(0deg); }
+        50% { transform: translate(3px, 3px) rotate(3deg); } 
+    }
+    
+    /* === PORTFOLIO SECTION (Magazine Layout Retain) === */
+    .portfolio {
+      background-color: #fff;
+      color: #000;
+      padding: 6rem 8%;
+      position: relative;
+      grid-template-columns: 4fr 1fr; 
+      grid-gap: 3rem;
+      display: grid; 
+      align-items: start;
+    }
+    
+    /* Project Grid (LEFT Column) */
+    .project-grid {
+      grid-column: 1 / 2; 
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: 2rem;
+      width: 100%;
+    }
+
+    /* Wrapper for Title and Text (RIGHT Column - Side Bar) */
+    .text-and-title-wrapper {
+        grid-column: 2 / 3; 
+        display: flex;
+        flex-direction: column;
+        position: relative; 
+        height: 100%; 
+    }
+
+    /* Vertical Magazine Title */
+    .magazine-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 7vw; 
+      font-weight: 700;
+      color: #111;
+      text-transform: uppercase;
+      white-space: nowrap; 
+      line-height: 0.8;
+      
+      position: absolute;
+      top: 0; 
+      
+      /* Rotation and positioning */
+      transform: rotate(90deg) translate(15px, 0); 
+      transform-origin: top left; 
+      
+      left: 100%; 
+      z-index: 10;
+    }
+    
+    /* Magazine Text Position (Simple spacing) */
+    .magazine-text {
+      font-family: 'Playfair Display', serif; 
+      font-size: 0.7rem; 
+      line-height: 1.6;
+      color: #333;
+      width: 100%;
+      max-width: 200px; 
+      margin-top: auto; /* Pushes text to the bottom of the column */
+      padding-top: 2rem; 
+      align-self: flex-end; /* Aligns text to the right side of the column */
+    }
+    
+    /* Original Project/Staggering Styles */
+    .project {
+      border-radius: 14px;
+      overflow: hidden;
+      background: #f8f8f8;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+      transition: transform 0.4s ease;
+    }
+
+    .project:hover { transform: translateY(-8px); }
+    
+    /* Project staggering (Adjusted slightly for better flow) */
+    .project-grid > .project:nth-child(2) { margin-top: 40px; }
+    .project-grid > .project:nth-child(4) { margin-top: 40px; }
+    .project-grid > .project:nth-child(3) { margin-top: -60px; } 
+
+    .scroll-container { height: 400px; overflow-y: scroll; scroll-behavior: smooth; }
+    .scroll-container img { width: 100%; height: auto; display: block; }
+
+    .fade-project { position: relative; height: 400px; }
+    .fade-project img { 
+      position: absolute; width: 100%; height: 100%; 
+      object-fit: cover; opacity: 0; 
+      animation: fadeSlide 8s infinite; 
+    }
+    .fade-project img:nth-child(1) { animation-delay: 0s; }
+    .fade-project img:nth-child(2) { animation-delay: 4s; }
+
+    @keyframes fadeSlide { 0%{opacity:0;} 10%{opacity:1;} 40%{opacity:1;} 50%{opacity:0;} 100%{opacity:0;} }
+
+    /* === RESPONSIVE DESIGN === */
+    @media (max-width: 1024px) {
+      .portfolio { grid-template-columns: 1fr; padding: 4rem 5%; grid-gap: 2rem; }
+      .text-and-title-wrapper { grid-column: 1 / 2; min-height: auto; position: static; display: block; order: -1; }
+      .magazine-title { position: static; transform: none; transform-origin: center; text-align: center; font-size: 3rem; margin-bottom: 1rem; margin-top: 0; left: auto; }
+      .magazine-text { width: 100%; max-width: 100%; text-align: center; padding-right: 0; margin-top: 0.5rem; font-size: 1rem; align-self: center; }
+      .project-grid { grid-column: 1 / 2; grid-template-columns: 1fr; } 
+      .project-grid > .project:nth-child(2) { margin-top: 0; } 
+      .project-grid > .project:nth-child(3) { margin-top: 0; } 
+      .project-grid > .project:nth-child(4) { margin-top: 0; }
+    }
+    
+    @media (max-width: 768px) {
+      header { flex-direction: column; text-align: center; }
+      .header-text { max-width: 100%; }
+      .contact { justify-content: center; }
+      .profile-pic { order: -1; margin-bottom: 3rem; } /* Push image up on mobile */
+      .project-grid { grid-template-columns: 1fr; } 
+    }
+  </style>
+</head>
+<body>
+  <header>
+    
+    <!-- הווקטורים הצפים (Floating Vectors) - מוקטנים ומופצים באזור הכותרת -->
+    
+    <!-- Vector 1: Circle (Green, scaled to 25px) -->
+    <svg class="vector circle" style="top: 5%; right: 30%; width: 25px; height: 25px; left: auto; animation-delay: 0s;"><circle cx="12.5" cy="12.5" r="10" stroke="#a3ff00" stroke-width="2" fill="none" /></svg>
+    
+    <!-- Vector 2: Triangle (White, scaled to 20px) -->
+    <svg class="vector triangle" style="top: 25%; right: 10%; width: 20px; height: 20px; left: auto; animation-delay: 2s;"><polygon points="10,2.5 17.5,17.5 2.5,17.5" stroke="#fff" stroke-width="2" fill="none" /></svg>
+    
+    <!-- Vector 3: Square (Blue, scaled to 30px) -->
+    <svg class="vector square" style="top: 75%; right: 5%; width: 30px; height: 30px; left: auto; animation-delay: 4s;"><rect x="5" y="5" width="20" height="20" stroke="#00b4d8" stroke-width="2" fill="none" /></svg>
+    
+    <!-- Vector 5: Pentagon (Green, positioned upper left) -->
+    <svg class="vector pentagon" style="top: 15%; left: 10%; width: 30px; height: 30px; right: auto; animation-delay: 3s;"><polygon points="15,2 28,11 23,28 7,28 2,11" stroke="#a3ff00" stroke-width="2" fill="none" /></svg>
+    
+    <!-- Vector 6: Small Circle (Blue, positioned near center) -->
+    <svg class="vector circle" style="top: 40%; left: 45%; width: 15px; height: 15px; right: auto; animation-delay: 5s;"><circle cx="7.5" cy="7.5" r="6" stroke="#00b4d8" stroke-width="1.5" fill="none" /></svg>
+
+    <div class="header-text">
+      <p>Hey there!</p>
+      <h1>I’m <strong>Shirly Herscovici</strong></h1>
+      
+      <!-- WRAPPER for the animated role text - controls height and clipping -->
+      <div id="role-wrapper">
+        <span id="role">Graphic Designer</span>
+      </div>
+      
+      <p>A passionate and versatile designer, blending aesthetics with functionality to create compelling digital experiences and stunning visual identities.</p>
+      <div class="contact">
+        <!-- מספר טלפון מעודכן -->
+        <a href="tel:0549775275">054-9775275</a>
+        <!-- כתובת אימייל מעודכנת -->
+        <a href="mailto:shirly3212@gmail.com">shirly3212@gmail.com</a>
+      </div>
+    </div>
+    
+    <!-- NOTE: The 'profile-pic' container now includes the moving elements -->
+    <div class="profile-pic">
+      
+      <!-- המשבצות המשתנות (Transform Squares) - עם מסגרת מודגשת -->
+      <div class="transform-square tl"></div>
+      <div class="transform-square tr"></div>
+      <div class="transform-square bl"></div>
+      <div class="transform-square br"></div>
+      
+      <!-- תמונת הפרופיל עודכנה ל-shirly.png -->
+      <img src="shirly.png" onerror="this.onerror=null;this.src='https://placehold.co/380x475/1e293b/cbd5e1?text=Image+Placeholder';" alt="Shirly Herscovici">
+    </div>
+  </header>
+
+  <section class="portfolio" id="portfolioSection">
+    
+    <!-- LEFT AREA: Project Grid (All images) -->
+    <div class="project-grid" id="projectGrid">
+      
+      <!-- Project 1 (Long Scroll Mockup) - long1.jpg -->
+      <div class="project scroll-project">
+        <div class="scroll-container">
+          <img src="long1.jpg" alt="Project 1: E-commerce Scroll">
+        </div>
+      </div>
+      
+      <!-- Project 3 (Image Fade) - c.jpg / d.jpg -->
+      <div class="project fade-project">
+        <img src="c.jpg" alt="Project 3 Image 1">
+        <img src="d.jpg" alt="Project 3 Image 2">
+      </div>
+      
+      <!-- Project 4 (Image Fade) - a.jpg / b.jpg -->
+      <div class="project fade-project">
+        <img src="a.jpg" alt="Project 4 Image 1">
+        <img src="b.jpg" alt="Project 4 Image 2">
+      </div>
+      
+      <!-- Project 2 (Long Scroll Mockup) - long2.jpg -->
+      <div class="project scroll-project">
+        <div class="scroll-container">
+          <img src="long2.jpg" alt="Project 2: Mobile UX Flow">
+        </div>
+      </div>
+    </div>
+    
+    <!-- RIGHT AREA: Vertical Title and Descriptive Text -->
+    <div class="text-and-title-wrapper" id="textTitleWrapper">
+        <h2 class="magazine-title">Clothing Brand</h2>
+        
+        <p class="magazine-text">When it comes to clothing, choosing the right brand can make all the difference. A good clothing brand not only offers stylish and comfortable clothes, but also reflects your personality and values.</p>
+    </div>
+
+  </section>
+
+  <script>
+    // JavaScript לטקסט המתחלף בכותרת (Slide Up/Fade Up)
+    const roles = ["Graphic Designer", "Web Designer", "Editor", "Motion Designer"];
+    let index = 0;
+    const roleElement = document.getElementById('role');
+    
+    const animateRoleChange = () => {
+        if (!roleElement) return;
+
+        // 1. דוהה החוצה ומחליק למטה (מכין ליציאה)
+        roleElement.style.opacity = 0;
+        roleElement.style.transform = 'translateY(10px)';
+
+        // 2. ממתין לסיום המעבר (0.5s), ואז משנה תוכן ומאתחל מיקום
+        setTimeout(() => {
+            index = (index + 1) % roles.length;
+            roleElement.textContent = roles[index];
+            roleElement.style.transform = 'translateY(-10px)'; // הגדרת מיקום התחלת ה'החלקה פנימה'
             
-            // --- 1. Image Carousel Logic for Featured Projects ---
-            const carouselItems = document.querySelectorAll('.project-item.is-carousel');
+            // 3. דוהה פנימה ומחליק למעלה למיקום הסופי
+            setTimeout(() => {
+                roleElement.style.opacity = 1;
+                roleElement.style.transform = 'translateY(0)';
+            }, 50); 
+        }, 500);
+    };
 
-            // 1a. Function to initialize carousel items
-            const initCarousel = (item) => {
-                const container = item.querySelector('.project-item-images');
-                // The data-images now uses reliable placeholder URLs
-                const imagesData = JSON.parse(item.getAttribute('data-images'));
-                
-                // Clear existing content (important for re-running)
-                container.innerHTML = '';
-                
-                let currentIndex = 0;
+    if (roleElement) {
+        // התחלת הרוטציה הרציפה
+        setTimeout(() => {
+             animateRoleChange();
+             setInterval(animateRoleChange, 4000);
+        }, 2500); 
+    }
+    
+    // JS להבטחת גובה העמודה הימנית תואם לשמאלית (שמירה על עיצוב המגזין)
+    function adjustWrapperHeight() {
+        const grid = document.getElementById('projectGrid');
+        const wrapper = document.getElementById('textTitleWrapper');
 
-                // Create the actual image and placeholder elements
-                imagesData.forEach((data, index) => {
-                    // Create Placeholder Text
-                    const placeholder = document.createElement('span');
-                    placeholder.className = 'placeholder-text';
-                    placeholder.textContent = data.text;
-                    container.appendChild(placeholder);
-                    
-                    // Create Image Element
-                    const img = document.createElement('img');
-                    img.src = data.src;
-                    img.alt = data.alt;
-                    // Removed the redundant onerror since the source is a reliable placeholder URL.
+        if (grid && wrapper && window.innerWidth > 1024) {
+             // הגדרת גובה ה-wrapper שווה לגובה ה-grid
+             wrapper.style.height = grid.offsetHeight + 'px';
+        } else if (wrapper) {
+             // איפוס גובה בנייד
+             wrapper.style.height = 'auto';
+        }
+    }
 
-                    // Set first image as active
-                    if (index === 0) {
-                        img.classList.add('active');
-                    }
-                    container.appendChild(img);
-                });
-                
-                const images = container.querySelectorAll('img');
-
-                // 1b. Start cycling for carousel items
-                if (images.length > 1) {
-                    const cycleImages = () => {
-                        // Fade out current image
-                        images[currentIndex].classList.remove('active');
-                        
-                        // Calculate next index
-                        currentIndex = (currentIndex + 1) % images.length;
-                        
-                        // Fade in next image
-                        images[currentIndex].classList.add('active');
-                    };
-
-                    // Start cycling every 4 seconds
-                    setInterval(cycleImages, 4000);
-                }
-            };
-            
-            // Initialize all carousel items
-            carouselItems.forEach(initCarousel);
-
-
-            // --- 2. Floating Element / Parallax Logic for Header ---
-            const floatingElements = document.querySelectorAll('.floating-element');
-            const header = document.getElementById('mainHeader');
-
-            if (header) {
-                header.addEventListener('mousemove', (e) => {
-                    const rect = header.getBoundingClientRect();
-                    const centerX = rect.left + rect.width / 2;
-                    const centerY = rect.top + rect.height / 2;
-                    const offsetX = e.clientX - centerX;
-                    const offsetY = e.clientY - centerY;
-
-                    floatingElements.forEach(el => {
-                        const speed = el.getAttribute('data-speed') || 5;
-                        const maxMovement = 15; 
-                        
-                        const translateX = (offsetX * speed / 2000) * maxMovement;
-                        const translateY = (offsetY * speed / 2000) * maxMovement;
-
-                        el.style.transform = `translate(${translateX}px, ${translateY}px)`;
-                    });
-                });
-            }
-            
-            // --- 3. Profile Card Tilt Effect ---
-            const profileCard = document.getElementById('profileCard');
-            if (profileCard) {
-                profileCard.addEventListener('mousemove', (e) => {
-                    const rect = profileCard.getBoundingClientRect();
-                    const x = e.clientX - rect.left;
-                    const y = e.clientY - rect.top;
-                    
-                    const middleX = rect.width / 2;
-                    const middleY = rect.height / 2;
-                    
-                    const rotateY = ((x - middleX) / middleX) * -3; 
-                    const rotateX = ((y - middleY) / middleY) * 3;
-                    
-                    const moveX = ((x - middleX) / middleX) * 5;
-                    const moveY = ((y - middleY) / middleY) * 5;
-
-                    profileCard.style.transform = `rotate(0deg) perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translate(${moveX}px, ${moveY}px)`;
-                });
-
-                profileCard.addEventListener('mouseleave', () => {
-                    profileCard.style.transform = 'rotate(-3deg)';
-                });
-            }
-        });
-    </script>
+    // קריאה בעת טעינה ובעת שינוי גודל החלון
+    window.addEventListener('load', adjustWrapperHeight);
+    window.addEventListener('resize', adjustWrapperHeight);
+  </script>
 </body>
 </html>
-
