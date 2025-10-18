@@ -105,27 +105,75 @@
         margin-bottom: 2rem;
     }
 
-    /* Contact Links */
+    /* Contact Links Container (עיצוב מחדש לשורה אחת קומפקטית) */
     .contact { 
-        display: flex; gap: 1.5rem; font-size: 1rem; flex-wrap: wrap; 
+        display: flex; 
+        gap: 0.5rem; /* מרווח קטן יותר בין הקישורים */
+        font-size: 0.9rem; /* גופן קטן יותר */
+        flex-wrap: nowrap; /* מונע מעבר שורה (אלא אם אין מקום) */
+        align-items: center; /* ליישור אנכי */
         /* Delayed appearance */
         opacity: 0;
         animation: fadeIn 0.8s ease-out 2.2s forwards;
     }
+    
+    /* General Link Styling (Phone & Email) */
     .contact a { 
         color: #ccc; 
         text-decoration: none; 
         border: 1px solid #555; 
-        padding: 0.75rem 1.25rem; 
-        border-radius: 8px; 
+        padding: 0.4rem 0.8rem; /* Padding קטן עוד יותר */
+        border-radius: 5px; /* רדיוס קטן יותר */
         transition: all 0.3s; 
+        white-space: nowrap; /* מונע שבירת שורה בטקסט של הכפתור */
     }
-    .contact a:hover { 
+    .contact a:hover:not(.ai-portfolio-btn) { 
         color: #111; 
         background-color: #a3ff00; 
         border-color: #a3ff00; 
         box-shadow: 0 0 15px rgba(163, 255, 0, 0.4);
     }
+    
+    /* === FULL PORTFOLIO BUTTON STYLING === */
+    .ai-portfolio-btn {
+        position: relative;
+        overflow: hidden;
+        border: none;
+        /* הגדלת ה-Padding vertical ל-0.5rem כדי למנוע חיתוך גובה */
+        padding: 0.5rem 0.8rem; 
+        border-radius: 5px;
+        font-weight: 700;
+        color: #fff;
+        background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%); /* בסיס כחול-סגול */
+        text-decoration: none;
+        transition: transform 0.3s ease;
+        z-index: 10;
+        /* שימוש באנימציית זוהר AI */
+        animation: glowPulse 2s infinite ease-in-out;
+    }
+
+    /* אייקון בתוך כפתור הפורטפוליו */
+    .ai-portfolio-btn svg {
+        /* הקטנת גודל ה-SVG כדי למנוע חיתוך טקסט */
+        width: 14px; 
+        height: 14px;
+        display:inline-block; 
+        vertical-align:middle; 
+        margin-right:4px; /* מרווח קטן יותר */
+    }
+
+    .ai-portfolio-btn:hover {
+        transform: scale(1.05);
+        cursor: pointer;
+    }
+
+    /* Keyframes for the AI Glow effect (Breathing/Pulsing) */
+    @keyframes glowPulse {
+        0% { box-shadow: 0 0 5px #6a11cb, 0 0 10px #2575fc; }
+        50% { box-shadow: 0 0 15px #6a11cb, 0 0 30px #2575fc, 0 0 45px #00b4d8; } /* יותר זוהר ומשולב עם טורקיז */
+        100% { box-shadow: 0 0 5px #6a11cb, 0 0 10px #2575fc; }
+    }
+
 
     /* Profile Picture Container - Base Styles */
     .profile-pic { 
@@ -374,6 +422,9 @@
       
       /* מסתירים את החץ בנייד כי אין גלילה פנימית */
       .scroll-indicator { display: none; }
+      
+      /* במובייל, הכפתורים עדיין נערמים אם אין מקום, אבל כרגע הם קומפקטיים יותר */
+      .contact { flex-direction: column; align-items: center; }
     }
     
     @media (max-width: 768px) {
@@ -415,7 +466,13 @@
       </div>
       
       <p>A passionate and versatile designer, blending aesthetics with functionality to create compelling digital experiences and stunning visual identities.</p>
+      
+      <!-- UPDATED CONTACT SECTION - Now Ultra Compact -->
       <div class="contact">
+        <!-- קישור לאתר ה-FULL PORTFOLIO המלא -->
+        <a href="https://shirly3212.github.io/Shirly_portfolio/index.html" class="ai-portfolio-btn" target="_blank">
+            FULL PORTFOLIO <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10" stroke="white" stroke-width="2"/><path d="M12 8V16M8 12H16" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
         <!-- מספר טלפון מעודכן -->
         <a href="tel:0549775275">054-9775275</a>
         <!-- כתובת אימייל מעודכנת -->
