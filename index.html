@@ -183,6 +183,40 @@
         0%, 100% { transform: translate(0, 0) rotate(0deg); }
         50% { transform: translate(3px, 3px) rotate(3deg); } 
     }
+
+    /* --- SVG Arrow Animation --- */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      width: 30px; /* קטן יותר */
+      height: 30px; /* קטן יותר */
+      opacity: 0;
+      animation: arrowScroll 3s infinite 2s ease-in-out, fadeIn 1s forwards 2s;
+      z-index: 10; 
+      pointer-events: none; 
+    }
+    
+    .scroll-indicator svg {
+        width: 100%;
+        height: 100%;
+        /* כעת החץ מצביע למעלה (ברירת מחדל של ה-SVG בלי טרנספורמציה) */
+        transform: rotate(0deg); 
+    }
+    
+    .scroll-indicator svg path {
+        /* מבטלים את הטרנספורמציה שהוספתי ישירות ל-path בפעם הקודמת */
+        transform: none; 
+    }
+
+    /* שינוי: אנימציה קלילה יותר, תנועה קלה למעלה */
+    @keyframes arrowScroll {
+      0% { transform: translateY(0); opacity: 0; }
+      15% { opacity: 1; }
+      40% { transform: translateY(-10px); opacity: 1; } /* תנועה קלה למעלה */
+      65% { opacity: 0.5; }
+      100% { transform: translateY(0); opacity: 0; }
+    }
     
     /* === PORTFOLIO SECTION (Magazine Layout Retain) === */
     .portfolio {
@@ -191,7 +225,7 @@
       padding: 6rem 8%;
       position: relative;
       grid-template-columns: 4fr 1fr; 
-      grid-gap: 3rem;
+      grid-gap: 2.5rem; 
       display: grid; 
       align-items: start;
     }
@@ -255,31 +289,52 @@
       background: #f8f8f8;
       box-shadow: 0 6px 20px rgba(0,0,0,0.08);
       transition: transform 0.4s ease;
+      /* הוספת גובה מינימלי ליצירת מרווח, במקום גובה קבוע */
+      min-height: 350px; 
+      display: flex;
+      flex-direction: column;
     }
 
     .project:hover { transform: translateY(-8px); }
     
     /* Project staggering (Adjusted slightly for better flow) */
+    /* שומרים על אפקט הזיג-זג */
     .project-grid > .project:nth-child(2) { margin-top: 40px; }
     .project-grid > .project:nth-child(4) { margin-top: 40px; }
     .project-grid > .project:nth-child(3) { margin-top: -60px; } 
 
-    .scroll-container { height: 400px; overflow-y: scroll; scroll-behavior: smooth; }
-    .scroll-container img { width: 100%; height: auto; display: block; }
-
-    .fade-project { position: relative; height: 400px; }
+    /* === SCROLL PROJECTS FIX & INDICATOR === */
+    .scroll-project {
+      /* הסרת הגובה הקבוע והחלפתו במיקום יחסי למיקום האינדיקטור */
+      position: relative;
+    }
+    
+    .scroll-container { 
+      /* שינוי: הגדלת גובה הקונטיינר כדי להציג יותר מהתמונה */
+      height: 500px; 
+      max-height: 500px; /* הגבלת גובה מירבית בתצוגת דסקטופ */
+      overflow-y: scroll; 
+      scroll-behavior: smooth; 
+    }
+    
+    .scroll-container img { 
+      width: 100%; 
+      height: auto; /* חשוב לשמירת פרופורציות */
+      display: block; 
+    }
+    
+    /* === FADE PROJECTS FIX === */
+    .fade-project { 
+      position: relative; 
+      height: 400px; /* נשאר גובה קבוע לפרויקטים המתחלפים */
+    }
     .fade-project img { 
       position: absolute; width: 100%; height: 100%; 
       object-fit: cover; opacity: 0; 
-      /* שינוי: זמן האנימציה שונה ל-12 שניות (4 שניות לתמונה * 3 תמונות) */
       animation: fadeSlide 12s infinite; 
     }
-    /* הגדרה חדשה של עיכובים עבור 3 תמונות */
-    /* תמונה 1: מופיעה ב-0%, נעלמת ב-33.33% */
     .fade-project img:nth-child(1) { animation-delay: 0s; }
-    /* תמונה 2: מופיעה ב-33.33%, נעלמת ב-66.66% */
     .fade-project img:nth-child(2) { animation-delay: 4s; }
-    /* תמונה 3: מופיעה ב-66.66%, נעלמת ב-100% */
     .fade-project img:nth-child(3) { animation-delay: 8s; }
 
 
@@ -302,6 +357,16 @@
       .project-grid > .project:nth-child(2) { margin-top: 0; } 
       .project-grid > .project:nth-child(3) { margin-top: 0; } 
       .project-grid > .project:nth-child(4) { margin-top: 0; }
+      
+      /* במובייל נאפשר גלילה רחבה יותר או הצגה מלאה */
+      .scroll-container { 
+        height: auto; /* מאפשר גובה מלא של התמונה */
+        max-height: none; 
+        overflow-y: hidden; /* מבטלים את הצורך בגלילה פנימית אם התמונה נכנסת */
+      }
+      
+      /* מסתירים את החץ בנייד כי אין גלילה פנימית */
+      .scroll-indicator { display: none; }
     }
     
     @media (max-width: 768px) {
@@ -372,6 +437,13 @@
       
       <!-- Project 1 (Long Scroll Mockup) - img_new/project_a.png -->
       <div class="project scroll-project">
+        <!-- SVG Arrow Scroll Indicator -->
+        <div class="scroll-indicator">
+          <!-- SVG נקי של חץ כלפי מעלה (מייצג גלילה כלפי מעלה) -->
+          <svg fill="#a3ff00" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-10v4h2v-4h3l-4-4-4 4h3z"/>
+          </svg>
+        </div>
         <div class="scroll-container">
           <img src="img_new/project_a.png" alt="Project 1: E-commerce Scroll">
         </div>
@@ -399,6 +471,13 @@
       
       <!-- Project 2 (Long Scroll Mockup) - img_new/project_b.png -->
       <div class="project scroll-project">
+         <!-- SVG Arrow Scroll Indicator -->
+        <div class="scroll-indicator">
+          <!-- SVG נקי של חץ כלפי מעלה (מייצג גלילה כלפי מעלה) -->
+          <svg fill="#a3ff00" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-10v4h2v-4h3l-4-4-4 4h3z"/>
+          </svg>
+        </div>
         <div class="scroll-container">
           <img src="img_new/project_b.png" alt="Project 2: Mobile UX Flow">
         </div>
@@ -407,9 +486,11 @@
     
     <!-- RIGHT AREA: Vertical Title and Descriptive Text -->
     <div class="text-and-title-wrapper" id="textTitleWrapper">
-        <h2 class="magazine-title">Clothing Brand</h2>
+        <!-- כותרת המגזין עודכנה ל-N12 MAGAZINE -->
+        <h2 class="magazine-title">N12 MAGAZINE</h2>
         
-        <p class="magazine-text">When it comes to clothing, choosing the right brand can make all the difference. A good clothing brand not only offers stylish and comfortable clothes, but also reflects your personality and values.</p>
+        <!-- טקסט תיאורי עודכן בהתאם -->
+        <p class="magazine-text">A magazine layout design based on the digital news platform N12. The design focuses on bold typography and structured grid systems to convey seriousness and professionalism.</p>
     </div>
 
   </section>
