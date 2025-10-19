@@ -280,15 +280,104 @@
     
     /* === PORTFOLIO SECTION (Magazine Layout - Dark Variant) === */
     .portfolio-dark {
-      /* Reusing the dark header background for contrast */
-      background-color: #0d0d0d; 
+      background: radial-gradient(circle at top left, #0d0d0d 40%, #000 100%);
       color: #fff;
       padding: 6rem 8%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       position: relative;
-      grid-template-columns: 4fr 1fr; 
-      grid-gap: 2.5rem; 
-      display: grid; 
-      align-items: start;
+      overflow: hidden;
+    }
+
+    .portfolio-dark::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(37,117,252,0.2), rgba(106,17,203,0.2));
+      z-index: 0;
+    }
+
+    .neon-title {
+      font-size: 3rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+      letter-spacing: 2px;
+    }
+
+    .neon-title::after {
+      content: '';
+      display: block;
+      width: 80px;
+      height: 4px;
+      margin: 1rem auto 0;
+      background: linear-gradient(90deg, #6a11cb, #2575fc);
+      border-radius: 4px;
+      animation: glowLine 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes glowLine {
+      from { box-shadow: 0 0 10px #6a11cb; }
+      to { box-shadow: 0 0 25px #2575fc; }
+    }
+
+    .magazine-text {
+      max-width: 600px;
+      text-align: center;
+      color: #ccc;
+      font-size: 1.1rem;
+      margin-top: 1rem;
+      z-index: 2;
+      animation: fadeUp 1s ease-out forwards;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .n12-showcase {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 3rem;
+      margin-top: 4rem;
+      z-index: 2;
+    }
+
+    .n12-card {
+      background: rgba(255,255,255,0.05);
+      border-radius: 20px;
+      overflow: hidden;
+      width: 320px;
+      height: 550px;
+      box-shadow: 0 0 30px rgba(37,117,252,0.3);
+      transform: perspective(800px) rotateY(10deg);
+      transition: all 0.4s ease;
+      position: relative;
+    }
+
+    .n12-card:hover {
+      transform: perspective(800px) rotateY(0deg) scale(1.05);
+      box-shadow: 0 0 60px rgba(106,17,203,0.6);
+    }
+
+    .n12-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .n12-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom right, rgba(106,17,203,0.2), rgba(37,117,252,0.2));
+      mix-blend-mode: overlay;
     }
 
     /* Project Grid (LEFT Column) - Applies to both sections */
@@ -327,25 +416,6 @@
       z-index: 10;
     }
     
-    /* Vertical Magazine Title - Dark Section (FIXED: Now horizontal for clarity) */
-    .portfolio-dark .magazine-title {
-      color: #fff;
-      font-family: 'Playfair Display', serif;
-      /* Title flow inside the column, no rotation/absolute positioning */
-      position: static; 
-      transform: none;
-      font-size: 3rem; /* Large and readable */
-      font-weight: 700;
-      text-transform: uppercase;
-      white-space: normal; 
-      line-height: 1;
-      margin-bottom: 1.5rem; /* Space below the title */
-      /* Ensure it respects the column flow */
-      left: auto; 
-      top: auto;
-      z-index: 10;
-    }
-    
     /* Magazine Text Position (Light Section) */
     .portfolio .magazine-text {
       font-family: 'Playfair Display', serif; 
@@ -357,19 +427,6 @@
       margin-top: auto; /* Pushes text to the bottom of the column */
       padding-top: 2rem; 
       align-self: flex-end; /* Aligns text to the right side of the column */
-    }
-    
-    /* Magazine Text Position (Dark Section) - ADJUSTED for horizontal title */
-    .portfolio-dark .magazine-text {
-      font-family: 'Playfair Display', serif; 
-      font-size: 0.7rem; 
-      line-height: 1.6;
-      color: #aaa; /* Light text on dark background */
-      width: 100%;
-      max-width: 200px; 
-      margin-top: 0; /* Let it flow directly below the title */
-      padding-top: 0; 
-      align-self: flex-start; /* Align text to the top */
     }
     
     /* Original Project/Staggering Styles */
@@ -433,186 +490,28 @@
         opacity: 1;
     }
 
-    /* ------------------------------------------------ */
-    /* === GALGALTZ N12 STYLES (Focus of the fix) === */
-    /* ------------------------------------------------ */
-    
-    .stack-project {
-        position: relative; 
-        /* The container for the phone, spans two columns */
-        height: 650px; 
-        display: flex; /* Use flex to arrange phone and external images */
-        justify-content: center;
-        align-items: center;
-        background: #0d0d0d; 
-        overflow: hidden; 
-        grid-column: 1 / 3; 
-        border-radius: 14px;
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-        gap: 3rem; /* Space between phone and external stack */
-        padding: 3rem; /* Add padding inside the dark container */
-    }
-    
-    .mobile-mockup {
-        position: relative;
-        width: 320px; /* Phone width */
-        height: 600px; /* Adjusted height to be slightly smaller */
-        background: #000;
-        
-        /* === NEW: ENHANCED FRAME STYLING for maximum visibility === */
-        border: 12px solid #444; /* Thicker, slightly lighter border */
-        border-radius: 40px;
-        box-shadow: 
-            /* Massive drop shadow for depth */
-            0 30px 100px rgba(0, 0, 0, 1.0), 
-            /* Bright, reflective metallic highlight */
-            inset 0 0 10px rgba(255, 255, 255, 0.15), 
-            /* Subtle outer white border for definition */
-            0 0 0 3px rgba(255, 255, 255, 0.1); 
-        /* ================================================= */
-        
-        overflow: hidden; 
-        transition: transform 0.3s ease-in-out;
-    }
-    
-    .mobile-mockup:hover {
-        transform: scale(1.03); /* Subtle hover to draw attention */
-    }
-
-    /* Speaker/Notch */
-    .mobile-mockup::before {
-        content: '';
-        position: absolute;
-        top: 10px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 60px;
-        height: 5px;
-        background: #222;
-        border-radius: 5px;
-        z-index: 10;
-    }
-
-    .screen-content {
-        width: 100%;
-        height: 100%;
-        overflow-y: scroll; /* Critical: Enables scrolling the combined content */
-        background-color: #111; /* Screen background */
-        
-        /* INSET SHADOW for screen recess effect (kept from previous fix) */
-        box-shadow: inset 0 0 15px rgba(0, 0, 0, 1.0); 
-
-        /* Custom scrollbar styling (optional, hides the default scrollbar) */
-        scrollbar-width: none; /* Firefox */
-        -ms-overflow-style: none; /* IE and Edge */
-    }
-
-    .screen-content::-webkit-scrollbar {
-        display: none; /* Chrome, Safari, Opera */
-    }
-
-    .screen-content img {
-        width: 100%;
-        height: auto; 
-        display: block;
-        margin: 0; 
-        padding: 0;
-    }
-
-    /* External Image Stack (New styles) */
-    .external-mockup-stack {
-        display: flex;
-        flex-direction: column;
-        gap: 1.5rem;
-        max-width: 300px;
-        height: 100%; /* Take up vertical space */
-        justify-content: space-between; /* Evenly space the three images */
-    }
-
-    .external-image-wrapper {
-        width: 100%;
-        height: 30%; /* Allocate space for each image */
-        overflow: hidden;
-        border-radius: 8px;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-        border: 1px solid #444;
-        transition: transform 0.3s;
-    }
-    
-    .external-image-wrapper:hover {
-        transform: scale(1.05);
-    }
-
-    .external-image-wrapper img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover; /* Crop if necessary to fit the 30% height */
-        object-position: top center; /* Show the top part of the image */
-        display: block;
-    }
-    
-    /* ------------------------------------------------ */
-    /* === END MOBILE SCROLL MOCKUP STYLES === */
-    /* ------------------------------------------------ */
-
-
     /* === RESPONSIVE DESIGN === */
     @media (max-width: 1024px) {
       /* Apply to both light and dark sections */
-      .portfolio, .portfolio-dark { grid-template-columns: 1fr; padding: 4rem 5%; grid-gap: 2rem; }
-      .portfolio .text-and-title-wrapper, .portfolio-dark .text-and-title-wrapper { grid-column: 1 / 2; min-height: auto; position: static; display: block; order: -1; }
+      .portfolio { grid-template-columns: 1fr; padding: 4rem 5%; grid-gap: 2rem; }
+      .portfolio .text-and-title-wrapper { grid-column: 1 / 2; min-height: auto; position: static; display: block; order: -1; }
       
       /* Ensure ALL titles are centered/horizontal on mobile */
-      .portfolio .magazine-title, .portfolio-dark .magazine-title { position: static; transform: none; transform-origin: center; text-align: center; font-size: 3rem; margin-bottom: 1rem; margin-top: 0; left: auto; }
+      .portfolio .magazine-title { position: static; transform: none; transform-origin: center; text-align: center; font-size: 3rem; margin-bottom: 1rem; margin-top: 0; left: auto; }
       
       /* Ensure ALL text is centered on mobile */
-      .portfolio .magazine-text, .portfolio-dark .magazine-text { width: 100%; max-width: 100%; text-align: center; padding-right: 0; margin-top: 0.5rem; font-size: 1rem; align-self: center; }
+      .portfolio .magazine-text { width: 100%; max-width: 100%; text-align: center; padding-right: 0; margin-top: 0.5rem; font-size: 1rem; align-self: center; }
       
       .project-grid { grid-column: 1 / 2; grid-template-columns: 1fr; } 
       .project-grid > .project:nth-child(2) { margin-top: 0; } 
       .project-grid > .project:nth-child(3) { margin-top: 0; } 
       .project-grid > .project:nth-child(4) { margin-top: 0; }
       
-      /* Mobile stack/mockup reset for Galgaltz */
-      .stack-project {
-          flex-direction: column; /* Stack vertically on mobile */
-          height: auto;
-          grid-column: 1 / 2;
-          padding: 2rem 5%; /* Add vertical padding */
-          background: #0d0d0d;
-          overflow: hidden;
-          gap: 2rem;
-      }
-      /* Ensure the mobile mockup is centered and sized appropriately on smaller screens */
-      .mobile-mockup {
-          width: 90%; /* Take up most of the screen width */
-          max-width: 350px; /* But don't get too wide */
-          height: 60vh; /* Adjust height relative to viewport height */
-          border-width: 8px; /* Thinner border */
-          border-radius: 30px;
-          transform: none;
-      }
-      
-      .mobile-mockup:hover {
-          transform: none;
-      }
-      
-      /* External Stack on Mobile: Horizontal row */
-      .external-mockup-stack {
-          flex-direction: row; 
-          max-width: 100%;
-          width: 100%;
-          height: auto;
-          justify-content: space-around;
-          gap: 0.5rem;
-      }
-      .external-image-wrapper {
-          width: 30%; /* Make them take up about a third of the width */
-          height: 150px; /* Fixed height for mobile to keep them small */
-      }
-      
       .scroll-indicator { display: none; }
       .contact { flex-direction: column; align-items: center; }
+
+      .neon-title { font-size: 2rem; }
+      .n12-card { width: 90%; height: 400px; }
     }
     
     @media (max-width: 768px) {
@@ -621,13 +520,16 @@
       .contact { justify-content: center; }
       .profile-pic { order: -1; margin-bottom: 3rem; } /* Push image up on mobile */
       .project-grid { grid-template-columns: 1fr; } 
+
+      .neon-title { font-size: 2rem; }
+      .n12-card { width: 90%; height: 400px; }
     }
   </style>
 </head>
 <body>
   <header>
     
-    <!-- הווקטורים הצפים (Floating Vectors) - מוקטנים ומופצים באזור הכותרת -->
+    <!-- הווקטורים הצפים (Floating Vectors) - ממוקטנים ומופצים באזור הכותרת -->
     
     <!-- Vector 1: Circle (Green, scaled to 25px) -->
     <svg class="vector circle" style="top: 5%; right: 30%; width: 25px; height: 25px; left: auto; animation-delay: 0s;"><circle cx="12.5" cy="12.5" r="10" stroke="#a3ff00" stroke-width="2" fill="none" /></svg>
@@ -646,7 +548,7 @@
 
     <div class="header-text">
       <p>Hey there!</p>
-      <h1>I’m <strong>Shirly Herscovici</strong></h1>
+      <h1>I'm <strong>Shirly Herscovici</strong></h1>
       
       <!-- WRAPPER for the animated role text - controls height and clipping -->
       <div id="role-wrapper">
@@ -722,7 +624,8 @@
       <div class="project scroll-project">
          <!-- SVG Arrow Scroll Indicator -->
         <div class="scroll-indicator">
-          <!-- SVG נקי של חץ כלפי מעלה (מייצג גלילה כלפי מעלה) -->
+          <!-- SVG נקי
+  של חץ כלפי מעלה (מייצג גלילה כלפי מעלה) -->
           <svg fill="#a3ff00" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-10v4h2v-4h3l-4-4-4 4h3z"/>
           </svg>
@@ -743,6 +646,7 @@
     </div>
 
   </section>
+
   <!-- === GALGALTZ N12 SECTION (Dark Variant) - REPLACED WITH NEW VERSION === -->
   <section class="portfolio-dark" id="galgaltzSection">
     <h2 class="neon-title">GALGALTZ N12</h2>
