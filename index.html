@@ -266,7 +266,7 @@
       100% { transform: translateY(0); opacity: 0; }
     }
     
-    /* === PORTFOLIO SECTION (Magazine Layout Retain) === */
+    /* === PORTFOLIO SECTION (Magazine Layout - Light Variant) === */
     .portfolio {
       background-color: #fff;
       color: #000;
@@ -278,7 +278,20 @@
       align-items: start;
     }
     
-    /* Project Grid (LEFT Column) */
+    /* === PORTFOLIO SECTION (Magazine Layout - Dark Variant) === */
+    .portfolio-dark {
+      /* Reusing the dark header background for contrast */
+      background-color: #0d0d0d; 
+      color: #fff;
+      padding: 6rem 8%;
+      position: relative;
+      grid-template-columns: 4fr 1fr; 
+      grid-gap: 2.5rem; 
+      display: grid; 
+      align-items: start;
+    }
+
+    /* Project Grid (LEFT Column) - Applies to both sections */
     .project-grid {
       grid-column: 1 / 2; 
       display: grid;
@@ -287,7 +300,7 @@
       width: 100%;
     }
 
-    /* Wrapper for Title and Text (RIGHT Column - Side Bar) */
+    /* Wrapper for Title and Text (RIGHT Column - Side Bar) - Applies to both sections */
     .text-and-title-wrapper {
         grid-column: 2 / 3; 
         display: flex;
@@ -296,29 +309,45 @@
         height: 100%; 
     }
 
-    /* Vertical Magazine Title */
-    .magazine-title {
+    /* Vertical Magazine Title - Light Section */
+    .portfolio .magazine-title {
+      color: #111;
       font-family: 'Playfair Display', serif;
       font-size: 7vw; 
       font-weight: 700;
-      color: #111;
       text-transform: uppercase;
       white-space: nowrap; 
       line-height: 0.8;
-      
       position: absolute;
       top: 0; 
-      
       /* Rotation and positioning */
       transform: rotate(90deg) translate(15px, 0); 
       transform-origin: top left; 
-      
       left: 100%; 
       z-index: 10;
     }
     
-    /* Magazine Text Position (Simple spacing) */
-    .magazine-text {
+    /* Vertical Magazine Title - Dark Section (FIXED: Now horizontal for clarity) */
+    .portfolio-dark .magazine-title {
+      color: #fff;
+      font-family: 'Playfair Display', serif;
+      /* Title flow inside the column, no rotation/absolute positioning */
+      position: static; 
+      transform: none;
+      font-size: 3rem; /* Large and readable */
+      font-weight: 700;
+      text-transform: uppercase;
+      white-space: normal; 
+      line-height: 1;
+      margin-bottom: 1.5rem; /* Space below the title */
+      /* Ensure it respects the column flow */
+      left: auto; 
+      top: auto;
+      z-index: 10;
+    }
+    
+    /* Magazine Text Position (Light Section) */
+    .portfolio .magazine-text {
       font-family: 'Playfair Display', serif; 
       font-size: 0.7rem; 
       line-height: 1.6;
@@ -330,11 +359,25 @@
       align-self: flex-end; /* Aligns text to the right side of the column */
     }
     
+    /* Magazine Text Position (Dark Section) - ADJUSTED for horizontal title */
+    .portfolio-dark .magazine-text {
+      font-family: 'Playfair Display', serif; 
+      font-size: 0.7rem; 
+      line-height: 1.6;
+      color: #aaa; /* Light text on dark background */
+      width: 100%;
+      max-width: 200px; 
+      margin-top: 0; /* Let it flow directly below the title */
+      padding-top: 0; 
+      align-self: flex-start; /* Align text to the top */
+    }
+    
     /* Original Project/Staggering Styles */
     .project {
       border-radius: 14px;
       overflow: hidden;
       background: #f8f8f8;
+      color: #000; /* Ensure text inside project card is black */
       box-shadow: 0 6px 20px rgba(0,0,0,0.08);
       transition: transform 0.4s ease;
       /* הוספת גובה מינימלי ליצירת מרווח, במקום גובה קבוע */
@@ -345,13 +388,12 @@
 
     .project:hover { transform: translateY(-8px); }
     
-    /* Project staggering (Adjusted slightly for better flow) */
-    /* שומרים על אפקט הזיג-זג */
+    /* Project staggering */
     .project-grid > .project:nth-child(2) { margin-top: 40px; }
     .project-grid > .project:nth-child(4) { margin-top: 40px; }
     .project-grid > .project:nth-child(3) { margin-top: -60px; } 
 
-    /* === SCROLL PROJECTS FIX & INDICATOR === */
+    /* === SCROLL PROJECTS FIX & INDICATOR (Retained) === */
     .scroll-project {
       position: relative;
     }
@@ -370,60 +412,206 @@
       display: block; 
     }
     
-    /* === FADE PROJECTS FIX (Changed Height to 550px) === */
-    .fade-project { 
-      position: relative; 
-      /* הגדלת הגובה להצגת תמונות מלבניות מאורכות יותר */
-      height: 550px; 
+    /* FADE Project (Original behavior for N12 Magazine section) */
+    .fade-project {
+        position: relative;
+        overflow: hidden;
     }
-    .fade-project img { 
-      position: absolute; width: 100%; 
-      /* שינוי חשוב: גובה 100% ו-object-fit: cover כדי לא לעוות */
-      height: 100%; 
-      object-fit: cover; 
-      opacity: 0; 
-      animation: fadeSlide 12s infinite; 
+    
+    .fade-project img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0;
+        transition: opacity 1s ease-in-out;
     }
-    .fade-project img:nth-child(1) { animation-delay: 0s; }
-    .fade-project img:nth-child(2) { animation-delay: 4s; }
-    .fade-project img:nth-child(3) { animation-delay: 8s; }
+    
+    .fade-project img.active {
+        opacity: 1;
+    }
 
-
-    /* שינוי: ה-Keyframes כדי להתאים ל-3 תמונות (כל תמונה גלויה במשך 33.33% מהזמן) */
-    @keyframes fadeSlide { 
-        0%, 100% {opacity:0;} 
-        8.33% {opacity:1;} 
-        25% {opacity:1;} 
-        33.33% {opacity:0;} 
+    /* ------------------------------------------------ */
+    /* === GALGALTZ N12 STYLES (Focus of the fix) === */
+    /* ------------------------------------------------ */
+    
+    .stack-project {
+        position: relative; 
+        /* The container for the phone, spans two columns */
+        height: 650px; 
+        display: flex; /* Use flex to arrange phone and external images */
+        justify-content: center;
+        align-items: center;
+        background: #0d0d0d; 
+        overflow: hidden; 
+        grid-column: 1 / 3; 
+        border-radius: 14px;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        gap: 3rem; /* Space between phone and external stack */
+        padding: 3rem; /* Add padding inside the dark container */
     }
+    
+    .mobile-mockup {
+        position: relative;
+        width: 320px; /* Phone width */
+        height: 600px; /* Adjusted height to be slightly smaller */
+        background: #000;
+        
+        /* === NEW: ENHANCED FRAME STYLING for maximum visibility === */
+        border: 12px solid #444; /* Thicker, slightly lighter border */
+        border-radius: 40px;
+        box-shadow: 
+            /* Massive drop shadow for depth */
+            0 30px 100px rgba(0, 0, 0, 1.0), 
+            /* Bright, reflective metallic highlight */
+            inset 0 0 10px rgba(255, 255, 255, 0.15), 
+            /* Subtle outer white border for definition */
+            0 0 0 3px rgba(255, 255, 255, 0.1); 
+        /* ================================================= */
+        
+        overflow: hidden; 
+        transition: transform 0.3s ease-in-out;
+    }
+    
+    .mobile-mockup:hover {
+        transform: scale(1.03); /* Subtle hover to draw attention */
+    }
+
+    /* Speaker/Notch */
+    .mobile-mockup::before {
+        content: '';
+        position: absolute;
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60px;
+        height: 5px;
+        background: #222;
+        border-radius: 5px;
+        z-index: 10;
+    }
+
+    .screen-content {
+        width: 100%;
+        height: 100%;
+        overflow-y: scroll; /* Critical: Enables scrolling the combined content */
+        background-color: #111; /* Screen background */
+        
+        /* INSET SHADOW for screen recess effect (kept from previous fix) */
+        box-shadow: inset 0 0 15px rgba(0, 0, 0, 1.0); 
+
+        /* Custom scrollbar styling (optional, hides the default scrollbar) */
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* IE and Edge */
+    }
+
+    .screen-content::-webkit-scrollbar {
+        display: none; /* Chrome, Safari, Opera */
+    }
+
+    .screen-content img {
+        width: 100%;
+        height: auto; 
+        display: block;
+        margin: 0; 
+        padding: 0;
+    }
+
+    /* External Image Stack (New styles) */
+    .external-mockup-stack {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        max-width: 300px;
+        height: 100%; /* Take up vertical space */
+        justify-content: space-between; /* Evenly space the three images */
+    }
+
+    .external-image-wrapper {
+        width: 100%;
+        height: 30%; /* Allocate space for each image */
+        overflow: hidden;
+        border-radius: 8px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+        border: 1px solid #444;
+        transition: transform 0.3s;
+    }
+    
+    .external-image-wrapper:hover {
+        transform: scale(1.05);
+    }
+
+    .external-image-wrapper img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Crop if necessary to fit the 30% height */
+        object-position: top center; /* Show the top part of the image */
+        display: block;
+    }
+    
+    /* ------------------------------------------------ */
+    /* === END MOBILE SCROLL MOCKUP STYLES === */
+    /* ------------------------------------------------ */
+
 
     /* === RESPONSIVE DESIGN === */
     @media (max-width: 1024px) {
-      .portfolio { grid-template-columns: 1fr; padding: 4rem 5%; grid-gap: 2rem; }
-      .text-and-title-wrapper { grid-column: 1 / 2; min-height: auto; position: static; display: block; order: -1; }
-      .magazine-title { position: static; transform: none; transform-origin: center; text-align: center; font-size: 3rem; margin-bottom: 1rem; margin-top: 0; left: auto; }
-      .magazine-text { width: 100%; max-width: 100%; text-align: center; padding-right: 0; margin-top: 0.5rem; font-size: 1rem; align-self: center; }
+      /* Apply to both light and dark sections */
+      .portfolio, .portfolio-dark { grid-template-columns: 1fr; padding: 4rem 5%; grid-gap: 2rem; }
+      .portfolio .text-and-title-wrapper, .portfolio-dark .text-and-title-wrapper { grid-column: 1 / 2; min-height: auto; position: static; display: block; order: -1; }
+      
+      /* Ensure ALL titles are centered/horizontal on mobile */
+      .portfolio .magazine-title, .portfolio-dark .magazine-title { position: static; transform: none; transform-origin: center; text-align: center; font-size: 3rem; margin-bottom: 1rem; margin-top: 0; left: auto; }
+      
+      /* Ensure ALL text is centered on mobile */
+      .portfolio .magazine-text, .portfolio-dark .magazine-text { width: 100%; max-width: 100%; text-align: center; padding-right: 0; margin-top: 0.5rem; font-size: 1rem; align-self: center; }
+      
       .project-grid { grid-column: 1 / 2; grid-template-columns: 1fr; } 
       .project-grid > .project:nth-child(2) { margin-top: 0; } 
       .project-grid > .project:nth-child(3) { margin-top: 0; } 
       .project-grid > .project:nth-child(4) { margin-top: 0; }
       
-      /* במובייל נאפשר גובה מלא לתמונות (עדיין שומרים על גובה מקסימלי לפרויקט המתחלף) */
-      .scroll-container { 
-        height: auto; 
-        max-height: none; 
-        overflow-y: hidden; 
+      /* Mobile stack/mockup reset for Galgaltz */
+      .stack-project {
+          flex-direction: column; /* Stack vertically on mobile */
+          height: auto;
+          grid-column: 1 / 2;
+          padding: 2rem 5%; /* Add vertical padding */
+          background: #0d0d0d;
+          overflow: hidden;
+          gap: 2rem;
+      }
+      /* Ensure the mobile mockup is centered and sized appropriately on smaller screens */
+      .mobile-mockup {
+          width: 90%; /* Take up most of the screen width */
+          max-width: 350px; /* But don't get too wide */
+          height: 60vh; /* Adjust height relative to viewport height */
+          border-width: 8px; /* Thinner border */
+          border-radius: 30px;
+          transform: none;
       }
       
-      /* בפרויקט המתחלף נשמור על יחס הגובה במובייל */
-      .fade-project {
-        height: 400px; /* קצת יותר נמוך במובייל כדי לא לתפוס יותר מדי מסך */
+      .mobile-mockup:hover {
+          transform: none;
       }
       
-      /* מסתירים את החץ בנייד כי אין גלילה פנימית */
+      /* External Stack on Mobile: Horizontal row */
+      .external-mockup-stack {
+          flex-direction: row; 
+          max-width: 100%;
+          width: 100%;
+          height: auto;
+          justify-content: space-around;
+          gap: 0.5rem;
+      }
+      .external-image-wrapper {
+          width: 30%; /* Make them take up about a third of the width */
+          height: 150px; /* Fixed height for mobile to keep them small */
+      }
+      
       .scroll-indicator { display: none; }
-      
-      /* במובייל, הכפתורים עדיין נערמים אם אין מקום, אבל כרגע הם קומפקטיים יותר */
       .contact { flex-direction: column; align-items: center; }
     }
     
@@ -494,6 +682,7 @@
     </div>
   </header>
 
+  <!-- === N12 MAGAZINE SECTION (Light Variant) - UNTOUCHED === -->
   <section class="portfolio" id="portfolioSection">
     
     <!-- LEFT AREA: Project Grid (All images) -->
@@ -513,24 +702,20 @@
         </div>
       </div>
       
-      <!-- Project 3 (Image Fade) - 3 תמונות מתחלפות -->
+      <!-- Project 3 (Standard Fade Project - Placeholder for original content) -->
       <div class="project fade-project">
-        <!-- תמונה 1 -->
-        <img src="img_new/img_new_001.png" alt="Project 3 Image 1">
-        <!-- תמונה 2 -->
-        <img src="img_new/img_new_002.jpeg" alt="Project 3 Image 2">
-        <!-- תמונה 3 (נוספה) -->
-        <img src="img_new/img_new_003.jpeg" alt="Project 3 Image 3">
+        <!-- Placeholder Images - Reverting to original layout placeholders -->
+        <img class="active" src="img_new/img_new_001.jpeg" onerror="this.onerror=null;this.src='https://placehold.co/400x550/f8f8f8/111?text=N12+Image+1';" alt="N12 Magazine Image 1">
+        <img src="img_new/img_new_002.jpeg" onerror="this.onerror=null;this.src='https://placehold.co/400x550/f8f8f8/111?text=N12+Image+2';" alt="N12 Magazine Image 2">
+        <img src="img_new/img_new_003.jpeg" onerror="this.onerror=null;this.src='https://placehold.co/400x550/f8f8f8/111?text=N12+Image+3';" alt="N12 Magazine Image 3">
       </div>
       
-      <!-- Project 4 (Image Fade) - 3 תמונות מתחלפות -->
+      <!-- Project 4 (Standard Fade Project - Placeholder for original content) -->
       <div class="project fade-project">
-        <!-- תמונה 1 -->
-        <img src="img_new/img_new_004.jpeg" alt="Project 4 Image 1">
-        <!-- תמונה 2 -->
-        <img src="img_new/img_new_006.jpeg" alt="Project 4 Image 2">
-        <!-- תמונה 3 (נוספה) -->
-        <img src="img_new/img_new_005.jpeg" alt="Project 4 Image 3">
+        <!-- Placeholder Images - Reverting to original layout placeholders -->
+        <img class="active" src="img_new/img_new_004.jpeg" onerror="this.onerror=null;this.src='https://placehold.co/400x550/f8f8f8/111?text=N12+Image+4';" alt="N12 Magazine Image 4">
+        <img src="img_new/img_new_005.jpeg" onerror="this.onerror=null;this.src='https://placehold.co/400x550/f8f8f8/111?text=N12+Image+5';" alt="N12 Magazine Image 5">
+        <img src="img_new/img_new_006.jpeg" onerror="this.onerror=null;this.src='https://placehold.co/400x550/f8f8f8/111?text=N12+Image+6';" alt="N12 Magazine Image 6">
       </div>
       
       <!-- Project 2 (Long Scroll Mockup) - img_new/project_b.png -->
@@ -555,6 +740,56 @@
         
         <!-- טקסט תיאורי עודכן בהתאם -->
         <p class="magazine-text">A magazine layout design based on the digital news platform N12. The design focuses on bold typography and structured grid systems to convey seriousness and professionalism.</p>
+    </div>
+
+  </section>
+
+  <!-- === GALGALTZ N12 SECTION (Dark Variant) - PHONE FIX APPLIED HERE === -->
+  <section class="portfolio-dark" id="galgaltzSection">
+    
+    <!-- LEFT AREA: Project Grid (2 columns) -->
+    <div class="project-grid" id="galgaltzProjectGrid">
+      
+      <!-- Project: Galgaltz N12 (Mobile Mockup & External Stack) -->
+      <!-- The 'stack-project' class handles the 2-column span with grid-column: 1 / 3 in CSS -->
+      <div class="project stack-project">
+        
+        <!-- 1. Mobile Mockup (Center) - ENHANCED VISIBILITY APPLIED -->
+        <div class="mobile-mockup">
+            <!-- Scrollable screen area - SCREEN RECESS APPLIED -->
+            <div class="screen-content">
+                <!-- Stacked Images for scrolling (Ensure this section can scroll) -->
+                <img src="img_1.jpg" onerror="this.onerror=null;this.src='https://placehold.co/320x600/333333/FFFFFF?text=Screen+1+Scroll';" alt="Galgaltz N12 UI Screen 1">
+                <img src="img_2.jpg" onerror="this.onerror=null;this.src='https://placehold.co/320x600/555555/FFFFFF?text=Screen+2+Scroll';" alt="Galgaltz N12 UI Screen 2">
+                <img src="img_3.jpg" onerror="this.onerror=null;this.src='https://placehold.co/320x600/888888/FFFFFF?text=Screen+3+Scroll';" alt="Galgaltz N12 UI Screen 3">
+            </div>
+        </div>
+        
+        <!-- 2. External Image Stack -->
+        <div class="external-mockup-stack">
+            <div class="external-image-wrapper">
+                <img src="img_1.jpg" onerror="this.onerror=null;this.src='https://placehold.co/300x200/333333/FFFFFF?text=Screen+1';" alt="Galgaltz N12 Screen 1">
+            </div>
+            <div class="external-image-wrapper">
+                <img src="img_2.jpg" onerror="this.onerror=null;this.src='https://placehold.co/300x200/555555/FFFFFF?text=Screen+2';" alt="Galgaltz N12 Screen 2">
+            </div>
+            <div class="external-image-wrapper">
+                <img src="img_3.jpg" onerror="this.onerror=null;this.src='https://placehold.co/300x200/888888/FFFFFF?text=Screen+3';" alt="Galgaltz N12 Screen 3">
+            </div>
+        </div>
+        
+      </div>
+      
+    </div>
+    
+    <!-- RIGHT AREA: Title and Descriptive Text -->
+    <div class="text-and-title-wrapper" id="galgaltzTextTitleWrapper">
+        <h2 class="magazine-title">GALGALTZ N12</h2>
+        
+        <!-- TEXT UPDATED AND TRANSLATED TO ENGLISH -->
+        <p class="magazine-text">
+          The "Music from the Screen" chart is a joint project by N12 and Galgalatz, allowing users to choose and vote for the greatest songs from movies and TV series. As part of my UI/UX work, I focused on designing an intuitive and enjoyable voting experience for this collaborative project.
+        </p>
     </div>
 
   </section>
@@ -596,17 +831,53 @@
     
     // JS להבטחת גובה העמודה הימנית תואם לשמאלית (שמירה על עיצוב המגזין)
     function adjustWrapperHeight() {
-        const grid = document.getElementById('projectGrid');
-        const wrapper = document.getElementById('textTitleWrapper');
+        // Defines the pairs of project grid and title wrapper that need synchronized heights
+        const sections = [
+            { gridId: 'projectGrid', wrapperId: 'textTitleWrapper' },
+            // Galgaltz is intentionally excluded from height sync since its layout is different (full width stack vs 1/3 column)
+        ];
 
-        if (grid && wrapper && window.innerWidth > 1024) {
-             // הגדרת גובה ה-wrapper שווה לגובה ה-grid
-             wrapper.style.height = grid.offsetHeight + 'px';
-        } else if (wrapper) {
-             // איפוס גובה בנייד
-             wrapper.style.height = 'auto';
-        }
+        sections.forEach(s => {
+            const grid = document.getElementById(s.gridId);
+            const wrapper = document.getElementById(s.wrapperId);
+
+            if (grid && wrapper && window.innerWidth > 1024) {
+                 // הגדרת גובה ה-wrapper שווה לגובה ה-grid
+                 wrapper.style.height = grid.offsetHeight + 'px';
+            } else if (wrapper) {
+                 // איפוס גובה בנייד
+                 wrapper.style.height = 'auto';
+            }
+        });
     }
+    
+    // JS for Fade-In Effect in N12 Magazine Section (Restored functionality)
+    document.addEventListener('DOMContentLoaded', () => {
+        const fadeProjects = document.querySelectorAll('.portfolio .fade-project');
+        
+        fadeProjects.forEach(project => {
+            const images = project.querySelectorAll('img');
+            let currentImageIndex = 0;
+
+            const updateImage = () => {
+                images.forEach((img, index) => {
+                    img.classList.remove('active');
+                    if (index === currentImageIndex) {
+                        img.classList.add('active');
+                    }
+                });
+
+                currentImageIndex = (currentImageIndex + 1) % images.length;
+            };
+
+            // Start the rotation for each fade project
+            if (images.length > 1) {
+                updateImage(); // Initial run to set active class
+                setInterval(updateImage, 3000); // Change image every 3 seconds
+            }
+        });
+    });
+
 
     // קריאה בעת טעינה ובעת שינוי גודל החלון
     window.addEventListener('load', adjustWrapperHeight);
