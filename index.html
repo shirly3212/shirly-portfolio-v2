@@ -5,8 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Shirly Herscovici - Portfolio</title>
   
-
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
   <style>
     /* Global Reset and Base Styles */
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -383,12 +382,16 @@
             flex-direction: column;
             align-items: flex-start;
         }
+        /* Ensures the H3 heading for the podcast is left-aligned on desktop */
+        .galgaltz-text-column .podcast-wrapper h3 {
+             text-align: left;
+        }
 
         /* Carousel Column on the right */
         .n12-showcase {
             flex: 2; /* Takes up less space, focuses on the device */
             display: flex;
-            justify-content: flex-end; /* Push device to the right */
+            justify-content: center; /* FIX: Center the carousel/picture in its column */
             width: 100%;
             padding-top: 2rem; /* Optional: adjust vertical alignment */
         }
@@ -513,11 +516,24 @@
         /* Ensure it remains responsive and centered on mobile */
         text-align: center; 
         width: 100%;
+        /* FIX: Ensure the new button wrapper is centered on mobile */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
-    .podcast-iframe-container {
+    
+    .podcast-wrapper h3 {
+        /* FIX: Ensure H3 is centered on mobile/base layout */
+        text-align: center;
+        /* I confirm this property is what centers the text as requested */
+    }
+    
+    /* Styling for the play button wrapper (was iframe container) */
+    .podcast-player-ui {
         position: relative;
         width: 100%;
-        padding-bottom: 56.25%; /* 16:9 ratio */
+        /* 16:9 ratio for visual height consistency, even if it's just a button now */
+        padding-bottom: 56.25%; 
         height: 0;
         overflow: hidden;
         max-width: 600px; /* Limit player size */
@@ -528,7 +544,7 @@
         transition: opacity 0.5s ease;
     }
     
-    /* Style for the custom Play button that triggers the iframe load */
+    /* Style for the custom Play button that triggers the redirect */
     #play-podcast-button {
         position: absolute;
         top: 0;
@@ -561,16 +577,7 @@
         height: 40px;
         fill: white;
     }
-
-    .podcast-iframe-container iframe {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        border: 0;
-    }
-    /* END NEW PODCAST STYLING */
+    /* END Podcast Player Styling */
 
     /* --- NEW: Audio Waves/Equalizer Background (Galgaltz Section) --- */
     .audio-waves-background {
@@ -750,7 +757,7 @@
       .n12-card { width: 90%; height: 400px; }
       
       /* Mobile adjustment for podcast player */
-      .podcast-iframe-container { margin: 1rem auto; }
+      .podcast-player-ui { margin: 1rem auto; }
       #play-podcast-button { font-size: 1rem; }
       #play-podcast-button svg { width: 30px; height: 30px; }
     }
@@ -766,7 +773,7 @@
       .n12-card { width: 90%; height: 400px; }
       
       /* Mobile adjustment for podcast player */
-      .podcast-iframe-container { margin: 1rem auto; }
+      .podcast-player-ui { margin: 1rem auto; }
     }
   </style>
 </head>
@@ -962,11 +969,12 @@
             
 
 <div class="podcast-wrapper">
+                <!-- Text Centering Confirmed: This H3 is centered via the CSS definition for .podcast-wrapper h3 -->
                 <h3 class="text-xl font-bold text-white mb-4 mt-6">Listen to the Official Podcast Chart</h3>
                 
                 
 
-<div id="podcast-player-ui" class="podcast-iframe-container">
+<div id="podcast-player-ui" class="podcast-player-ui">
                     
                     
 
@@ -976,11 +984,13 @@
 <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path d="M8 5v14l11-7z" fill="white"/>
                         </svg>
-                        Load and Play Podcast Player
+                        Go to Official Chart Page
                     </button>
 
                 </div>
                 <p class="text-xs text-gray-400 mt-2">Podcast provided by Podtail (external source).</p>
+                
+                <!-- REMOVED: The chart link as requested -->
             </div>
             
 
@@ -1108,7 +1118,8 @@
 
     // --- GALGALTZ N12 Carousel Logic ---
     const slideImages = [
-        "img_new/img_1.jpg",  
+        "img_new/img_1.png", 
+        "img_new/img_2.jpg", 
         "img_new/img_2.png", 
         "img_new/img_3.jpg", 
         "img_new/img_3.png", 
@@ -1175,39 +1186,18 @@
         updateCarouselDisplay();
     }
     
-    // --- NEW: Podcast Play Button Logic ---
-    const podcastHtml = `
-        <iframe
-            src="https://podtail.com/fr/podcast/08133522/--30/"
-            title="Galgalatz N12 Podcast Chart"
-            allow="autoplay; fullscreen; picture-in-picture"
-            sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
-            loading="lazy">
-        </iframe>
-    `;
-
+    // --- UPDATED: Play Button Redirect Logic ---
     window.loadAndPlayPodcast = function() {
-        const uiContainer = document.getElementById('podcast-player-ui');
-        if (uiContainer) {
-            // Replace the button UI with the actual iframe
-            uiContainer.innerHTML = podcastHtml;
-            // Note: The iframe loads the player, the user needs one more click to hit play inside the iframe.
-            uiContainer.style.height = 'auto'; // Reset height control after content is loaded
-            uiContainer.style.paddingBottom = '56.25%'; // Re-apply aspect ratio for responsive iframe
-        }
+        // The URL provided by the user
+        const chartUrl = 'https://glz.co.il/%D7%92%D7%9C%D7%92%D7%9C%D7%A6/%D7%AA%D7%95%D7%9B%D7%A0%D7%99%D7%95%D7%AA/%D7%9E%D7%A6%D7%A2%D7%93-%D7%9E%D7%95%D7%96%D7%99%D7%A7%D7%94-%D7%9E%D7%94%D7%9E%D7%A1%D7%9A';
+        
+        // Opens the URL in a new browser tab/window
+        window.open(chartUrl, '_blank');
     }
     
     // Call initialization when content is loaded
     document.addEventListener('DOMContentLoaded', () => {
         initializeCarousel();
-        
-        // Initial setup for the custom podcast button container
-        const uiContainer = document.getElementById('podcast-player-ui');
-        if (uiContainer) {
-            // Set the initial height for the button to occupy the 16:9 space
-            uiContainer.style.height = 'auto';
-            uiContainer.style.paddingBottom = '56.25%'; 
-        }
     });
     
     // קריאה בעת טעינה ובעת שינוי גודל החלון
