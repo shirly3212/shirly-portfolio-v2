@@ -671,10 +671,19 @@
 
     .project:hover { transform: translateY(-8px); }
     
-    /* Project staggering */
-    .project-grid > .project:nth-child(2) { margin-top: 40px; }
-    .project-grid > .project:nth-child(4) { margin-top: 40px; }
-    .project-grid > .project:nth-child(3) { margin-top: -60px; } 
+    /* Project staggering FIX: Removed overlapping negative margins */
+    .project-grid > .project:nth-child(2) { 
+        margin-top: 0px; 
+        /* Original: 40px */
+    }
+    .project-grid > .project:nth-child(4) { 
+        margin-top: 0px; 
+        /* Original: 40px */
+    }
+    .project-grid > .project:nth-child(3) { 
+        margin-top: 0px; 
+        /* Original: -60px (Caused Overlap) */
+    } 
 
     /* === SCROLL PROJECTS FIX & INDICATOR (Retained) === */
     .scroll-project {
@@ -729,6 +738,7 @@
       .portfolio .magazine-text { width: 100%; max-width: 100%; text-align: center; padding-right: 0; margin-top: 0.5rem; font-size: 1rem; align-self: center; }
       
       .project-grid { grid-column: 1 / 2; grid-template-columns: 1fr; } 
+      /* Ensure staggering is zeroed out for mobile stacked view */
       .project-grid > .project:nth-child(2) { margin-top: 0; } 
       .project-grid > .project:nth-child(3) { margin-top: 0; } 
       .project-grid > .project:nth-child(4) { margin-top: 0; }
