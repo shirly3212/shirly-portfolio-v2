@@ -743,55 +743,18 @@
     </div>
 
   </section>
-
-  <!-- === GALGALTZ N12 SECTION (Dark Variant) - PHONE FIX APPLIED HERE === -->
+  <!-- === GALGALTZ N12 SECTION (Dark Variant) - REPLACED WITH NEW VERSION === -->
   <section class="portfolio-dark" id="galgaltzSection">
-    
-    <!-- LEFT AREA: Project Grid (2 columns) -->
-    <div class="project-grid" id="galgaltzProjectGrid">
-      
-      <!-- Project: Galgaltz N12 (Mobile Mockup & External Stack) -->
-      <!-- The 'stack-project' class handles the 2-column span with grid-column: 1 / 3 in CSS -->
-      <div class="project stack-project">
-        
-        <!-- 1. Mobile Mockup (Center) - ENHANCED VISIBILITY APPLIED -->
-        <div class="mobile-mockup">
-            <!-- Scrollable screen area - SCREEN RECESS APPLIED -->
-            <div class="screen-content">
-                <!-- Stacked Images for scrolling (Ensure this section can scroll) -->
-                <img src="/img_new/img_1.jpg" onerror="this.onerror=null;this.src='https://placehold.co/320x600/333333/FFFFFF?text=Screen+1+Scroll';" alt="Galgaltz N12 UI Screen 1">
-                <img src="/img_new/img_2.jpg" onerror="this.onerror=null;this.src='https://placehold.co/320x600/555555/FFFFFF?text=Screen+2+Scroll';" alt="Galgaltz N12 UI Screen 2">
-                <img src="/img_new/img_3.jpg" onerror="this.onerror=null;this.src='https://placehold.co/320x600/888888/FFFFFF?text=Screen+3+Scroll';" alt="Galgaltz N12 UI Screen 3">
-            </div>
-        </div>
-        
-        <!-- 2. External Image Stack -->
-        <div class="external-mockup-stack">
-            <div class="external-image-wrapper">
-                <img src="img_1.jpg" onerror="this.onerror=null;this.src='https://placehold.co/300x200/333333/FFFFFF?text=Screen+1';" alt="Galgaltz N12 Screen 1">
-            </div>
-            <div class="external-image-wrapper">
-                <img src="img_2.jpg" onerror="this.onerror=null;this.src='https://placehold.co/300x200/555555/FFFFFF?text=Screen+2';" alt="Galgaltz N12 Screen 2">
-            </div>
-            <div class="external-image-wrapper">
-                <img src="img_3.jpg" onerror="this.onerror=null;this.src='https://placehold.co/300x200/888888/FFFFFF?text=Screen+3';" alt="Galgaltz N12 Screen 3">
-            </div>
-        </div>
-        
-      </div>
-      
-    </div>
-    
-    <!-- RIGHT AREA: Title and Descriptive Text -->
-    <div class="text-and-title-wrapper" id="galgaltzTextTitleWrapper">
-        <h2 class="magazine-title">GALGALTZ N12</h2>
-        
-        <!-- TEXT UPDATED AND TRANSLATED TO ENGLISH -->
-        <p class="magazine-text">
-          The "Music from the Screen" chart is a joint project by N12 and Galgalatz, allowing users to choose and vote for the greatest songs from movies and TV series. As part of my UI/UX work, I focused on designing an intuitive and enjoyable voting experience for this collaborative project.
-        </p>
-    </div>
+    <h2 class="neon-title">GALGALTZ N12</h2>
+    <p class="magazine-text">
+      The "Music from the Screen" chart is a joint project by N12 and Galgalatz, where users vote for the greatest songs from movies and series. I designed a vibrant, intuitive, and cinematic UI/UX experience for this collaboration.
+    </p>
 
+    <div class="n12-showcase">
+      <div class="n12-card"><img src="img_2.jpg" alt="N12 Galgalatz UI 1"></div>
+      <div class="n12-card"><img src="img_3.jpg" alt="N12 Galgalatz UI 2"></div>
+      <div class="n12-card"><img src="img_1.jpg" alt="N12 Galgalatz UI 3"></div>
+    </div>
   </section>
 
   <script>
@@ -803,7 +766,7 @@
     const animateRoleChange = () => {
         if (!roleElement) return;
 
-        // 1. דוהה החוצה ומחליק למטה (מכין ליציאה)
+        // 1. הודעה החוצה ומחליק למטה (מכין ליציאה)
         roleElement.style.opacity = 0;
         roleElement.style.transform = 'translateY(10px)';
 
@@ -811,9 +774,9 @@
         setTimeout(() => {
             index = (index + 1) % roles.length;
             roleElement.textContent = roles[index];
-            roleElement.style.transform = 'translateY(-10px)'; // הגדרת מיקום התחלת ה'החלקה פנימה'
+            roleElement.style.transform = 'translateY(-10px)'; // הגדרת מיקום התחלתי ה'החלקה פנימה'
             
-            // 3. דוהה פנימה ומחליק למעלה למיקום הסופי
+            // 3. הודעה פנימה ומחליק למעלה למיקום הסופי
             setTimeout(() => {
                 roleElement.style.opacity = 1;
                 roleElement.style.transform = 'translateY(0)';
@@ -822,7 +785,7 @@
     };
 
     if (roleElement) {
-        // התחלת הרוטציה הרציפה
+        // התחלת הרוטציה הרצופה
         setTimeout(() => {
              animateRoleChange();
              setInterval(animateRoleChange, 4000);
