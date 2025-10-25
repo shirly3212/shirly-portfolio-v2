@@ -1,1335 +1,589 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Shirly Herscovici - Portfolio</title>
-  
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght{300;400;700}&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
   <style>
-    /* Global Reset and Base Styles */
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #1a1a1a; }
+    ::-webkit-scrollbar-thumb { background-color: #a3ff00; border-radius: 10px; border: 2px solid #1a1a1a; }
+    
     body {
-      font-family: 'Lato', sans-serif;
-      background-color: #111;
-      color: #fff;
-      overflow-x: hidden;
-      line-height: 1.6;
-    }
-
-    /* === HEADER SECTION (Hero) === */
-    header {
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      /* הרקע המקורי - כמעט שחור */
-      background-color: #0d0d0d; 
-      padding: 5rem 10%;
-      min-height: 85vh;
-      overflow: hidden; 
-
-      /* --- NEW: רקע רשת (Grid Background) --- */
-      background-image: 
-        linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-      background-size: 30px 30px; /* גודל המשבצת */
-    }
-    
-    /* --- FLOATING VECTORS STYLES (הווקטורים) --- */
-    .vector { 
-      position: absolute; 
-      opacity: 0.5; 
-      animation: float 7s ease-in-out infinite; 
-      z-index: 0; /* נשאר ברקע */
-    }
-    /* שימוש בצבעים הקיימים עבור צורות חדשות */
-    .vector circle { stroke: #a3ff00; stroke-width: 2; fill: none; }
-    .vector triangle polygon { stroke: #fff; stroke-width: 2; fill: none; }
-    .vector square rect { stroke: #00b4d8; stroke-width: 2; fill: none; }
-    
-    @keyframes float { 0%,100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-15px) rotate(10deg); } }
-
-
-    .header-text { max-width: 50%; z-index: 2; }
-    
-    /* Main Name/Title */
-    .header-text h1 { 
-      font-size: clamp(3rem, 7vw, 4rem); 
-      font-weight: 300; 
-      margin-bottom: 0.5rem; 
-      line-height: 1.1; 
-      /* Delayed appearance for all text */
-      opacity: 0;
-      animation: fadeIn 0.8s ease-out 1.5s forwards; 
-    }
-    .header-text h1 strong { display: block; font-weight: 700; }
-
-    /* Animated Role (The Green Highlighted Text) */
-    #role-wrapper {
-      margin-bottom: 2rem;
-      /* Animation: Delayed fade in for the wrapper */
-      opacity: 0;
-      animation: fadeIn 0.8s ease-out 1.5s forwards; 
-      /* Ensure we can clip the sliding text */
-      overflow: hidden; 
-      line-height: 1.5; 
-      height: clamp(2.5rem, 6vw, 3.5rem); 
-    }
-
-    #role {
-      display: inline-block;
-      color: #a3ff00;
-      font-weight: 700;
-      font-size: clamp(1.8rem, 4vw, 2.5rem);
-      white-space: nowrap;
-      padding: 0 5px; 
-      
-      /* Transition for Slide Up */
-      transition: opacity 0.5s ease-out, transform 0.5s ease-out; 
-      transform: translateY(0); /* Initial position */
-    }
-
-    .header-text p { 
-      margin-bottom: 0; /* כדי לוודא שאין מרווח תחתון שיוצר קו */
-      font-size: 1.1rem; 
-      color: #aaa; 
-      /* Delayed appearance */
-      opacity: 0;
-      animation: fadeIn 0.8s ease-out 2s forwards;
-    }
-    
-    /* מרווח בין הפיסקה לקישורים */
-    .header-text p:last-of-type { 
-      margin-bottom: 2rem;
-    }
-
-    /* Contact Links Container (עיצוב מחדש לשורה אחת קומפקטית) */
-    .contact { 
-      display: flex; 
-      gap: 0.5rem; /* מרווח קטן יותר בין הקישורים */
-      font-size: 0.9rem; /* גופן קטן יותר */
-      flex-wrap: nowrap; /* מונע מעבר שורה (אלא אם אין מקום) */
-      align-items: center; /* ליישור אנכי */
-      /* Delayed appearance */
-      opacity: 0;
-      animation: fadeIn 0.8s ease-out 2.2s forwards;
-    }
-    
-    /* General Link Styling (Phone & Email) */
-    .contact a { 
-      color: #ccc; 
-      text-decoration: none; 
-      border: 1px solid #555; 
-      padding: 0.4rem 0.8rem; /* Padding קטן עוד יותר */
-      border-radius: 5px; /* רדיוס קטן יותר */
-      transition: all 0.3s; 
-      white-space: nowrap; /* מונע שבירת שורה בטקסט של הכפתור */
-    }
-    .contact a:hover:not(.ai-portfolio-btn) { 
-      color: #111; 
-      background-color: #a3ff00; 
-      border-color: #a3ff00; 
-      box-shadow: 0 0 15px rgba(163, 255, 0, 0.4);
-    }
-    
-    /* === FULL PORTFOLIO BUTTON STYLING === */
-    .ai-portfolio-btn {
-      position: relative;
-      overflow: hidden;
-      border: none;
-      /* הגדלת ה-Padding vertical ל-0.5rem כדי למנוע חיתוך גובה */
-      padding: 0.5rem 0.8rem; 
-      border-radius: 5px;
-      font-weight: 700;
-      color: #fff;
-      background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%); /* בסיס כחול-סגול */
-      text-decoration: none;
-      transition: transform 0.3s ease;
-      z-index: 10;
-      /* שימוש באנימציית זוהר AI */
-      animation: glowPulse 2s infinite ease-in-out;
-    }
-
-    /* אייקון בתוך כפתור הפורטפוליו */
-    .ai-portfolio-btn svg {
-      /* הקטנת גודל ה-SVG כדי למנוע חיתוך טקסט */
-      width: 14px; 
-      height: 14px;
-      display:inline-block; 
-      vertical-align:middle; 
-      margin-right:4px; /* מרווח קטן יותר */
-    }
-
-    .ai-portfolio-btn:hover {
-      transform: scale(1.05);
-      cursor: pointer;
-    }
-
-    /* Keyframes for the AI Glow effect (Breathing/Pulsing) */
-    @keyframes glowPulse {
-      0% { box-shadow: 0 0 5px #6a11cb, 0 0 10px #2575fc; }
-      50% { box-shadow: 0 0 15px #6a11cb, 0 0 30px #2575fc, 0 0 45px #00b4d8; } /* יותר זוהר ומשולב עם טורקיז */
-      100% { box-shadow: 0 0 5px #6a11cb, 0 0 10px #2575fc; }
-    }
-
-
-    /* Profile Picture Container - Base Styles */
-    .profile-pic { 
-      position: relative; 
-      z-index: 1; 
-      /* Initial appearance using general fadeIn, delayed */
-      opacity: 0;
-      animation: fadeIn 0.8s ease-out 0.5s forwards; 
-      /* Enable smooth transitions for hover effect */
-      transition: all 0.5s ease-in-out;
-    }
-
-    /* Interactive Hover Effect: Shrink 70% and Change Position (NO BOX-SHADOW) */
-    .profile-pic:hover {
-      /* Scale down to 70% and translate/rotate */
-      transform: scale(0.7) translate(10%, -5%) rotate(-2deg); 
-    }
-
-    .profile-pic img { 
-      width: clamp(300px, 35vw, 380px); 
-      height: auto;
-      border-radius: 20px; 
-      box-shadow: 0 0 25px rgba(255,255,255,0.1); 
-      position: relative; 
-      z-index: 2; 
-    }
-    
-    /* --- TRANSFORM SQUARES STYLES (המשבצות) --- */
-    .transform-square { 
-      position: absolute; 
-      width: 16px; 
-      height: 16px; 
-      background: #fff; 
-      /* שמירת ההדגשה מהבקשה הקודמת */
-      border: 3px solid #a3ff00; 
-      opacity: 0.9; z-index: 3; 
-      /* Continuous movement */
-      animation: squareMovement 3s ease-in-out 1.2s infinite alternate; 
-    }
-    .transform-square.tl { top: -10px; left: -10px; animation-direction: normal; } 
-    .transform-square.tr { top: -10px; right: -10px; animation-direction: reverse; } 
-    .transform-square.bl { bottom: -10px; left: -10px; animation-direction: reverse; } 
-    .transform-square.br { bottom: -10px; right: -10px; animation-direction: normal; } 
-
-
-    /* === ANIMATIONS === */
-
-    /* Animation: General Fade In for text elements */
-    @keyframes fadeIn {
-      to { opacity: 1; }
-    }
-    
-    /* Animation: Subtle float and rotation for the transform squares */
-    @keyframes squareMovement {
-      0%, 100% { transform: translate(0, 0) rotate(0deg); }
-      50% { transform: translate(3px, 3px) rotate(3deg); } 
-    }
-
-    /* --- SVG Arrow Animation --- */
-    .scroll-indicator {
-      position: absolute;
-      bottom: 20px;
-      right: 20px;
-      width: 30px; /* קטן יותר */
-      height: 30px; /* קטן יותר */
-      opacity: 0;
-      animation: arrowScroll 3s infinite 2s ease-in-out, fadeIn 1s forwards 2s;
-      z-index: 10; 
-      pointer-events: none; 
-    }
-    
-    .scroll-indicator svg {
-      width: 100%;
-      height: 100%;
-      /* החץ מצביע למעלה (ברירת מחדל) */
-      transform: rotate(0deg); 
-    }
-    
-    .scroll-indicator svg path {
-      /* מבטלים טרנספורמציה ישירה */
-      transform: none; 
-    }
-
-    /* אנימציה: תנועה קלה למעלה */
-    @keyframes arrowScroll {
-      0% { transform: translateY(0); opacity: 0; }
-      15% { opacity: 1; }
-      40% { transform: translateY(-10px); opacity: 1; } /* תנועה קלה למעלה */
-      65% { opacity: 0.5; }
-      100% { transform: translateY(0); opacity: 0; }
-    }
-    
-    /* === PORTFOLIO SECTION (Magazine Layout - Light Variant) === */
-    .portfolio {
-      background-color: #fff;
-      color: #000;
-      padding: 6rem 8%;
-      position: relative;
-      grid-template-columns: 4fr 1fr; 
-      grid-gap: 2.5rem; 
-      display: grid; 
-      align-items: start;
-    }
-    
-    /* === PORTFOLIO SECTION (Magazine Layout - Dark Variant) === */
-    .portfolio-dark {
-      background: radial-gradient(circle at top left, #0d0d0d 40%, #000 100%);
-      color: #fff;
-      padding: 6rem 8%;
-      /* Changed to flex-col and centered to handle mobile stacking. Desktop layout will be handled by the inner wrapper. */
-      display: flex;
-      flex-direction: column;
-      align-items: center; 
-      position: relative;
-      overflow: hidden;
-    }
-
-    .portfolio-dark::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, rgba(37,117,252,0.2), rgba(106,17,203,0.2));
-      mix-blend-mode: overlay;
-      z-index: 0;
-    }
-
-    .neon-title {
-      font-size: 3rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      text-align: center;
-      position: relative;
-      z-index: 2;
-      letter-spacing: 2px;
-      /* Ensure title is full width on mobile/stacked layout */
-      width: 100%; 
-    }
-
-    .neon-title::after {
-      content: '';
-      display: block;
-      width: 80px;
-      height: 4px;
-      margin: 1rem auto 0;
-      background: linear-gradient(90deg, #6a11cb, #2575fc);
-      border-radius: 4px;
-      animation: glowLine 3s ease-in-out infinite alternate;
-    }
-
-    @keyframes glowLine {
-      from { box-shadow: 0 0 10px #6a11cb; }
-      to { box-shadow: 0 0 25px #2575fc; }
-    }
-
-    /* Global magazine text for dark section */
-    .magazine-text {
-      max-width: 800px; /* Increased max width for better text flow on the left column */
-      text-align: center;
-      color: #ccc;
-      font-size: 1.1rem;
-      margin-top: 1rem;
-      z-index: 2;
-      animation: fadeUp 1s ease-out forwards;
-    }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* --- NEW LAYOUT: Container for 2-Column Desktop Layout --- */
-    .galgaltz-content-wrapper {
-        display: flex;
-        flex-direction: column; /* Stacked by default (mobile) */
-        align-items: center;
-        gap: 4rem;
-        width: 100%;
-        max-width: 1200px; /* Max content width */
-        margin-top: 4rem;
-        z-index: 2;
-    }
-
-    /* Desktop View: Text Left (3/5), Carousel Right (2/5) */
-    @media (min-width: 1024px) {
-        .galgaltz-content-wrapper {
-            flex-direction: row; /* Horizontal on desktop */
-            align-items: flex-start; /* Align to the top */
-        }
-        /* Grouping text content and podcast on the left */
-        .galgaltz-text-column {
-            flex: 3; /* Takes up more space */
-            padding-right: 3rem;
-            text-align: left;
-            /* Reset specific centering elements for desktop */
-            width: 100%;
-        }
-        .galgaltz-text-column .magazine-text {
-            text-align: left; /* Align text left */
-            margin-left: 0;
-            margin-right: 0;
-        }
-        /* Aligning the podcast/buttons left */
-        .galgaltz-text-column .podcast-wrapper {
-            text-align: left;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-        }
-        /* Ensures the H3 heading for the podcast is left-aligned on desktop */
-        .galgaltz-text-column .podcast-wrapper h3 {
-             text-align: left;
-        }
-
-        /* Carousel Column on the right */
-        .n12-showcase {
-            flex: 2; /* Takes up less space, focuses on the device */
-            display: flex;
-            justify-content: center; /* FIX: Center the carousel/picture in its column */
-            width: 100%;
-            padding-top: 2rem; /* Optional: adjust vertical alignment */
-        }
-    }
-
-
-    /* Single Carousel Card Styling */
-    .n12-card.carousel-card {
-      /* Keeps existing n12-card styles */
-      background: rgba(255,255,255,0.05);
-      border-radius: 20px;
-      overflow: hidden;
-      width: 320px; /* Fixed size for the phone mockup */
-      height: 550px;
-      box-shadow: 0 0 30px rgba(37,117,252,0.3);
-      transform: perspective(800px) rotateY(10deg);
-      transition: all 0.4s ease;
-      position: relative;
-      /* Added flex to push dot container down */
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end; 
-    }
-
-    .n12-card:hover {
-      transform: perspective(800px) rotateY(0deg) scale(1.05);
-      box-shadow: 0 0 60px rgba(106,17,203,0.6);
-    }
-    
-    /* Ensure old img styles don't conflict, focusing on new structure */
-    #carousel-viewport {
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        top: 0;
-        left: 0;
-        overflow: hidden;
-        border-radius: 20px; /* Match card radius */
-        cursor: zoom-in; /* Indicate interactivity */
-    }
-
-    #carousel-image {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition: opacity 0.4s ease-in-out; /* Smooth transition for image change */
-    }
-
-    .n12-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to bottom right, rgba(106,17,203,0.2), rgba(37,117,252,0.2));
-      mix-blend-mode: overlay;
-    }
-
-    /* Navigation Buttons */
-    .nav-button {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        background: rgba(0, 0, 0, 0.4);
-        border: none;
-        color: white;
-        padding: 10px;
-        cursor: pointer;
-        z-index: 30;
-        border-radius: 50%;
-        width: 40px;
-        height: 40px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: background 0.3s, transform 0.3s;
-    }
-
-    .nav-button:hover {
-        background: rgba(37, 117, 252, 0.8); /* Blue hover effect */
-        transform: translateY(-50%) scale(1.1);
-    }
-
-    .nav-button svg {
-        width: 16px;
-        height: 16px;
-    }
-
-    .prev-button { left: 10px; }
-    .next-button { right: 10px; }
-
-
-    /* Dot Indicators Styling */
-    .dots-container {
-        position: absolute;
-        bottom: 20px;
-        left: 50%;
-        transform: translateX(-50%);
-        display: flex;
-        gap: 8px;
-        z-index: 30; /* Above the image */
-        background: rgba(0, 0, 0, 0.2);
-        padding: 8px 12px;
-        border-radius: 20px;
-    }
-
-    .dot {
-        width: 10px;
-        height: 10px;
-        background-color: rgba(255, 255, 255, 0.5);
-        border-radius: 50%;
-        cursor: pointer;
-        transition: background-color 0.3s, transform 0.3s;
-    }
-
-    .dot.active {
-        background-color: #a3ff00; /* Green active color */
-        transform: scale(1.2);
-    }
-    /* END Carousel Styling */
-
-    /* Podcast Player Styling (Responsive Iframe) */
-    .podcast-wrapper {
-        margin-top: 2.5rem; /* Increased margin to move it down */
-        /* Ensure it remains responsive and centered on mobile */
-        text-align: center; 
-        width: 100%;
-        /* FIX: Ensure the new button wrapper is centered on mobile */
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .podcast-wrapper h3 {
-        /* FIX: Ensure H3 is centered on mobile/base layout */
-        text-align: center;
-    }
-    
-    /* Styling for the play button wrapper (was iframe container) */
-    .podcast-player-ui {
-        position: relative;
-        width: 100%;
-        /* 16:9 ratio for visual height consistency, even if it's just a button now */
-        padding-bottom: 56.25%; 
-        height: 0;
-        overflow: hidden;
-        max-width: 600px; /* Limit player size */
-        margin: 0 auto; /* Centered */
-        border-radius: 12px; /* Match portfolio style */
-        box-shadow: 0 0 10px rgba(37,117,252,0.5); /* Subtle glow matching section */
-        z-index: 2; /* Bring player above background elements */
-        transition: opacity 0.5s ease;
-    }
-
-    /* NEW: Style for the background image inside the podcast player UI */
-    .podcast-bg-image {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        z-index: 1; /* Below the button (z-index 2) */
-        border-radius: 12px;
-    }
-
-    /* NEW: Optional: Add a subtle overlay for contrast over the background image */
-    .podcast-player-ui::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.6); /* Dark overlay for contrast */
-        border-radius: 12px;
-        z-index: 1; 
-    }
-
-    /* Style for the custom Play button that triggers the redirect */
-    #play-podcast-button {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        /* Changed background to transparent to show image */
-        background: transparent; 
-        color: white;
-        border: none;
-        cursor: pointer;
-        font-size: 1.2rem;
-        font-weight: 700;
-        border-radius: 12px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-        transition: transform 0.3s, box-shadow 0.3s;
-        box-shadow: 0 0 15px rgba(37,117,252,0.5); /* Retained initial shadow */
-        z-index: 2; /* Ensure button is on top of image and overlay */
-    }
-
-    #play-podcast-button:hover {
-        transform: scale(1.02);
-        box-shadow: 0 0 25px rgba(163, 255, 0, 0.6); /* Green hover glow */
-    }
-
-    #play-podcast-button svg {
-        width: 40px;
-        height: 40px;
-        fill: white;
-    }
-    /* END Podcast Player Styling */
-
-    /* --- NEW: Audio Waves/Equalizer Background (Galgaltz Section) --- */
-    .audio-waves-background {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 100px; 
-        display: flex;
-        /* NEW: Changed back to space-between to fill width without gap */
-        justify-content: space-between; 
-        align-items: flex-end;
-        gap: 0; 
-        opacity: 0.15; 
-        z-index: 1; 
-        overflow: hidden;
-        margin-bottom: 20px;
-    }
-
-    .wave-bar {
-        /* NEW: Slightly thicker bar width */
-        width: 3px; 
-        min-height: 10px; 
-        background-color: #a3ff00; 
-        border-radius: 1px; 
-        transform-origin: bottom;
-        animation: waveMotion 1.5s ease-in-out infinite alternate;
-    }
-
-    @keyframes waveMotion {
-        0% { transform: scaleY(0.1); }
-        50% { transform: scaleY(6); } 
-        100% { transform: scaleY(1); }
-    }
-    
-    /* Project Grid (LEFT Column) - Applies to both sections */
-    .project-grid {
-      grid-column: 1 / 2; 
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      grid-gap: 2rem;
-      width: 100%;
-    }
-
-    /* Wrapper for Title and Text (RIGHT Column - Side Bar) - Applies to both sections */
-    .text-and-title-wrapper {
-      grid-column: 2 / 3; 
-      display: flex;
-      flex-direction: column;
-      position: relative; 
-      height: 100%; 
-    }
-
-    /* Vertical Magazine Title - Light Section */
-    .portfolio .magazine-title {
-      color: #111;
-      font-family: 'Playfair Display', serif;
-      font-size: 7vw; 
-      font-weight: 700;
-      text-transform: uppercase;
-      white-space: nowrap; 
-      line-height: 0.8;
-      position: absolute;
-      top: 0; 
-      /* Rotation and positioning */
-      transform: rotate(90deg) translate(15px, 0); 
-      transform-origin: top left; 
-      left: 100%; 
-      z-index: 10;
-    }
-    
-    /* Magazine Text Position (Light Section) */
-    .portfolio .magazine-text {
-      font-family: 'Playfair Display', serif; 
-      font-size: 0.7rem; 
-      line-height: 1.6;
-      color: #333;
-      width: 100%;
-      max-width: 200px; 
-      margin-top: auto; /* Pushes text to the bottom of the column */
-      padding-top: 2rem; 
-      align-self: flex-end; /* Aligns text to the right side of the column */
-    }
-    
-    /* Original Project/Staggering Styles */
-    .project {
-      border-radius: 14px;
-      overflow: hidden;
-      background: #f8f8f8;
-      color: #000; /* Ensure text inside project card is black */
-      box-shadow: 0 6px 20px rgba(0,0,0,0.08);
-      transition: transform 0.4s ease;
-      /* הוספת גובה מינימלי ליצירת מרווח, במקום גובה קבוע */
-      min-height: 350px; 
-      display: flex;
-      flex-direction: column;
-    }
-
-    .project:hover { transform: translateY(-8px); }
-    
-    /* Project staggering FIX: Removed overlapping negative margins */
-    .project-grid > .project:nth-child(2) { 
-        margin-top: 0px; 
-        /* Original: 40px */
-    }
-    .project-grid > .project:nth-child(4) { 
-        margin-top: 0px; 
-        /* Original: 40px */
-    }
-    .project-grid > .project:nth-child(3) { 
-        margin-top: 0px; 
-        /* Original: -60px (Caused Overlap) */
-    } 
-
-    /* === SCROLL PROJECTS FIX & INDICATOR (Retained) === */
-    .scroll-project {
-      position: relative;
-    }
-    
-    .scroll-container { 
-      /* גובה קבוע נמוך יחסית, כדי לאלץ גלילה */
-      height: 500px; 
-      max-height: 500px; 
-      overflow-y: scroll; 
-      scroll-behavior: smooth; 
-    }
-    
-    .scroll-container img { 
-      width: 100%; 
-      height: auto; 
-      display: block; 
-    }
-    
-    /* FADE Project (Original behavior for N12 Magazine section) */
-    .fade-project {
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .fade-project img {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      opacity: 0;
-      transition: opacity 1s ease-in-out;
-    }
-    
-    .fade-project img.active {
-      opacity: 1;
-    }
-    
-    /* --- NEW MODAL/LIGHTBOX STYLES --- */
-    .modal-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.9);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 1000; /* Ensure it is on top of everything */
-        backdrop-filter: blur(5px);
-        transition: opacity 0.3s ease;
-    }
-
-    .modal-content {
-        position: relative;
-        max-width: 95vw;
-        max-height: 95vh;
-        padding: 20px;
-        background: #000;
-        border-radius: 10px;
-        box-shadow: 0 0 50px rgba(163, 255, 0, 0.5);
-    }
-
-    #modal-image {
-        display: block;
-        max-width: 100%;
-        max-height: 85vh; /* Prevent image from overflowing viewport */
-        object-fit: contain;
-        border-radius: 8px;
-    }
-
-    .close-button {
-        position: absolute;
-        top: -15px;
-        right: -15px;
-        color: #111;
-        font-size: 30px;
-        font-weight: bold;
-        cursor: pointer;
-        background: #a3ff00;
-        border-radius: 50%;
-        width: 40px;
-        height: 40px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        line-height: 1;
-        border: 2px solid #a3ff00;
-        transition: background-color 0.3s, color 0.3s, transform 0.3s;
-        z-index: 1002;
-    }
-
-    .close-button:hover,
-    .close-button:focus {
-        color: white;
-        background-color: #000;
-        transform: rotate(90deg);
-        text-decoration: none;
-    }
-
-
-    /* === RESPONSIVE DESIGN === */
-    @media (max-width: 1024px) {
-      /* Apply to both light and dark sections */
-      .portfolio { grid-template-columns: 1fr; padding: 4rem 5%; grid-gap: 2rem; }
-      .portfolio .text-and-title-wrapper { grid-column: 1 / 2; min-height: auto; position: static; display: block; order: -1; }
-      
-      /* Ensure ALL titles are centered/horizontal on mobile */
-      .portfolio .magazine-title { position: static; transform: none; transform-origin: center; text-align: center; font-size: 3rem; margin-bottom: 1rem; margin-top: 0; left: auto; }
-      
-      /* Ensure ALL text is centered on mobile */
-      .portfolio .magazine-text { width: 100%; max-width: 100%; text-align: center; padding-right: 0; margin-top: 0.5rem; font-size: 1rem; align-self: center; }
-      
-      .project-grid { grid-column: 1 / 2; grid-template-columns: 1fr; } 
-      /* Ensure staggering is zeroed out for mobile stacked view */
-      .project-grid > .project:nth-child(2) { margin-top: 0; } 
-      .project-grid > .project:nth-child(3) { margin-top: 0; } 
-      .project-grid > .project:nth-child(4) { margin-top: 0; }
-      
-      .scroll-indicator { display: none; }
-      .contact { flex-direction: column; align-items: center; }
-
-      .neon-title { font-size: 2rem; }
-      .n12-card { width: 90%; height: 400px; }
-      
-      /* Mobile adjustment for podcast player */
-      .podcast-player-ui { margin: 1rem auto; }
-      #play-podcast-button { font-size: 1rem; }
-      #play-podcast-button svg { width: 30px; height: 30px; }
-    }
-    
-    @media (max-width: 768px) {
-      header { flex-direction: column; text-align: center; }
-      .header-text { max-width: 100%; }
-      .contact { justify-content: center; }
-      .profile-pic { order: -1; margin-bottom: 3rem; } /* Push image up on mobile */
-      .project-grid { grid-template-columns: 1fr; } 
-
-      .neon-title { font-size: 2rem; }
-      .n12-card { width: 90%; height: 400px; }
-      
-      /* Mobile adjustment for podcast player */
-      .podcast-player-ui { margin: 1rem auto; }
+        background-color: #111;
+        color: #fff;
+        font-family: 'Lato', sans-serif;
+        cursor: none; /* Hide default cursor */
+        overflow-x: hidden;
     }
   </style>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          keyframes: {
+            fadeIn: { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
+            fadeOut: { '0%': { opacity: '1' }, '100%': { opacity: '0' } },
+            fadeUp: {
+              '0%': { opacity: '0', transform: 'translateY(20px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            },
+            float: {
+              '0%, 100%': { transform: 'translateY(0) rotate(0deg)' },
+              '50%': { transform: 'translateY(-15px) rotate(10deg)' },
+            },
+            squareMovement: {
+                '0%, 100%': { transform: 'translate(0, 0) rotate(0deg)' },
+                '50%': { transform: 'translate(3px, 3px) rotate(3deg)' }
+            },
+            glowPulse: {
+                '0%': { boxShadow: '0 0 5px #6a11cb, 0 0 10px #2575fc' },
+                '50%': { boxShadow: '0 0 15px #6a11cb, 0 0 30px #2575fc, 0 0 45px #00b4d8' },
+                '100%': { boxShadow: '0 0 5px #6a11cb, 0 0 10px #2575fc' },
+            },
+            glowLine: {
+                'from': { boxShadow: '0 0 10px #a3ff00' },
+                'to': { boxShadow: '0 0 25px #00b4d8' },
+            },
+            waveMotion: {
+              '0%': { transform: 'scaleY(0.1)' },
+              '50%': { transform: 'scaleY(6)' },
+              '100%': { transform: 'scaleY(1)' },
+            },
+            carouselImageIn: {
+                '0%': { opacity: '0', transform: 'scale(1.1)' },
+                '100%': { opacity: '1', transform: 'scale(1)' },
+            },
+            bounce: {
+                '0%, 20%, 50%, 80%, 100%': { transform: 'translateY(0)' },
+                '40%': { transform: 'translateY(-15px)' },
+                '60%': { transform: 'translateY(-8px)' }
+            },
+            lightFlare: {
+              '0%': { transform: 'translateX(-100%) skewX(-30deg)', opacity: '0.3' },
+              '60%': { transform: 'translateX(100%) skewX(-30deg)', opacity: '1' },
+              '100%': { transform: 'translateX(100%) skewX(-30deg)', opacity: '0' },
+            },
+            revealItem: {
+              '0%': { opacity: '0', clipPath: 'inset(0 100% 0 0)' },
+              '100%': { opacity: '1', clipPath: 'inset(0 0 0 0)' },
+            },
+             textReveal: {
+              '0%': { opacity: '0', transform: 'translateY(10px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            },
+          }
+        }
+      }
+    }
+  </script>
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/"
+  }
+}
+</script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 </head>
 <body>
-  <header>
-    
-    
+  <div id="root"></div>
+  <script type="text/babel" data-type="module">
+    import React, { useState, useEffect, useRef } from 'react';
+    import ReactDOM from 'react-dom/client';
 
-<svg class="vector circle" style="top: 5%; right: 30%; width: 25px; height: 25px; left: auto; animation-delay: 0s;"><circle cx="12.5" cy="12.5" r="10" stroke="#a3ff00" stroke-width="2" fill="none" /></svg>
-    
-    
-
-<svg class="vector triangle" style="top: 25%; right: 10%; width: 20px; height: 20px; left: auto; animation-delay: 2s;"><polygon points="10,2.5 17.5,17.5 2.5,17.5" stroke="#fff" stroke-width="2" fill="none" /></svg>
-    
-    
-
-<svg class="vector square" style="top: 75%; right: 5%; width: 30px; height: 30px; left: auto; animation-delay: 4s;"><rect x="5" y="5" width="20" height="20" stroke="#00b4d8" stroke-width="2" fill="none" /></svg>
-    
-    
-
-<svg class="vector pentagon" style="top: 15%; left: 10%; width: 30px; height: 30px; right: auto; animation-delay: 3s;"><polygon points="15,2 28,11 23,28 7,28 2,11" stroke="#a3ff00" stroke-width="2" fill="none" /></svg>
-    
-    
-
-<svg class="vector circle" style="top: 40%; left: 45%; width: 15px; height: 15px; right: auto; animation-delay: 5s;"><circle cx="7.5" cy="7.5" r="6" stroke="#00b4d8" stroke-width="1.5" fill="none" /></svg>
-
-    <div class="header-text">
-      <p>Hey there!</p>
-      <h1>I'm <strong>Shirly Herscovici</strong></h1>
-      
-      
-
-<div id="role-wrapper">
-        <span id="role">Graphic Designer</span>
-      </div>
-      
-      <p>A passionate and versatile designer, blending aesthetics with functionality to create compelling digital experiences and stunning visual identities.</p>
-      
-      
-
-<div class="contact">
-        
-
-<a href="https://shirly3212.github.io/Shirly_portfolio/index.html" class="ai-portfolio-btn" target="_blank">
-          FULL PORTFOLIO <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" cy="12" r="10" stroke="white" stroke-width="2"/><path d="M12 8V16M8 12H16" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
-        
-
-<a href="tel:0549775275">054-9775275</a>
-        
-
-<a href="mailto:shirly3212@gmail.com">shirly3212@gmail.com</a>
-      </div>
-    </div>
-    
-    
-
-<div class="profile-pic">
-      
-      
-
-<div class="transform-square tl"></div>
-      <div class="transform-square tr"></div>
-      <div class="transform-square bl"></div>
-      <div class="transform-square br"></div>
-      
-      
-
-<img src="img_new/img_new_portfolio_2025.jpg.png" onerror="this.onerror=null;this.src='https://placehold.co/380x475/1e293b/cbd5e1?text=Image+Placeholder';" alt="Shirly Herscovici">
-    </div>
-  </header>
-
-  
-
-<section class="portfolio" id="portfolioSection">
-    
-    
-
-<div class="project-grid" id="projectGrid">
-      
-      
-
-<div class="project scroll-project">
-        
-
-<div class="scroll-indicator">
-          
-
-<svg fill="#a3ff00" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-10v4h2v-4h3l-4-4-4 4h3z"/>
-          </svg>
-        </div>
-        <div class="scroll-container">
-          <img src="img_new/project_a.png" alt="Project 1: E-commerce Scroll">
-        </div>
-      </div>
-      
-      
-
-<div class="project fade-project">
-        
-
-<img class="active" src="img_new/img_new_003.jpeg" onerror="this.onerror=null;this.src='https://placehold.co/400x550/f8f8f8/111?text=N12+Image+1';" alt="N12 Magazine Image 1">
-        <img src="img_new/2.png" onerror="this.onerror=null;this.src='https://placehold.co/400x550/f8f8f8/111?text=N12+Image+2';" alt="N12 Magazine Image 2">
-        <img src="img_new/3.png" onerror="this.onerror=null;this.src='https://placehold.co/400x550/f8f8f8/111?text=N12+Image+2';" alt="N12 Magazine Image 2">
-        <img src="img_new/img_new_002.jpeg" onerror="this.onerror=null;this.src='https://placehold.co/400x550/f8f8f8/111?text=N12+Image+2';" alt="N12 Magazine Image 2">
-      </div>
-      
-      
-
-<div class="project fade-project">
-        
-
-<img class="active" src="img_new/img_new_004.jpeg" onerror="this.onerror=null;this.src='https://placehold.co/400x550/f8f8f8/111?text=N12+Image+4';" alt="N12 Magazine Image 4">
-        <img src="img_new/img_new_005.jpeg" onerror="this.onerror=null;this.src='https://placehold.co/400x550/f8f8f8/111?text=N12+Image+5';" alt="N12 Magazine Image 5">
-        <img src="img_new/img_new_006.jpeg" onerror="this.onerror=null;this.src='https://placehold.co/400x550/f8f8f8/111?text=N12+Image+6';" alt="N12 Magazine Image 6">
-        <img src="img_new/1.png" onerror="this.onerror=null;this.src='https://placehold.co/400x550/f8f8f8/111?text=N12+Image+6';" alt="N12 Magazine Image 1">
-        <img src="img_new/4.png" onerror="this.onerror=null;this.src='https://placehold.co/400x550/f8f8f8/111?text=N12+Image+6';" alt="N12 Magazine Image 1">
-
-
-      </div>
-      
-      
-
-<div class="project scroll-project">
-          
-
-<div class="scroll-indicator">
-          
-
-<svg fill="#a3ff00" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-10v4h2v-4h3l-4-4-4 4h3z"/>
-          </svg>
-        </div>
-        <div class="scroll-container">
-          <img src="img_new/scroling_1.png" alt="Project 2: Mobile UX Flow">
-        </div>
-      </div>
-    </div>
-    
-    
-
-<div class="text-and-title-wrapper" id="textTitleWrapper">
-        
-
-<h2 class="magazine-title">N12 MAGAZINE</h2>
-        
-        
-
-<p class="magazine-text">A magazine layout design based on the digital news platform N12. The design focuses on bold typography and structured grid systems to convey seriousness and professionalism.</p>
-    </div>
-
-  </section>
-
-  
-
-<section class="portfolio-dark" id="galgaltzSection">
-    
-
-<div class="audio-waves-background">
-        
-
-<script>
-            document.addEventListener('DOMContentLoaded', () => {
-                const waveContainer = document.querySelector('.audio-waves-background');
-                if (waveContainer) {
-                    // Create more bars to account for thinner width, covering the background better
-                    const numberOfBars = 80; // Keeping 80 bars for good coverage
-                    for (let i = 0; i < numberOfBars; i++) {
-                        const bar = document.createElement('div');
-                        bar.classList.add('wave-bar');
-                        // Random duration between 1s and 2s
-                        const duration = (Math.random() * 1) + 1; 
-                        // Random delay between 0s and 1.5s
-                        const delay = Math.random() * 1.5; 
-                        bar.style.animationDuration = `${duration}s`;
-                        bar.style.animationDelay = `${delay}s`;
-                        waveContainer.appendChild(bar);
-                    }
-                }
-            });
-        </script>
-    </div>
-    
-    <h2 class="neon-title">GALGALTZ N12</h2>
-    
-    
-
-<div class="galgaltz-content-wrapper">
-        
-        
-
-<div class="galgaltz-text-column">
-            <p class="magazine-text">
-                The **"Music from the Screen"** chart is a joint project by N12 and Galgalatz, where users vote for the greatest songs from movies and series. I designed a vibrant, intuitive, and cinematic UI/UX experience for this collaboration.
-            </p>
-
-            
-
-<div class="podcast-wrapper">
-                <!-- Text Centering Confirmed: This H3 is centered via the CSS definition for .podcast-wrapper h3 -->
-                <h3 class="text-xl font-bold text-white mb-4 mt-6">Listen to the Official Podcast Chart</h3>
-                
-                
-
-<div id="podcast-player-ui" class="podcast-player-ui">
-                    
-                    <!-- NEW: Background Image behind the button -->
-                    <img src="img_new/img_1.jpg" onerror="this.onerror=null;this.src='https://placehold.co/600x337/333/fff?text=Podcast+Preview+Image';" alt="Podcast Preview" class="podcast-bg-image">
-                    
-                    
-
-<button id="play-podcast-button" onclick="loadAndPlayPodcast()">
-                        
-
-<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M8 5v14l11-7z" fill="white"/>
-                        </svg>
-                        Go to Official Chart Page
-                    </button>
-
-                </div>
-                <p class="text-xs text-gray-400 mt-2">Podcast provided by Podtail (external source).</p>
-                
-            </div>
-            
-
-</div>
-
-        
-
-<div class="n12-showcase">
-            
-
-<div class="n12-card carousel-card">
-              <div id="carousel-viewport">
-                
-
-<img id="carousel-image" src="" alt="GALGALTZ N12 UI Screen">
-              </div>
-              
-              
-
-<button class="nav-button prev-button" onclick="changeSlide(-1)">
-                
-
-<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15 18L9 12L15 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </button>
-              <button class="nav-button next-button" onclick="changeSlide(1)">
-                
-
-<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 18L15 12L9 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </button>
-              
-              
-
-<div id="carousel-dots" class="dots-container"></div>
-            </div>
-        </div>
-        
-
-</div>
-  </section>
-
-  <!-- NEW: Image Modal Structure (Lightbox) -->
-<div id="image-modal" class="modal-overlay" style="display: none;">
-    <div class="modal-content">
-        <!-- Close button with the 'X' -->
-        <span class="close-button" onclick="closeModal()">&times;</span>
-        <img id="modal-image" src="" alt="Enlarged Project View">
-    </div>
-</div>
-<!-- END Modal Structure -->
-
-  <script>
-    // JavaScript לטקסט המתחלף בכותרת (Slide Up/Fade Up)
-    const roles = ["Graphic Designer", "Web Designer", "Editor", "Motion Designer"];
-    let index = 0;
-    const roleElement = document.getElementById('role');
-    
-    const animateRoleChange = () => {
-      if (!roleElement) return;
-
-      // 1. הודעה החוצה ומחליק למטה (מכין ליציאה)
-      roleElement.style.opacity = 0;
-      roleElement.style.transform = 'translateY(10px)';
-
-      // 2. ממתין לסיום המעבר (0.5s), ואז משנה תוכן ומאתחל מיקום
-      setTimeout(() => {
-        index = (index + 1) % roles.length;
-        roleElement.textContent = roles[index];
-        roleElement.style.transform = 'translateY(-10px)'; // הגדרת מיקום התחלתי ה'החלקה פנימה'
-        
-        // 3. הודעה פנימה ומחליק למעלה למיקום הסופי
-        setTimeout(() => {
-          roleElement.style.opacity = 1;
-          roleElement.style.transform = 'translateY(0)';
-        }, 50); 
-      }, 500);
+    // --- CONSTANTS ---
+    const ROLES = ["Graphic Designer", "Web Designer", "Editor", "Motion Designer"];
+    const N12_MAGAZINE_IMAGES = {
+        scroll1: "img_new/project_a.png",
+        scroll2: "img_new/scroling_1.png",
+        fade1: ["img_new/img_new_003.jpeg", "img_new/2.png", "img_new/3.png", "img_new/img_new_002.jpeg"],
+        fade2: ["img_new/img_new_004.jpeg", "img_new/img_new_005.jpeg", "img_new/img_new_006.jpeg", "img_new/1.png", "img_new/4.png"]
     };
-
-    if (roleElement) {
-      // התחלת הרוטציה הרצופה
-      setTimeout(() => {
-          animateRoleChange();
-          setInterval(animateRoleChange, 4000);
-      }, 2500); 
-    }
-    
-    // JS להבטחת גובה העמודה הימנית תואם לשמאלית (שמירה על עיצוב המגזין)
-    function adjustWrapperHeight() {
-      // Defines the pairs of project grid and title wrapper that need synchronized heights
-      const sections = [
-        { gridId: 'projectGrid', wrapperId: 'textTitleWrapper' },
-        // Galgaltz is intentionally excluded from height sync since its layout is different (full width stack vs 1/3 column)
-      ];
-
-      sections.forEach(s => {
-        const grid = document.getElementById(s.gridId);
-        const wrapper = document.getElementById(s.wrapperId);
-
-        if (grid && wrapper && window.innerWidth > 1024) {
-              // הגדרת גובה ה-wrapper שווה לגובה ה-grid
-              wrapper.style.height = grid.offsetHeight + 'px';
-        } else if (wrapper) {
-              // איפוס גובה בנייד
-              wrapper.style.height = 'auto';
-        }
-      });
-    }
-    
-    // JS for Fade-In Effect in N12 Magazine Section (Restored functionality)
-    document.addEventListener('DOMContentLoaded', () => {
-      const fadeProjects = document.querySelectorAll('.portfolio .fade-project');
-      
-      fadeProjects.forEach(project => {
-        const images = project.querySelectorAll('img');
-        let currentImageIndex = 0;
-
-        const updateImage = () => {
-          images.forEach((img, index) => {
-            img.classList.remove('active');
-            if (index === currentImageIndex) {
-              img.classList.add('active');
-            }
-          });
-
-          currentImageIndex = (currentImageIndex + 1) % images.length;
-        };
-
-        // Start the rotation for each fade project
-        if (images.length > 1) {
-          updateImage(); // Initial run to set active class
-          setInterval(updateImage, 3000); // Change image every 3 seconds
-        }
-      });
-    });
-
-
-    // --- GALGALTZ N12 Carousel Logic ---
-    const slideImages = [
-        "img_new/img_1.jpg", 
-        "img_new/img_7.jpg", 
-        "img_new/img_4.png", 
-        "img_new/img_2.png", 
-        "img_new/img_3.png"
+    const GALGALTZ_IMAGES = ["img_new/img_1.jpg", "img_new/img_7.jpg", "img_new/img_4.png", "img_new/img_2.png", "img_new/img_3.png"];
+    const DIVERSE_DESIGNS = [
+        { src: "img_new/img_new_016.jpeg", title: "News 12 Archive", className: "col-span-1 row-span-1" },
+        { src: "img_new/img_new_014.jpeg", title: "Look Them in the Eyes", className: "col-span-1 row-span-2" },
+        { src: "img_new/img_new_013.jpeg", title: "October 7th Memorial", className: "col-span-2 row-span-1" },
+        { src: "img_new/img_new_012.png", title: "The Political Arena", className: "col-span-2 row-span-1" },
+        { src: "img_new/img_new_009.jpeg", title: "The Power of Iran", className: "col-span-1 row-span-1" },
+        { src: "img_new/img_new_011.jpeg", title: "World Cup 2022", className: "col-span-2 row-span-1" },
+        { src: "img_new/img_new_010.jpeg", title: "War Room Update", className: "col-span-2 row-span-1" },
     ];
 
-    let currentSlide = 0;
-    let carouselImage;
-    let carouselDotsContainer;
-
-    function initializeCarousel() {
-        carouselImage = document.getElementById('carousel-image');
-        carouselDotsContainer = document.getElementById('carousel-dots');
-
-        if (!carouselImage || !carouselDotsContainer) return;
-
-        // 1. Create Dots
-        slideImages.forEach((_, index) => {
-            const dot = document.createElement('div');
-            dot.classList.add('dot');
-            dot.dataset.index = index;
-            dot.onclick = () => goToSlide(index);
-            carouselDotsContainer.appendChild(dot);
-        });
-
-        // 2. Load Initial Slide
-        updateCarouselDisplay();
-    }
-
-    // Function to update the image source and active dot
-    function updateCarouselDisplay() {
-        // 1. Update Image
-        carouselImage.style.opacity = 0; // Fade out
-        setTimeout(() => {
-            carouselImage.src = slideImages[currentSlide];
-            carouselImage.style.opacity = 1; // Fade in
-        }, 200); // Match CSS transition duration
-
-        // NEW: Add click handler to the image to open the modal
-        carouselImage.onclick = () => openModal(slideImages[currentSlide]);
-
-
-        // 2. Update Dots
-        const dots = carouselDotsContainer.querySelectorAll('.dot');
-        dots.forEach((dot, index) => {
-            dot.classList.toggle('active', index === currentSlide);
-        });
-    }
-
-    // Function called by the navigation buttons
-    window.changeSlide = function(direction) {
-        let newIndex = currentSlide + direction;
-
-        // Loop back (circular movement)
-        if (newIndex >= slideImages.length) {
-            newIndex = 0;
-        } else if (newIndex < 0) {
-            newIndex = slideImages.length - 1;
-        }
-
-        goToSlide(newIndex);
-    }
-
-    // Function called by the dots
-    function goToSlide(index) {
-        currentSlide = index;
-        updateCarouselDisplay();
-    }
+    // --- COMPONENTS ---
+    const Preloader = ({ isVisible }) => {
+        if (!isVisible) return null;
+        return (
+            <div id="preloader" className="fixed inset-0 bg-[#0d0d0d] flex flex-col justify-center items-center z-[10000] animate-[fadeOut_0.5s_ease_2.5s_forwards]">
+                <div className="relative w-48 h-48 flex justify-center items-center overflow-hidden">
+                    <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-transparent via-[#a3ff00] to-transparent animate-[lightFlare_2s_ease-in-out_forwards]"></div>
+                    <div className="relative text-white font-['Playfair_Display'] font-extrabold text-9xl animate-[revealItem_2s_ease-in-out_forwards]">
+                        <span className="absolute left-0 top-0 -translate-x-3">S</span>
+                        <span className="absolute right-0 top-0 translate-x-3">H</span>
+                    </div>
+                </div>
+                <div className="text-center mt-6 opacity-0 animate-[textReveal_2s_ease_forwards]">
+                    <h1 className="text-4xl lg:text-5xl font-bold font-['Playfair_Display'] text-white">Shirly Herscovici</h1>
+                    <p className="text-lg lg:text-xl text-[#a3ff00] mt-2">Graphic Designer</p>
+                </div>
+            </div>
+        );
+    };
     
-    // --- UPDATED: Play Button Redirect Logic ---
-    window.loadAndPlayPodcast = function() {
-        // The URL provided by the user
-        const chartUrl = 'https://glz.co.il/%D7%92%D7%9C%D7%92%D7%9C%D7%A6/%D7%AA%D7%95%D7%9B%D7%A0%D7%99%D7%95%D7%AA/%D7%9E%D7%A6%D7%A2%D7%93-%D7%9E%D7%95%D7%96%D7%99%D7%A7%D7%94-%D7%9E%D7%94%D7%9E%D7%A1%D7%9A';
-        
-        // Opens the URL in a new browser tab/window
-        window.open(chartUrl, '_blank');
-    }
+    const CustomCursor = () => {
+        const cursorRingRef = useRef(null);
+        const cursorDotRef = useRef(null);
+        const [isHovering, setIsHovering] = useState(false);
+        const [isCursorInverted, setIsCursorInverted] = useState(false);
+        useEffect(() => {
+            const moveCursor = (e) => {
+                const { clientX: x, clientY: y } = e;
+                if (cursorRingRef.current && cursorDotRef.current) {
+                    cursorRingRef.current.style.left = `${x}px`;
+                    cursorRingRef.current.style.top = `${y}px`;
+                    cursorDotRef.current.style.left = `${x}px`;
+                    cursorDotRef.current.style.top = `${y}px`;
+                }
+                
+                const target = e.target;
+                // Check for hover-able elements to change cursor size
+                setIsHovering(!!target.closest('[data-cursor-hover]'));
+                // Check if the cursor is over a section that requires an inverted color scheme
+                setIsCursorInverted(!!target.closest('[data-cursor-invert]'));
+            };
 
-    // --- NEW MODAL/LIGHTBOX FUNCTIONS ---
-    window.openModal = function(imageUrl) {
-        const modal = document.getElementById('image-modal');
-        const modalImage = document.getElementById('modal-image');
-        if (modal && modalImage) {
-            modalImage.src = imageUrl;
-            modal.style.display = 'flex'; // Show modal
-        }
-    }
+            window.addEventListener('mousemove', moveCursor);
 
-    window.closeModal = function() {
-        const modal = document.getElementById('image-modal');
-        if (modal) {
-            modal.style.display = 'none'; // Hide modal
+            return () => {
+                window.removeEventListener('mousemove', moveCursor);
+            };
+        }, []);
+        const dotSize = isHovering ? 0 : 8;
+        const ringSize = isHovering ? 40 : 24;
+        const ringBorderColor = isHovering ? 'border-[#a3ff00]/50' : (isCursorInverted ? 'border-black/70' : 'border-white/70');
+        const dotBgColor = isCursorInverted ? 'bg-black' : 'bg-white';
+        return (
+            <>
+                <div
+                    id="cursor-ring"
+                    ref={cursorRingRef}
+                    className={`fixed border-2 rounded-full pointer-events-none -translate-x-1/2 -translate-y-1/2 z-[9999] transition-[width,height,border-color] duration-300 ease-out ${ringBorderColor}`}
+                    style={{ left: '-100px', top: '-100px', width: `${ringSize}px`, height: `${ringSize}px` }}
+                ></div>
+                <div
+                    id="cursor-dot"
+                    ref={cursorDotRef}
+                    className={`fixed rounded-full pointer-events-none -translate-x-1/2 -translate-y-1/2 z-[9999] transition-[width,height] duration-300 ease-out ${dotBgColor}`}
+                    style={{ left: '-100px', top: '-100px', width: `${dotSize}px`, height: `${dotSize}px` }}
+                ></div>
+            </>
+        );
+    };
+
+    const Vector = ({ type, style, delay }) => {
+        let svgHTML = '';
+        switch (type) {
+            case 'circle': svgHTML = `<svg><circle cx="12.5" cy="12.5" r="10" stroke="#a3ff00" strokeWidth="2" fill="none" /></svg>`; break;
+            case 'triangle': svgHTML = `<svg><polygon points="10,2.5 17.5,17.5 2.5,17.5" stroke="#fff" strokeWidth="2" fill="none" /></svg>`; break;
+            case 'square': svgHTML = `<svg><rect x="5" y="5" width="20" height="20" stroke="#00b4d8" strokeWidth="2" fill="none" /></svg>`; break;
+            case 'pentagon': svgHTML = `<svg><polygon points="15,2 28,11 23,28 7,28 2,11" stroke="#a3ff00" strokeWidth="2" fill="none" /></svg>`; break;
+            case 'small-circle': svgHTML = `<svg><circle cx="7.5" cy="7.5" r="6" stroke="#00b4d8" strokeWidth="1.5" fill="none" /></svg>`; break;
         }
+        return (
+            <div 
+                data-cursor-hover
+                className="absolute z-0 opacity-40 transition-all duration-300 ease-in-out hover:scale-125 hover:rotate-12 hover:opacity-80" 
+                style={style}
+            >
+                <div className="animate-[float_7s_ease-in-out_infinite]" style={{ animationDelay: delay }} dangerouslySetInnerHTML={{ __html: svgHTML }} />
+            </div>
+        );
+    };
+    
+    const Header = () => {
+        const [roleIndex, setRoleIndex] = useState(0);
+        useEffect(() => {
+            const interval = setInterval(() => {
+                setRoleIndex(prevIndex => (prevIndex + 1) % ROLES.length);
+            }, 4000);
+            return () => clearInterval(interval);
+        }, []);
+        return (
+            <header id="header" className="relative flex items-center justify-between bg-[#0d0d0d] p-[5rem_10%] min-h-[85vh] overflow-hidden bg-[linear-gradient(to_right,rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[30px_30px] max-lg:flex-col max-lg:text-center max-lg:p-[4rem_5%]">
+                <Vector type="circle" style={{ top: '5%', right: '30%', width: '25px', height: '25px' }} delay="0s" />
+                <Vector type="triangle" style={{ top: '25%', right: '10%', width: '20px', height: '20px' }} delay="2s" />
+                <Vector type="square" style={{ top: '75%', right: '5%', width: '30px', height: '30px' }} delay="4s" />
+                <Vector type="pentagon" style={{ top: '15%', left: '10%', width: '30px', height: '30px' }} delay="3s" />
+                <Vector type="small-circle" style={{ top: '40%', left: '45%', width: '15px', height: '15px' }} delay="5s" />
+                <div className="max-w-[50%] z-10 max-lg:max-w-full">
+                    <p className="animate-[fadeIn_0.8s_ease-out_2s_forwards] opacity-0">Hey there!</p>
+                    <h1 className="text-[clamp(3rem,7vw,4rem)] font-light mb-2 leading-tight animate-[fadeIn_0.8s_ease-out_1.5s_forwards] opacity-0">
+                        I'm <strong className="block font-bold">Shirly Herscovici</strong>
+                    </h1>
+                    <div className="h-[clamp(2.5rem,6vw,3.5rem)] overflow-hidden mb-8 animate-[fadeIn_0.8s_ease-out_1.5s_forwards] opacity-0">
+                        <div className="relative h-full">
+                            {ROLES.map((role, index) => (
+                                <span key={role} className={`absolute inset-0 text-[#a3ff00] font-bold text-[clamp(1.8rem,4vw,2.5rem)] whitespace-nowrap transition-all duration-500 ease-out flex max-lg:justify-center ${index === roleIndex ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-full'}`}>
+                                    {role}
+                                </span>
+                            ))}
+                        </div>
+                    </div>
+                    <p className="text-[1.1rem] text-[#aaa] mb-8 animate-[fadeIn_0.8s_ease-out_2s_forwards] opacity-0">
+                        A passionate and versatile designer, blending aesthetics with functionality to create compelling digital experiences and stunning visual identities.
+                    </p>
+                    <div className="flex gap-2 max-lg:flex-col max-lg:items-center max-lg:gap-4 animate-[fadeIn_0.8s_ease-out_2.2s_forwards] opacity-0">
+                        <a data-cursor-hover href="https://shirly3212.github.io/Shirly_portfolio/index.html" className="group relative overflow-hidden px-3 py-2 rounded-md font-bold text-white bg-gradient-to-r from-[#6a11cb] to-[#2575fc] no-underline transition-transform duration-300 ease-out hover:scale-105 z-10 animate-[glowPulse_2s_infinite_ease-in-out] flex items-center gap-2" target="_blank" rel="noopener noreferrer">
+                            FULL PORTFOLIO
+                            <svg className="w-4 h-4 transition-transform duration-300 group-hover:rotate-45" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10" stroke="white" strokeWidth="2"/><path d="M12 8V16M8 12H16" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                        </a>
+                        <a data-cursor-hover href="tel:0549775275" className="text-[#ccc] no-underline border border-[#555] px-3 py-2 rounded-md transition-all duration-300 hover:text-black hover:bg-[#a3ff00] hover:border-[#a3ff00] hover:shadow-[0_0_15px_rgba(163,255,0,0.4)]">054-9775275</a>
+                        <a data-cursor-hover href="mailto:shirly3212@gmail.com" className="text-[#ccc] no-underline border border-[#555] px-3 py-2 rounded-md transition-all duration-300 hover:text-black hover:bg-[#a3ff00] hover:border-[#a3ff00] hover:shadow-[0_0_15px_rgba(163,255,0,0.4)]">shirly3212@gmail.com</a>
+                    </div>
+                </div>
+                <div data-cursor-hover id="profile-pic-container" className="group relative z-[1] animate-[fadeIn_0.8s_ease-out_0.5s_forwards] opacity-0 max-lg:order-[-1] max-lg:mb-12">
+                    <div id="profile-pic-wrapper" className="relative transition-transform duration-300 ease-in-out cursor-grab active:scale-95">
+                        <div className="absolute -top-2.5 -left-2.5 w-4 h-4 bg-white border-2 border-[#a3ff00] z-20 animate-[squareMovement_3s_ease-in-out_1.2s_infinite_alternate] transition-all duration-300 group-hover:scale-150 group-hover:bg-[#a3ff00]"></div>
+                        <div className="absolute -top-2.5 -right-2.5 w-4 h-4 bg-white border-2 border-[#a3ff00] z-20 animate-[squareMovement_3s_ease-in-out_1.2s_infinite_alternate-reverse] transition-all duration-300 group-hover:scale-150 group-hover:bg-[#a3ff00]"></div>
+                        <div className="absolute -bottom-2.5 -left-2.5 w-4 h-4 bg-white border-2 border-[#a3ff00] z-20 animate-[squareMovement_3s_ease-in-out_1.2s_infinite_alternate-reverse] transition-all duration-300 group-hover:scale-150 group-hover:bg-[#a3ff00]"></div>
+                        <div className="absolute -bottom-2.5 -right-2.5 w-4 h-4 bg-white border-2 border-[#a3ff00] z-20 animate-[squareMovement_3s_ease-in-out_1.2s_infinite_alternate] transition-all duration-300 group-hover:scale-150 group-hover:bg-[#a3ff00]"></div>
+                        <img src="img_new/img_new_portfolio_2025.jpg.png" alt="Shirly Herscovici" className="w-[clamp(300px,35vw,380px)] h-auto rounded-2xl shadow-[0_0_25px_rgba(255,255,255,0.1)] relative z-[1]" />
+                    </div>
+                </div>
+            </header>
+        );
+    };
+
+    const ScrollProjectCard = ({ imgSrc, onImageClick }) => {
+        const scrollContainerRef = useRef(null);
+        const intervalRef = useRef(null);
+        const userScrolledRef = useRef(false);
+        useEffect(() => {
+            const scrollContainer = scrollContainerRef.current;
+            if (!scrollContainer) return;
+            const startAutoScroll = () => {
+                intervalRef.current = window.setInterval(() => {
+                    if (userScrolledRef.current || !scrollContainer) return;
+                    if (scrollContainer.scrollTop + scrollContainer.clientHeight >= scrollContainer.scrollHeight - 2) {
+                        scrollContainer.scrollTo({ top: 0, behavior: 'smooth' });
+                    } else {
+                        scrollContainer.scrollBy({ top: 1, behavior: 'smooth' });
+                    }
+                }, 50);
+            };
+            const stopAutoScroll = () => {
+                if (intervalRef.current) clearInterval(intervalRef.current);
+            };
+            const handleInteraction = () => {
+                userScrolledRef.current = true;
+                stopAutoScroll();
+            };
+            startAutoScroll();
+            scrollContainer.addEventListener('scroll', handleInteraction, { passive: true });
+            scrollContainer.addEventListener('touchstart', handleInteraction, { passive: true });
+            return () => {
+                stopAutoScroll();
+                if (scrollContainer) {
+                  scrollContainer.removeEventListener('scroll', handleInteraction);
+                  scrollContainer.removeEventListener('touchstart', handleInteraction);
+                }
+            };
+        }, []);
+        return (
+            <div className="project relative min-h-[350px] rounded-xl bg-[#f8f8f8] shadow-lg transition-transform duration-300 hover:-translate-y-2 overflow-hidden">
+                <div data-cursor-hover className="absolute bottom-4 right-4 z-20 w-8 h-8 animate-bounce">
+                    <svg fill="#a3ff00" viewBox="0 0 24 24"><path d="M12,2A10,10,0,1,0,22,12,10,10,0,0,0,12,2Zm1,8H11V6H8l4-4,4,4H13Z" transform="rotate(180 12 12)" /></svg>
+                </div>
+                <div className="absolute bottom-0 left-0 w-full h-1/4 bg-gradient-to-t from-black/20 to-transparent z-10 pointer-events-none"></div>
+                <div ref={scrollContainerRef} className="scroll-container h-[500px] overflow-y-scroll scroll-smooth">
+                    <img src={imgSrc} onClick={() => onImageClick(imgSrc)} alt="Scrolling Project" className="w-full h-auto block cursor-pointer" />
+                </div>
+            </div>
+        );
+    };
+    
+    const FadeProjectCard = ({ images, onImageClick }) => {
+        const [currentIndex, setCurrentIndex] = useState(0);
+        useEffect(() => {
+            const interval = setInterval(() => {
+                setCurrentIndex(prev => (prev + 1) % images.length);
+            }, 3000);
+            return () => clearInterval(interval);
+        }, [images.length]);
+        return (
+            <div className="project relative min-h-[350px] overflow-hidden rounded-xl bg-[#f8f8f8] shadow-lg transition-transform duration-300 hover:-translate-y-2 cursor-pointer" onClick={() => onImageClick(images[currentIndex])}>
+                {images.map((imgSrc, index) => (
+                    <img
+                        key={imgSrc}
+                        src={imgSrc}
+                        alt={`Fading project ${index + 1}`}
+                        className={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${index === currentIndex ? 'opacity-100' : 'opacity-0'}`}
+                    />
+                ))}
+            </div>
+        );
+    };
+    
+    const N12MagazineSection = ({ onImageClick }) => {
+        const gridRef = useRef(null);
+        const wrapperRef = useRef(null);
+        useEffect(() => {
+          const adjustHeight = () => {
+            if (gridRef.current && wrapperRef.current && window.innerWidth >= 1024) {
+              wrapperRef.current.style.height = `${gridRef.current.offsetHeight}px`;
+            } else if (wrapperRef.current) {
+              wrapperRef.current.style.height = 'auto';
+            }
+          };
+          adjustHeight();
+          window.addEventListener('resize', adjustHeight);
+          const images = gridRef.current?.querySelectorAll('img');
+          if (images) {
+            let loadedCount = 0;
+            const totalImages = images.length;
+            images.forEach(img => {
+              if (img.complete) {
+                loadedCount++;
+              } else {
+                img.onload = () => {
+                  loadedCount++;
+                  if (loadedCount === totalImages) {
+                    adjustHeight();
+                  }
+                };
+              }
+            });
+            if(loadedCount === totalImages) adjustHeight();
+          }
+          return () => window.removeEventListener('resize', adjustHeight);
+        }, []);
+        return (
+            <section data-cursor-invert id="n12-section" className="bg-white text-black p-[6rem_8%] grid lg:grid-cols-[4fr_1fr] grid-cols-1 gap-10 items-start max-lg:p-[4rem_5%] max-lg:gap-8">
+                <div ref={gridRef} id="n12-grid" className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                    <ScrollProjectCard imgSrc={N12_MAGAZINE_IMAGES.scroll1} onImageClick={onImageClick} />
+                    <FadeProjectCard images={N12_MAGAZINE_IMAGES.fade1} onImageClick={onImageClick} />
+                    <FadeProjectCard images={N12_MAGAZINE_IMAGES.fade2} onImageClick={onImageClick} />
+                    <ScrollProjectCard imgSrc={N12_MAGAZINE_IMAGES.scroll2} onImageClick={onImageClick} />
+                </div>
+                <div ref={wrapperRef} id="n12-wrapper" className="lg:relative flex flex-col max-lg:order-[-1] max-lg:text-center max-lg:mb-8">
+                    <h2 className="text-[#111] font-['Playfair_Display'] text-[7vw] font-bold uppercase whitespace-nowrap leading-[0.8] z-10 lg:absolute lg:top-0 lg:left-full lg:origin-top-left lg:transform lg:rotate-90 lg:translate-y-[15px]">N12 MAGAZINE</h2>
+                    <p className="font-['Playfair_Display'] text-[0.9rem] leading-relaxed text-[#555] w-full lg:max-w-[200px] mt-auto pt-8 lg:self-end max-lg:max-w-full max-lg:mx-auto max-lg:pt-0 max-lg:mt-4">
+                        A magazine layout design based on the digital news platform N12. The design focuses on bold typography and structured grid systems to convey seriousness and professionalism.
+                    </p>
+                </div>
+            </section>
+        );
+    };
+
+    const GalgaltzSection = ({ onImageClick }) => {
+        const [currentSlide, setCurrentSlide] = useState(0);
+        const [isAnimating, setIsAnimating] = useState(false);
+        const handleNext = () => {
+            if (isAnimating) return;
+            setCurrentSlide((prev) => (prev + 1) % GALGALTZ_IMAGES.length);
+        };
+        const handlePrev = () => {
+            if (isAnimating) return;
+            setCurrentSlide((prev) => (prev - 1 + GALGALTZ_IMAGES.length) % GALGALTZ_IMAGES.length);
+        };
+        const handleDotClick = (index) => {
+            if (isAnimating) return;
+            setCurrentSlide(index);
+        };
+        useEffect(() => {
+            setIsAnimating(true);
+            const timer = setTimeout(() => setIsAnimating(false), 400);
+            return () => clearTimeout(timer);
+        }, [currentSlide]);
+        return (
+            <section className="bg-[radial-gradient(circle_at_top_left,#0d0d0d_40%,#000_100%)] text-white p-[6rem_8%] flex flex-col items-center relative overflow-hidden max-lg:p-[4rem_5%]">
+                <div className="absolute inset-0 bg-gradient-to-br from-[rgba(37,117,252,0.2)] to-[rgba(106,17,203,0.2)] mix-blend-overlay z-0"></div>
+                <div id="audio-wave-background" className="absolute bottom-0 left-0 w-full h-[100px] flex justify-between items-end gap-0 opacity-15 z-[1] overflow-hidden mb-5">
+                    {Array.from({ length: 80 }).map((_, i) => (
+                        <div
+                            key={i}
+                            className="w-[3px] min-h-[10px] bg-[#a3ff00] rounded-sm origin-bottom animate-[waveMotion_1.5s_ease-in-out_infinite_alternate]"
+                            style={{
+                                animationDuration: `${(Math.random() * 1) + 1}s`,
+                                animationDelay: `${Math.random() * 1.5}s`,
+                            }}
+                        ></div>
+                    ))}
+                </div>
+                <h2 className="text-3xl lg:text-5xl font-extrabold uppercase text-center relative z-[2] tracking-wider">
+                    GALGALTZ N12
+                    <span className="block w-20 h-1 mx-auto mt-4 bg-gradient-to-r from-[#a3ff00] to-[#00b4d8] rounded animate-[glowLine_3s_ease-in-out_infinite_alternate]"></span>
+                </h2>
+                <div className="flex flex-col lg:flex-row items-center lg:items-start gap-16 w-full max-w-6xl mt-16 z-[2]">
+                    <div className="lg:flex-[3] lg:pr-12 text-center lg:text-left animate-[fadeUp_1s_ease-out_forwards]">
+                        <p className="max-w-3xl text-center lg:text-left text-[#ccc] text-[1.1rem]">
+                            The <strong>"Music from the Screen"</strong> chart is a joint project by N12 and Galgalatz, where users vote for the greatest songs from movies and series. I designed a vibrant, intuitive, and cinematic UI/UX experience for this collaboration.
+                        </p>
+                        <div className="mt-10 text-center flex flex-col items-center lg:items-start">
+                            <h3 className="text-xl font-bold text-white mb-4">Listen to the Official Podcast Chart</h3>
+                            <a data-cursor-hover href="https://glz.co.il/%D7%92%D7%9C%D7%92%D7%9C%D7%A6/%D7%AA%D7%95%D7%9B%D7%A0%D7%99%D7%95%D7%AA/%D7%9E%D7%A6%D7%A2%D7%93-%D7%9E%D7%95%D7%96%D7%99%D7%A7%D7%94-%D7%9E%D7%94%D7%9E%D7%A1%D7%9A" target="_blank" rel="noopener noreferrer" className="relative w-full h-0 pb-[56.25%] overflow-hidden max-w-xl mx-auto lg:mx-0 rounded-xl shadow-[0_0_10px_rgba(37,117,252,0.5)] z-[2] transition-transform duration-300 hover:scale-102 cursor-pointer group">
+                                <img src="img_new/img_1.jpg" alt="Podcast Preview" className="absolute top-0 left-0 w-full h-full object-cover z-[1] rounded-xl"/>
+                                <div className="absolute inset-0 bg-black/60 z-[1] rounded-xl"></div>
+                                <div className="absolute inset-0 z-[2] flex flex-col items-center justify-center gap-2 text-white">
+                                    <svg className="w-10 h-10 fill-white transition-transform duration-300 group-hover:scale-110" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                    <span className="font-bold text-lg">Go to Official Chart Page</span>
+                                </div>
+                            </a>
+                            <p className="text-xs text-gray-400 mt-2 mx-auto lg:mx-0">Podcast provided by Podtail (external source).</p>
+                        </div>
+                    </div>
+                    <div className="lg:flex-[2] flex justify-center w-full lg:pt-8">
+                        <div className="group relative bg-black/20 rounded-[30px] w-[340px] h-[580px] shadow-[0_0_30px_rgba(37,117,252,0.3)] transition-all duration-400 ease-in-out [transform:perspective(800px)_rotateY(10deg)] hover:[transform:perspective(800px)_rotateY(0deg)_scale(1.05)] hover:shadow-[0_0_60px_rgba(106,17,203,0.6)]">
+                            <div className="w-full h-full absolute top-0 left-0 overflow-hidden rounded-[30px]">
+                               <img 
+                                    id="carousel-image"
+                                    src={GALGALTZ_IMAGES[currentSlide]} 
+                                    alt="GALGALTZ N12 UI Screen" 
+                                    data-cursor-hover 
+                                    onClick={() => onImageClick(GALGALTZ_IMAGES[currentSlide])}
+                                    className={`w-full h-full object-cover cursor-zoom-in ${isAnimating ? 'animate-[carouselImageIn_0.4s_ease-in-out_forwards]' : ''}`}
+                               />
+                            </div>
+                            <button data-cursor-hover id="prev-btn" onClick={handlePrev} className="absolute top-1/2 -translate-y-1/2 left-3 bg-black/40 border-none text-white p-2.5 z-30 rounded-full w-10 h-10 flex items-center justify-center transition-all duration-300 hover:bg-[#a3ff00] hover:scale-110 hover:text-black">
+                                <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4"><path d="M15 18L9 12L15 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                            </button>
+                            <button data-cursor-hover id="next-btn" onClick={handleNext} className="absolute top-1/2 -translate-y-1/2 right-3 bg-black/40 border-none text-white p-2.5 z-30 rounded-full w-10 h-10 flex items-center justify-center transition-all duration-300 hover:bg-[#a3ff00] hover:scale-110 hover:text-black">
+                                <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4"><path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                            </button>
+                            <div id="carousel-dots" className="absolute bottom-5 left-1/2 -translate-x-1/2 flex gap-2 z-30 bg-black/20 p-[8px_12px] rounded-full">
+                                {GALGALTZ_IMAGES.map((_, index) => (
+                                    <div 
+                                        key={index}
+                                        data-cursor-hover
+                                        onClick={() => handleDotClick(index)}
+                                        className={`w-2.5 h-2.5 rounded-full cursor-pointer transition-all duration-300 ${index === currentSlide ? 'bg-[#a3ff00] scale-125' : 'bg-white/50'}`}
+                                    ></div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        );
+    };
+
+    const DiverseDesignsSection = ({ onImageClick }) => {
+        return (
+            <section data-cursor-invert id="diverse-section" className="bg-white text-black p-[6rem_8%] max-lg:p-[4rem_5%]">
+                <div className="text-center mb-12 animate-[fadeUp_1s_ease-out_forwards]">
+                    <h2 className="text-3xl lg:text-5xl font-extrabold uppercase text-black tracking-wider">A Spectrum of Work</h2>
+                    <span className="block w-20 h-1 mx-auto mt-4 bg-gradient-to-r from-[#a3ff00] to-[#00b4d8] rounded animate-[glowLine_3s_ease-in-out_infinite_alternate]"></span>
+                    <p className="max-w-3xl mx-auto mt-4 text-[#555] text-[1.1rem]">A collection of various projects, showcasing versatility in branding, editorial design, and digital campaigns.</p>
+                </div>
+                <div id="diverse-grid" className="grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-[250px]">
+                    {DIVERSE_DESIGNS.map((design, index) => (
+                        <div
+                            key={design.src}
+                            className={`group relative overflow-hidden rounded-lg shadow-lg cursor-pointer animate-[fadeUp_1s_ease-out] ${design.className}`}
+                            style={{ animationDelay: `${index * 100}ms` }}
+                            data-cursor-hover
+                            onClick={() => onImageClick(design.src)}
+                        >
+                            <img src={design.src} alt={design.title} className="w-full h-full object-cover object-center transition-transform duration-500 ease-in-out group-hover:scale-105" />
+                            <div className="absolute inset-0 bg-black/60 opacity-0 transition-opacity duration-500 group-hover:opacity-100 flex items-end p-4">
+                                <h3 className="text-white font-bold text-lg transform translate-y-4 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">{design.title}</h3>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </section>
+        );
+    };
+
+    const ImageModal = ({ src, onClose }) => {
+        useEffect(() => {
+            const handleKeyDown = (e) => {
+                if (e.key === 'Escape') {
+                    onClose();
+                }
+            };
+            window.addEventListener('keydown', handleKeyDown);
+            return () => {
+                window.removeEventListener('keydown', handleKeyDown);
+            };
+        }, [onClose]);
+        return (
+            <div 
+                id="image-modal" 
+                className="fixed inset-0 bg-black/90 flex justify-center items-center z-[1000] backdrop-blur-sm animate-[fadeIn_0.3s_ease]"
+                onClick={onClose}
+            >
+                <div 
+                    className="relative max-w-[95vw] max-h-[95vh] p-5 bg-black rounded-lg shadow-[0_0_50px_rgba(163,255,0,0.5)]"
+                    onClick={(e) => e.stopPropagation()}
+                >
+                    <button 
+                        data-cursor-hover 
+                        id="modal-close-btn" 
+                        className="absolute -top-4 -right-4 text-[#111] text-3xl font-bold cursor-pointer bg-[#a3ff00] rounded-full w-10 h-10 flex justify-center items-center leading-none border-2 border-[#a3ff00] transition-all duration-300 hover:text-white hover:bg-black hover:rotate-90 z-[1002]"
+                        onClick={onClose}
+                    >
+                        &times;
+                    </button>
+                    <img id="modal-image" src={src} alt="Enlarged Project View" className="block max-w-full max-h-[85vh] object-contain rounded-md"/>
+                </div>
+            </div>
+        );
+    };
+
+    // --- APP ---
+    const App = () => {
+        const [loading, setLoading] = useState(true);
+        const [modalImageSrc, setModalImageSrc] = useState(null);
+        useEffect(() => {
+            const timer = setTimeout(() => {
+                setLoading(false);
+            }, 3000);
+            return () => clearTimeout(timer);
+        }, []);
+        const openModal = (src) => {
+            setModalImageSrc(src);
+        };
+        const closeModal = () => {
+            setModalImageSrc(null);
+        };
+        return (
+            <>
+                <Preloader isVisible={loading} />
+                <CustomCursor />
+                <div className={`transition-opacity duration-500 ease-in ${loading ? 'opacity-0' : 'opacity-100'}`}>
+                    <Header />
+                    <main>
+                        <N12MagazineSection onImageClick={openModal} />
+                        <GalgaltzSection onImageClick={openModal} />
+                        <DiverseDesignsSection onImageClick={openModal} />
+                    </main>
+                </div>
+                {modalImageSrc && <ImageModal src={modalImageSrc} onClose={closeModal} />}
+            </>
+        );
+    };
+
+    // --- RENDER ---
+    const rootElement = document.getElementById('root');
+    if (!rootElement) {
+      throw new Error("Could not find root element to mount to");
     }
-    
-    // Call initialization when content is loaded
-    document.addEventListener('DOMContentLoaded', () => {
-        initializeCarousel();
-    });
-    
-    // קריאה בעת טעינה ובעת שינוי גודל החלון
-    window.addEventListener('load', adjustWrapperHeight);
-    window.addEventListener('resize', adjustWrapperHeight);
+    const root = ReactDOM.createRoot(rootElement);
+    root.render(
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>
+    );
   </script>
 </body>
 </html>
