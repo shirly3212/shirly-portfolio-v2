@@ -26,6 +26,17 @@
     }
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    /* Section Reveal Animation */
+    .scroll-reveal {
+      opacity: 0;
+      transform: translateY(50px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    .scroll-reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
   </style>
   <script>
     tailwind.config = {
@@ -205,7 +216,7 @@
         }, []);
         const dotSize = isHovering ? 0 : 8;
         const ringSize = isHovering ? 40 : 24;
-        const ringBorderColor = isHovering ? 'border-[#a3ff00]/50' : (isCursorInverted ? 'border-black/70' : 'border-white/70');
+        const ringBorderColor = isHovering ? 'border-[#00b4d8]/70' : (isCursorInverted ? 'border-black/70' : 'border-white/70');
         const dotBgColor = isCursorInverted ? 'bg-black' : 'bg-white';
         return (
             <>
@@ -254,18 +265,18 @@
             return () => clearInterval(interval);
         }, []);
         return (
-            <header id="home" className="relative flex items-center justify-between bg-[#0d0d0d] p-[5rem_10%] min-h-[100vh] overflow-hidden bg-[linear-gradient(to_right,rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[30px_30px] max-lg:flex-col max-lg:text-center max-lg:p-[4rem_5%] max-lg:justify-center">
+            <header id="home" className="bg-[#111] relative flex items-center justify-between p-[5rem_10%] min-h-[100vh] overflow-hidden max-lg:flex-col max-lg:text-center max-lg:p-[4rem_5%] max-lg:justify-center">
                 <Vector type="circle" style={{ top: '5%', right: '30%', width: '25px', height: '25px' }} delay="0s" />
                 <Vector type="triangle" style={{ top: '25%', right: '10%', width: '20px', height: '20px' }} delay="2s" />
                 <Vector type="square" style={{ top: '75%', right: '5%', width: '30px', height: '30px' }} delay="4s" />
                 <Vector type="pentagon" style={{ top: '15%', left: '10%', width: '30px', height: '30px' }} delay="3s" />
                 <Vector type="small-circle" style={{ top: '40%', left: '45%', width: '15px', height: '15px' }} delay="5s" />
                 <div className="max-w-[50%] z-10 max-lg:max-w-full">
-                    <p className="animate-[fadeIn_0.8s_ease-out_2s_forwards] opacity-0">Hey there!</p>
-                    <h1 className="text-[clamp(3rem,7vw,4rem)] font-light mb-2 leading-tight animate-[fadeIn_0.8s_ease-out_1.5s_forwards] opacity-0">
+                    <p>Hey there!</p>
+                    <h1 className="text-[clamp(3rem,7vw,4rem)] font-light mb-2 leading-tight">
                         I'm <strong className="block font-bold">Shirly Herscovici</strong>
                     </h1>
-                    <div className="h-[clamp(2.5rem,6vw,3.5rem)] overflow-hidden mb-8 animate-[fadeIn_0.8s_ease-out_1.5s_forwards] opacity-0">
+                    <div className="h-[clamp(2.5rem,6vw,3.5rem)] overflow-hidden mb-8">
                         <div className="relative h-full">
                             {ROLES.map((role, index) => (
                                 <span key={role} className={`absolute inset-0 text-[#a3ff00] font-bold text-[clamp(1.8rem,4vw,2.5rem)] whitespace-nowrap transition-all duration-500 ease-out flex max-lg:justify-center ${index === roleIndex ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-full'}`}>
@@ -274,10 +285,10 @@
                             ))}
                         </div>
                     </div>
-                    <p className="text-[1.1rem] text-[#aaa] mb-8 animate-[fadeIn_0.8s_ease-out_2s_forwards] opacity-0">
+                    <p className="text-[1.1rem] text-[#aaa] mb-8">
                         A passionate and versatile designer, blending aesthetics with functionality to create compelling digital experiences and stunning visual identities.
                     </p>
-                    <div className="flex gap-2 max-lg:flex-col max-lg:items-center max-lg:gap-4 animate-[fadeIn_0.8s_ease-out_2.2s_forwards] opacity-0">
+                    <div className="flex gap-2 max-lg:flex-col max-lg:items-center max-lg:gap-4">
                         <a data-cursor-hover href="https://shirly3212.github.io/Shirly_portfolio/index.html" className="group relative overflow-hidden px-3 py-2 rounded-md font-bold text-white bg-gradient-to-r from-[#6a11cb] to-[#2575fc] no-underline transition-transform duration-300 ease-out hover:scale-105 z-10 animate-[glowPulse_2s_infinite_ease-in-out] flex items-center gap-2" target="_blank" rel="noopener noreferrer">
                             FULL PORTFOLIO
                             <svg className="w-4 h-4 transition-transform duration-300 group-hover:rotate-45" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10" stroke="white" strokeWidth="2"/><path d="M12 8V16M8 12H16" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
@@ -335,7 +346,7 @@
             };
         }, []);
         return (
-            <div className="project relative min-h-[350px] rounded-xl bg-[#f8f8f8] shadow-lg transition-transform duration-300 hover:-translate-y-2 overflow-hidden">
+            <div className="project relative min-h-[350px] rounded-xl bg-[#f0f0f0] shadow-lg transition-transform duration-300 hover:-translate-y-2 overflow-hidden">
                 <div data-cursor-hover className="absolute bottom-4 right-4 z-20 w-8 h-8 animate-bounce">
                     <svg fill="#a3ff00" viewBox="0 0 24 24"><path d="M12,2A10,10,0,1,0,22,12,10,10,0,0,0,12,2Zm1,8H11V6H8l4-4,4,4H13Z" transform="rotate(180 12 12)" /></svg>
                 </div>
@@ -356,7 +367,7 @@
             return () => clearInterval(interval);
         }, [images.length]);
         return (
-            <div className="project relative min-h-[350px] overflow-hidden rounded-xl bg-[#f8f8f8] shadow-lg transition-transform duration-300 hover:-translate-y-2 cursor-pointer" onClick={() => onImageClick(images[currentIndex])}>
+            <div className="project relative min-h-[350px] overflow-hidden rounded-xl bg-[#f0f0f0] shadow-lg transition-transform duration-300 hover:-translate-y-2 cursor-pointer" onClick={() => onImageClick(images[currentIndex])}>
                 {images.map((imgSrc, index) => (
                     <img
                         key={imgSrc}
@@ -403,7 +414,7 @@
           return () => window.removeEventListener('resize', adjustHeight);
         }, []);
         return (
-            <section data-cursor-invert id="n12-magazine" className="bg-white text-black p-[6rem_8%] grid lg:grid-cols-[4fr_1fr] grid-cols-1 gap-10 items-start max-lg:p-[4rem_5%] max-lg:gap-8 min-h-[100vh]">
+            <section data-cursor-invert id="n12-magazine" className="scroll-reveal bg-white text-black p-[6rem_8%] grid lg:grid-cols-[4fr_1fr] grid-cols-1 gap-10 items-start max-lg:p-[4rem_5%] max-lg:gap-8 min-h-[100vh]">
                 <div ref={gridRef} id="n12-grid" className="grid grid-cols-1 sm:grid-cols-2 gap-8">
                     <ScrollProjectCard imgSrc={N12_MAGAZINE_IMAGES.scroll1} onImageClick={onImageClick} />
                     <FadeProjectCard images={N12_MAGAZINE_IMAGES.fade1} onImageClick={onImageClick} />
@@ -441,8 +452,7 @@
             return () => clearTimeout(timer);
         }, [currentSlide]);
         return (
-            <section id="galgaltz" className="bg-[radial-gradient(circle_at_top_left,#0d0d0d_40%,#000_100%)] text-white p-[6rem_8%] flex flex-col items-center justify-center relative overflow-hidden max-lg:p-[4rem_5%] min-h-[100vh]">
-                <div className="absolute inset-0 bg-gradient-to-br from-[rgba(37,117,252,0.2)] to-[rgba(106,17,203,0.2)] mix-blend-overlay z-0"></div>
+            <section id="galgaltz" className="scroll-reveal bg-[#111] text-white p-[6rem_8%] flex flex-col items-center justify-center relative overflow-hidden max-lg:p-[4rem_5%] min-h-[100vh]">
                 <div id="audio-wave-background" className="absolute bottom-0 left-0 w-full h-[100px] flex justify-between items-end gap-0 opacity-15 z-[1] overflow-hidden mb-5">
                     {Array.from({ length: 80 }).map((_, i) => (
                         <div
@@ -455,55 +465,57 @@
                         ></div>
                     ))}
                 </div>
-                <h2 className="text-3xl lg:text-5xl font-extrabold uppercase text-center relative z-[2] tracking-wider">
-                    GALGALTZ N12
-                    <span className="block w-20 h-1 mx-auto mt-4 bg-gradient-to-r from-[#a3ff00] to-[#00b4d8] rounded animate-[glowLine_3s_ease-in-out_infinite_alternate]"></span>
-                </h2>
-                <div className="flex flex-col lg:flex-row items-center lg:items-start gap-16 w-full max-w-6xl mt-16 z-[2]">
-                    <div className="lg:flex-[3] lg:pr-12 text-center lg:text-left animate-[fadeUp_1s_ease-out_forwards]">
-                        <p className="max-w-3xl text-center lg:text-left text-[#ccc] text-[1.1rem]">
-                            The <strong>"Music from the Screen"</strong> chart is a joint project by N12 and Galgalatz, where users vote for the greatest songs from movies and series. I designed a vibrant, intuitive, and cinematic UI/UX experience for this collaboration.
-                        </p>
-                        <div className="mt-10 text-center flex flex-col items-center lg:items-start">
-                            <h3 className="text-xl font-bold text-white mb-4">Listen to the Official Podcast Chart</h3>
-                            <a data-cursor-hover href="https://glz.co.il/%D7%92%D7%9C%D7%92%D7%9C%D7%A6/%D7%AA%D7%95%D7%9B%D7%A0%D7%99%D7%95%D7%AA/%D7%9E%D7%A6%D7%A2%D7%93-%D7%9E%D7%95%D7%96%D7%99%D7%A7%D7%94-%D7%9E%D7%94%D7%9E%D7%A1%D7%9A" target="_blank" rel="noopener noreferrer" className="relative w-full h-0 pb-[56.25%] overflow-hidden max-w-xl mx-auto lg:mx-0 rounded-xl shadow-[0_0_10px_rgba(37,117,252,0.5)] z-[2] transition-transform duration-300 hover:scale-102 cursor-pointer group">
-                                <img src="img_new/img_1.jpg" alt="Podcast Preview" className="absolute top-0 left-0 w-full h-full object-cover z-[1] rounded-xl"/>
-                                <div className="absolute inset-0 bg-black/60 z-[1] rounded-xl"></div>
-                                <div className="absolute inset-0 z-[2] flex flex-col items-center justify-center gap-2 text-white">
-                                    <svg className="w-10 h-10 fill-white transition-transform duration-300 group-hover:scale-110" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                                    <span className="font-bold text-lg">Go to Official Chart Page</span>
-                                </div>
-                            </a>
-                            <p className="text-xs text-gray-400 mt-2 mx-auto lg:mx-0">Podcast provided by Podtail (external source).</p>
-                        </div>
-                    </div>
-                    <div className="lg:flex-[2] flex justify-center w-full lg:pt-8">
-                        <div className="group relative bg-black/20 rounded-[30px] w-[340px] h-[580px] shadow-[0_0_30px_rgba(37,117,252,0.3)] transition-all duration-400 ease-in-out [transform:perspective(800px)_rotateY(10deg)] hover:[transform:perspective(800px)_rotateY(0deg)_scale(1.05)] hover:shadow-[0_0_60px_rgba(106,17,203,0.6)]">
-                            <div className="w-full h-full absolute top-0 left-0 overflow-hidden rounded-[30px]">
-                               <img 
-                                    id="carousel-image"
-                                    src={GALGALTZ_IMAGES[currentSlide]} 
-                                    alt="GALGALTZ N12 UI Screen" 
-                                    data-cursor-hover 
-                                    onClick={() => onImageClick(GALGALTZ_IMAGES[currentSlide])}
-                                    className={`w-full h-full object-cover cursor-zoom-in ${isAnimating ? 'animate-[carouselImageIn_0.4s_ease-in-out_forwards]' : ''}`}
-                               />
+                <div className="w-full">
+                    <h2 className="text-3xl lg:text-5xl font-extrabold uppercase text-center relative z-[2] tracking-wider">
+                        GALGALTZ N12
+                        <span className="block w-20 h-1 mx-auto mt-4 bg-gradient-to-r from-[#a3ff00] to-[#00b4d8] rounded animate-[glowLine_3s_ease-in-out_infinite_alternate]"></span>
+                    </h2>
+                    <div className="flex flex-col lg:flex-row items-center lg:items-start gap-16 w-full max-w-6xl mt-16 z-[2] mx-auto">
+                        <div className="lg:flex-[3] lg:pr-12 text-center lg:text-left">
+                            <p className="max-w-3xl text-center lg:text-left text-[#ccc] text-[1.1rem]">
+                                The <strong>"Music from the Screen"</strong> chart is a joint project by N12 and Galgalatz, where users vote for the greatest songs from movies and series. I designed a vibrant, intuitive, and cinematic UI/UX experience for this collaboration.
+                            </p>
+                            <div className="mt-10 text-center flex flex-col items-center lg:items-start">
+                                <h3 className="text-xl font-bold text-white mb-4">Listen to the Official Podcast Chart</h3>
+                                <a data-cursor-hover href="https://glz.co.il/%D7%92%D7%9C%D7%92%D7%9C%D7%A6/%D7%AA%D7%95%D7%9B%D7%A0%D7%99%D7%95%D7%AA/%D7%9E%D7%A6%D7%A2%D7%93-%D7%9E%D7%95%D7%96%D7%99%D7%A7%D7%94-%D7%9E%D7%94%D7%9E%D7%A1%D7%9A" target="_blank" rel="noopener noreferrer" className="relative w-full h-0 pb-[56.25%] overflow-hidden max-w-xl mx-auto lg:mx-0 rounded-xl shadow-[0_0_10px_rgba(37,117,252,0.5)] z-[2] transition-transform duration-300 hover:scale-102 cursor-pointer group">
+                                    <img src="img_new/img_1.jpg" alt="Podcast Preview" className="absolute top-0 left-0 w-full h-full object-cover z-[1] rounded-xl"/>
+                                    <div className="absolute inset-0 bg-black/60 z-[1] rounded-xl"></div>
+                                    <div className="absolute inset-0 z-[2] flex flex-col items-center justify-center gap-2 text-white">
+                                        <svg className="w-10 h-10 fill-white transition-transform duration-300 group-hover:scale-110" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                        <span className="font-bold text-lg">Go to Official Chart Page</span>
+                                    </div>
+                                </a>
+                                <p className="text-xs text-gray-400 mt-2 mx-auto lg:mx-0">Podcast provided by Podtail (external source).</p>
                             </div>
-                            <button data-cursor-hover id="prev-btn" onClick={handlePrev} className="absolute top-1/2 -translate-y-1/2 left-3 bg-black/40 border-none text-white p-2.5 z-30 rounded-full w-10 h-10 flex items-center justify-center transition-all duration-300 hover:bg-[#a3ff00] hover:scale-110 hover:text-black">
-                                <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4"><path d="M15 18L9 12L15 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                            </button>
-                            <button data-cursor-hover id="next-btn" onClick={handleNext} className="absolute top-1/2 -translate-y-1/2 right-3 bg-black/40 border-none text-white p-2.5 z-30 rounded-full w-10 h-10 flex items-center justify-center transition-all duration-300 hover:bg-[#a3ff00] hover:scale-110 hover:text-black">
-                                <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4"><path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                            </button>
-                            <div id="carousel-dots" className="absolute bottom-5 left-1/2 -translate-x-1/2 flex gap-2 z-30 bg-black/20 p-[8px_12px] rounded-full">
-                                {GALGALTZ_IMAGES.map((_, index) => (
-                                    <div 
-                                        key={index}
-                                        data-cursor-hover
-                                        onClick={() => handleDotClick(index)}
-                                        className={`w-2.5 h-2.5 rounded-full cursor-pointer transition-all duration-300 ${index === currentSlide ? 'bg-[#a3ff00] scale-125' : 'bg-white/50'}`}
-                                    ></div>
-                                ))}
+                        </div>
+                        <div className="lg:flex-[2] flex justify-center w-full lg:pt-8">
+                            <div className="group relative bg-black/20 rounded-[30px] w-[340px] h-[580px] shadow-[0_0_30px_rgba(37,117,252,0.3)] transition-all duration-400 ease-in-out [transform:perspective(800px)_rotateY(10deg)] hover:[transform:perspective(800px)_rotateY(0deg)_scale(1.05)] hover:shadow-[0_0_60px_rgba(106,17,203,0.6)]">
+                                <div className="w-full h-full absolute top-0 left-0 overflow-hidden rounded-[30px]">
+                                   <img 
+                                        id="carousel-image"
+                                        src={GALGALTZ_IMAGES[currentSlide]} 
+                                        alt="GALGALTZ N12 UI Screen" 
+                                        data-cursor-hover 
+                                        onClick={() => onImageClick(GALGALTZ_IMAGES[currentSlide])}
+                                        className={`w-full h-full object-cover cursor-zoom-in ${isAnimating ? 'animate-[carouselImageIn_0.4s_ease-in-out_forwards]' : ''}`}
+                                   />
+                                </div>
+                                <button data-cursor-hover id="prev-btn" onClick={handlePrev} className="absolute top-1/2 -translate-y-1/2 left-3 bg-black/40 border-none text-white p-2.5 z-30 rounded-full w-10 h-10 flex items-center justify-center transition-all duration-300 hover:bg-[#a3ff00] hover:scale-110 hover:text-black">
+                                    <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4"><path d="M15 18L9 12L15 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                                </button>
+                                <button data-cursor-hover id="next-btn" onClick={handleNext} className="absolute top-1/2 -translate-y-1/2 right-3 bg-black/40 border-none text-white p-2.5 z-30 rounded-full w-10 h-10 flex items-center justify-center transition-all duration-300 hover:bg-[#a3ff00] hover:scale-110 hover:text-black">
+                                    <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4"><path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                                </button>
+                                <div id="carousel-dots" className="absolute bottom-5 left-1/2 -translate-x-1/2 flex gap-2 z-30 bg-black/20 p-[8px_12px] rounded-full">
+                                    {GALGALTZ_IMAGES.map((_, index) => (
+                                        <div 
+                                            key={index}
+                                            data-cursor-hover
+                                            onClick={() => handleDotClick(index)}
+                                            className={`w-2.5 h-2.5 rounded-full cursor-pointer transition-all duration-300 ${index === currentSlide ? 'bg-[#a3ff00] scale-125' : 'bg-white/50'}`}
+                                        ></div>
+                                    ))}
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -579,9 +591,9 @@
         );
     
         return (
-            <section data-cursor-invert id="editing-suite" className="bg-white text-black p-[6rem_8%] overflow-hidden max-lg:p-[4rem_5%] min-h-[100vh] flex items-center">
+            <section data-cursor-invert id="editing-suite" className="scroll-reveal bg-white text-black p-[6rem_8%] overflow-hidden max-lg:p-[4rem_5%] min-h-[100vh] flex items-center">
                 <div className="max-w-7xl mx-auto grid grid-cols-1 xl:grid-cols-[2fr_3fr] items-center gap-12">
-                    <div className="w-full text-center xl:text-left animate-[fadeUp_1s_ease-out_forwards]">
+                    <div className="w-full text-center xl:text-left">
                         <h2 className="text-3xl lg:text-5xl font-extrabold uppercase tracking-wider">
                             Editing Suite
                             <span className="block w-20 h-1 xl:mx-0 mx-auto mt-4 bg-gradient-to-r from-[#a3ff00] to-[#00b4d8] rounded animate-[glowLine_3s_ease-in-out_infinite_alternate]"></span>
@@ -659,10 +671,10 @@
 
     const DiverseDesignsSection = ({ onImageClick }) => {
         return (
-            <section id="spectrum-of-work" className="bg-[#0d0d0d] text-white p-[6rem_8%] max-lg:p-[4rem_5%] overflow-hidden min-h-[100vh] bg-[linear-gradient(to_right,rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[30px_30px]">
-                <div className="text-center mb-12 animate-[fadeUp_1s_ease-out_forwards]">
+            <section id="spectrum-of-work" className="scroll-reveal bg-[#111] text-white p-[6rem_8%] max-lg:p-[4rem_5%] overflow-hidden min-h-[100vh]">
+                <div className="text-center mb-12">
                     <h2 className="text-3xl lg:text-5xl font-extrabold uppercase tracking-wider">A Spectrum of Work</h2>
-                    <span className="block w-20 h-1 mx-auto mt-4 bg-gradient-to-r from-[#6a11cb] to-[#2575fc] rounded"></span>
+                    <span className="block w-20 h-1 mx-auto mt-4 bg-gradient-to-r from-[#a3ff00] to-[#00b4d8] rounded"></span>
                     <p className="max-w-3xl mx-auto mt-4 text-gray-300 text-[1.1rem]">A collection of various projects, showcasing versatility in branding, editorial design, and digital campaigns.</p>
                 </div>
                 
@@ -673,6 +685,7 @@
                             data-cursor-hover
                             onClick={() => onImageClick(design.src)}
                             className="group relative overflow-hidden rounded-lg shadow-lg cursor-zoom-in [break-inside:avoid] transform transition-all duration-500 ease-in-out group-hover:grayscale group-hover:opacity-40 hover:!grayscale-0 hover:!opacity-100 hover:!scale-105 hover:shadow-2xl hover:shadow-[#a3ff00]/30"
+                            style={{ transitionDelay: `${index * 50}ms` }}
                         >
                             <img src={design.src} alt={design.title} className="w-full h-auto object-cover" />
                              <div className="absolute bottom-0 left-0 w-full p-5 bg-gradient-to-t from-black/90 to-black/0 text-left transform translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-in-out">
@@ -751,17 +764,54 @@
     
     const Footer = () => {
         return (
-            <footer className="bg-[#0a0a0a] text-center p-12">
-                <h3 className="text-3xl font-['Playfair_Display'] font-bold">Let's Create Together</h3>
-                <p className="text-gray-400 mt-2 mb-6">Have a project in mind? I'd love to hear about it.</p>
-                <div className="flex justify-center gap-4">
-                     <a data-cursor-hover href="tel:0549775275" className="text-[#ccc] no-underline border border-[#555] px-3 py-2 rounded-md transition-all duration-300 hover:text-black hover:bg-[#a3ff00] hover:border-[#a3ff00] hover:shadow-[0_0_15px_rgba(163,255,0,0.4)]">054-9775275</a>
-                    <a data-cursor-hover href="mailto:shirly3212@gmail.com" className="text-[#ccc] no-underline border border-[#555] px-3 py-2 rounded-md transition-all duration-300 hover:text-black hover:bg-[#a3ff00] hover:border-[#a3ff00] hover:shadow-[0_0_15px_rgba(163,255,0,0.4)]">shirly3212@gmail.com</a>
+            <footer className="scroll-reveal bg-[#111] text-center p-12">
+                <div>
+                    <h3 className="text-3xl font-['Playfair_Display'] font-bold">Let's Create Together</h3>
+                    <p className="text-gray-400 mt-2 mb-6">Have a project in mind? I'd love to hear about it.</p>
+                    <div className="flex justify-center gap-4">
+                         <a data-cursor-hover href="tel:0549775275" className="text-[#ccc] no-underline border border-[#555] px-3 py-2 rounded-md transition-all duration-300 hover:text-black hover:bg-[#a3ff00] hover:border-[#a3ff00] hover:shadow-[0_0_15px_rgba(163,255,0,0.4)]">054-9775275</a>
+                        <a data-cursor-hover href="mailto:shirly3212@gmail.com" className="text-[#ccc] no-underline border border-[#555] px-3 py-2 rounded-md transition-all duration-300 hover:text-black hover:bg-[#a3ff00] hover:border-[#a3ff00] hover:shadow-[0_0_15px_rgba(163,255,0,0.4)]">shirly3212@gmail.com</a>
+                    </div>
+                    <p className="text-xs text-gray-600 mt-10">&copy; {new Date().getFullYear()} Shirly Herscovici. All Rights Reserved.</p>
                 </div>
-                <p className="text-xs text-gray-600 mt-10">&copy; {new Date().getFullYear()} Shirly Herscovici. All Rights Reserved.</p>
             </footer>
         )
     }
+    
+    const ScrollToTopButton = ({ activeSection }) => {
+        const [isVisible, setIsVisible] = useState(false);
+
+        useEffect(() => {
+            const toggleVisibility = () => {
+                if (window.scrollY > window.innerHeight / 2) {
+                    setIsVisible(true);
+                } else {
+                    setIsVisible(false);
+                }
+            };
+            window.addEventListener("scroll", toggleVisibility);
+            return () => window.removeEventListener("scroll", toggleVisibility);
+        }, []);
+
+        const scrollToTop = () => {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        };
+        
+        const isLight = ['n12-magazine', 'editing-suite'].includes(activeSection);
+        const bgColor = isLight ? 'bg-black/80 hover:bg-black' : 'bg-white/80 hover:bg-white';
+        const textColor = isLight ? 'text-white hover:text-[#a3ff00]' : 'text-black hover:text-[#a3ff00]';
+
+        return (
+            <button
+                data-cursor-hover
+                onClick={scrollToTop}
+                className={`fixed bottom-6 left-6 w-12 h-12 rounded-full flex items-center justify-center shadow-lg transition-all duration-300 z-50 ${bgColor} ${textColor} ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-0'}`}
+                aria-label="Scroll to top"
+            >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 15l7-7 7 7"></path></svg>
+            </button>
+        );
+    };
 
     // --- APP ---
     const App = () => {
@@ -796,6 +846,26 @@
             return () => observer.disconnect();
         }, []);
 
+        useEffect(() => {
+            const revealObserver = new IntersectionObserver(
+                (entries, observer) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('is-visible');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                },
+                { rootMargin: '0px 0px -20% 0px', threshold: 0.1 }
+            );
+
+            document.querySelectorAll('.scroll-reveal').forEach(el => {
+                if (el) revealObserver.observe(el);
+            });
+
+            return () => revealObserver.disconnect();
+        }, []);
+
         const handleNavigation = (e, id) => {
             e.preventDefault();
             document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
@@ -814,6 +884,7 @@
                 <CustomCursor />
                 <div className={`transition-opacity duration-500 ease-in ${loading ? 'opacity-0' : 'opacity-100'}`}>
                     <SideNav activeSection={activeSection} onNavigate={handleNavigation} />
+                    <ScrollToTopButton activeSection={activeSection} />
                     <Header />
                     <main>
                         <N12MagazineSection onImageClick={openModal} />
