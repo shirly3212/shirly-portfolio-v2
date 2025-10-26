@@ -437,26 +437,29 @@
 
         const changeSlide = (newSlideIndex) => {
             if (isAnimating || newSlideIndex === currentSlide) return;
-
-            setIsAnimating(true);
+            setIsAnimating(true); // Set isAnimating to true at the start of the change
+    
             setCurrentSlide(newSlideIndex);
-
+    
             setTimeout(() => {
-                setIsAnimating(false);
+                setIsAnimating(false); // Set isAnimating back to false after animation duration
             }, 400); 
         };
-
+    
         const handleNext = () => {
+            if (isAnimating) return;
             const nextSlide = (currentSlide + 1) % GALGALTZ_IMAGES.length;
             changeSlide(nextSlide);
         };
-
+    
         const handlePrev = () => {
+            if (isAnimating) return;
             const prevSlide = (currentSlide - 1 + GALGALTZ_IMAGES.length) % GALGALTZ_IMAGES.length;
             changeSlide(prevSlide);
         };
-
+    
         const handleDotClick = (index) => {
+            if (isAnimating) return;
             changeSlide(index);
         };
         
@@ -781,7 +784,10 @@
                          <a data-cursor-hover href="tel:0549775275" className="text-[#ccc] no-underline border border-[#555] px-3 py-2 rounded-md transition-all duration-300 hover:text-black hover:bg-[#a3ff00] hover:border-[#a3ff00] hover:shadow-[0_0_15px_rgba(163,255,0,0.4)]">054-9775275</a>
                         <a data-cursor-hover href="mailto:shirly3212@gmail.com" className="text-[#ccc] no-underline border border-[#555] px-3 py-2 rounded-md transition-all duration-300 hover:text-black hover:bg-[#a3ff00] hover:border-[#a3ff00] hover:shadow-[0_0_15px_rgba(163,255,0,0.4)]">shirly3212@gmail.com</a>
                     </div>
-                    <p className="text-xs text-gray-600 mt-10">&copy; {new Date().getFullYear()} Shirly Herscovici. All Rights Reserved.</p>
+                    <div className="mt-10">
+                        <p className="text-xs text-gray-500">Designed & Developed by Shirly Herscovici</p>
+                        <p className="text-xs text-gray-600 mt-1">&copy; {new Date().getFullYear()} All Rights Reserved.</p>
+                    </div>
                 </div>
             </footer>
         )
