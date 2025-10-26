@@ -14,6 +14,9 @@
     ::-webkit-scrollbar-track { background: #1a1a1a; }
     ::-webkit-scrollbar-thumb { background-color: #a3ff00; border-radius: 10px; border: 2px solid #1a1a1a; }
     
+    html {
+        scroll-behavior: smooth;
+    }
     body {
         background-color: #111;
         color: #fff;
@@ -21,6 +24,8 @@
         cursor: none; /* Hide default cursor */
         overflow-x: hidden;
     }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
   </style>
   <script>
     tailwind.config = {
@@ -136,13 +141,20 @@
         no_bg: "img_new/portrait_no_bg.png.png",
     };
     const DIVERSE_DESIGNS = [
-        { src: "img_new/img_new_016.jpeg", title: "News 12 Archive", className: "col-span-1 row-span-1" },
-        { src: "img_new/img_new_014.jpeg", title: "Look Them in the Eyes", className: "col-span-1 row-span-2" },
-        { src: "img_new/img_new_013.jpeg", title: "October 7th Memorial", className: "col-span-2 row-span-1" },
-        { src: "img_new/img_new_012.png", title: "The Political Arena", className: "col-span-2 row-span-1" },
-        { src: "img_new/img_new_009.jpeg", title: "The Power of Iran", className: "col-span-1 row-span-1" },
-        { src: "img_new/img_new_011.jpeg", title: "World Cup 2022", className: "col-span-2 row-span-1" },
-        { src: "img_new/img_new_010.jpeg", title: "War Room Update", className: "col-span-2 row-span-1" },
+        { src: "img_new/img_new_016.jpeg", title: "News 12 Archive" },
+        { src: "img_new/img_new_014.jpeg", title: "Look Them in the Eyes" },
+        { src: "img_new/img_new_013.jpeg", title: "October 7th Memorial" },
+        { src: "img_new/img_new_012.png", title: "The Political Arena" },
+        { src: "img_new/img_new_009.jpeg", title: "The Power of Iran" },
+        { src: "img_new/img_new_011.jpeg", title: "World Cup 2022" },
+        { src: "img_new/img_new_010.jpeg", title: "War Room Update" },
+    ];
+    const SECTIONS = [
+        { id: 'home', title: 'Home' },
+        { id: 'n12-magazine', title: 'N12 Magazine' },
+        { id: 'galgaltz', title: 'Galgaltz N12' },
+        { id: 'editing-suite', title: 'Editing Suite' },
+        { id: 'spectrum-of-work', title: 'Spectrum of Work' },
     ];
 
     // --- COMPONENTS ---
@@ -181,9 +193,7 @@
                 }
                 
                 const target = e.target;
-                // Check for hover-able elements to change cursor size
                 setIsHovering(!!target.closest('[data-cursor-hover]'));
-                // Check if the cursor is over a section that requires an inverted color scheme
                 setIsCursorInverted(!!target.closest('[data-cursor-invert]'));
             };
 
@@ -244,7 +254,7 @@
             return () => clearInterval(interval);
         }, []);
         return (
-            <header id="header" className="relative flex items-center justify-between bg-[#0d0d0d] p-[5rem_10%] min-h-[85vh] overflow-hidden bg-[linear-gradient(to_right,rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[30px_30px] max-lg:flex-col max-lg:text-center max-lg:p-[4rem_5%]">
+            <header id="home" className="relative flex items-center justify-between bg-[#0d0d0d] p-[5rem_10%] min-h-[100vh] overflow-hidden bg-[linear-gradient(to_right,rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[30px_30px] max-lg:flex-col max-lg:text-center max-lg:p-[4rem_5%] max-lg:justify-center">
                 <Vector type="circle" style={{ top: '5%', right: '30%', width: '25px', height: '25px' }} delay="0s" />
                 <Vector type="triangle" style={{ top: '25%', right: '10%', width: '20px', height: '20px' }} delay="2s" />
                 <Vector type="square" style={{ top: '75%', right: '5%', width: '30px', height: '30px' }} delay="4s" />
@@ -393,7 +403,7 @@
           return () => window.removeEventListener('resize', adjustHeight);
         }, []);
         return (
-            <section data-cursor-invert id="n12-section" className="bg-white text-black p-[6rem_8%] grid lg:grid-cols-[4fr_1fr] grid-cols-1 gap-10 items-start max-lg:p-[4rem_5%] max-lg:gap-8">
+            <section data-cursor-invert id="n12-magazine" className="bg-white text-black p-[6rem_8%] grid lg:grid-cols-[4fr_1fr] grid-cols-1 gap-10 items-start max-lg:p-[4rem_5%] max-lg:gap-8 min-h-[100vh]">
                 <div ref={gridRef} id="n12-grid" className="grid grid-cols-1 sm:grid-cols-2 gap-8">
                     <ScrollProjectCard imgSrc={N12_MAGAZINE_IMAGES.scroll1} onImageClick={onImageClick} />
                     <FadeProjectCard images={N12_MAGAZINE_IMAGES.fade1} onImageClick={onImageClick} />
@@ -431,7 +441,7 @@
             return () => clearTimeout(timer);
         }, [currentSlide]);
         return (
-            <section className="bg-[radial-gradient(circle_at_top_left,#0d0d0d_40%,#000_100%)] text-white p-[6rem_8%] flex flex-col items-center relative overflow-hidden max-lg:p-[4rem_5%]">
+            <section id="galgaltz" className="bg-[radial-gradient(circle_at_top_left,#0d0d0d_40%,#000_100%)] text-white p-[6rem_8%] flex flex-col items-center justify-center relative overflow-hidden max-lg:p-[4rem_5%] min-h-[100vh]">
                 <div className="absolute inset-0 bg-gradient-to-br from-[rgba(37,117,252,0.2)] to-[rgba(106,17,203,0.2)] mix-blend-overlay z-0"></div>
                 <div id="audio-wave-background" className="absolute bottom-0 left-0 w-full h-[100px] flex justify-between items-end gap-0 opacity-15 z-[1] overflow-hidden mb-5">
                     {Array.from({ length: 80 }).map((_, i) => (
@@ -508,36 +518,22 @@
         const [imageSrc, setImageSrc] = useState(PHOTO_EDITING_IMAGES.before);
         const [overlayEffect, setOverlayEffect] = useState(null);
 
-        // Refs for sound effects
-        const clickSoundRef = useRef(null);
-        const stepCompleteSoundRef = useRef(null);
-        const finalCompleteSoundRef = useRef(null);
-    
         const STEPS_CONFIG = [
             { name: 'Enhance Colors', icon: 'sparkles', nextImage: PHOTO_EDITING_IMAGES.color_corrected, nextStep: 1, animation: 'color-wave' },
             { name: 'Remove Mic', icon: 'eraser', nextImage: PHOTO_EDITING_IMAGES.mic_removed, nextStep: 2, animation: 'dissolve' },
             { name: 'Change Shirt', icon: 'shirt', nextImage: PHOTO_EDITING_IMAGES.new_shirt, nextStep: 3, animation: 'dissolve' },
             { name: 'Remove BG', icon: 'select', nextImage: PHOTO_EDITING_IMAGES.no_bg, nextStep: 4, animation: 'scanline' },
         ];
-
-        const playSound = (soundRef) => {
-            if (soundRef.current) {
-                soundRef.current.currentTime = 0;
-                soundRef.current.play().catch(e => console.error("Sound play failed:", e));
-            }
-        };
     
         const handleNextStep = (stepConfig) => {
             if (isAnimating || step + 1 !== stepConfig.nextStep) return;
             
-            playSound(clickSoundRef);
             setIsAnimating(true);
             setOverlayEffect(stepConfig.animation);
 
             setTimeout(() => {
                 setImageSrc(stepConfig.nextImage);
                 setStep(stepConfig.nextStep);
-                playSound(stepConfig.nextStep === 4 ? finalCompleteSoundRef : stepCompleteSoundRef);
                 setTimeout(() => {
                     setOverlayEffect(null);
                     setIsAnimating(false);
@@ -547,7 +543,6 @@
     
         const handleReset = () => {
             if (isAnimating) return;
-            playSound(clickSoundRef);
             setIsAnimating(true);
             setOverlayEffect('dissolve');
             setTimeout(() => {
@@ -584,25 +579,20 @@
         );
     
         return (
-            <section id="photo-editing-section" className="bg-[#0d0d0d] text-white p-[6rem_8%] overflow-hidden bg-[linear-gradient(to_right,rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[30px_30px] max-lg:p-[4rem_5%]">
-                {/* Audio elements for SFX */}
-                <audio ref={clickSoundRef} src="sfx/click.mp3" preload="auto"></audio>
-                <audio ref={stepCompleteSoundRef} src="sfx/step_complete.mp3" preload="auto"></audio>
-                <audio ref={finalCompleteSoundRef} src="sfx/final_complete.mp3" preload="auto"></audio>
-
+            <section data-cursor-invert id="editing-suite" className="bg-white text-black p-[6rem_8%] overflow-hidden max-lg:p-[4rem_5%] min-h-[100vh] flex items-center">
                 <div className="max-w-7xl mx-auto grid grid-cols-1 xl:grid-cols-[2fr_3fr] items-center gap-12">
                     <div className="w-full text-center xl:text-left animate-[fadeUp_1s_ease-out_forwards]">
                         <h2 className="text-3xl lg:text-5xl font-extrabold uppercase tracking-wider">
                             Editing Suite
                             <span className="block w-20 h-1 xl:mx-0 mx-auto mt-4 bg-gradient-to-r from-[#a3ff00] to-[#00b4d8] rounded animate-[glowLine_3s_ease-in-out_infinite_alternate]"></span>
                         </h2>
-                        <p className="mt-8 text-[1.1rem] text-[#ccc]">
+                        <p className="mt-8 text-[1.1rem] text-gray-600">
                             Step into my shoes! Use the tools to transform this image yourself. Experience firsthand how color correction, background removal, and other adjustments bring a photo to its full potential.
                         </p>
                     </div>
 
                     <div className="w-full flex-shrink-0">
-                        <div className="w-full max-w-lg mx-auto rounded-xl shadow-[0_0_40px_rgba(163,255,0,0.2)] bg-black/30 p-4 border border-white/10 backdrop-blur-sm">
+                        <div className="w-full max-w-lg mx-auto rounded-xl shadow-[0_0_25px_rgba(163,255,0,0.3)] bg-black p-4 border-white/10">
                             <div className="relative overflow-hidden rounded-md aspect-square">
                                 <img
                                     key={imageSrc}
@@ -622,7 +612,7 @@
                             
                             <div className="mt-4">
                                 <div className="text-center text-[#a3ff00] mb-3 h-6 transition-opacity duration-300 font-bold">{getPrompt()}</div>
-                                <div className="w-full bg-gray-700 rounded-full h-2.5 mb-4 overflow-hidden">
+                                <div className="w-full bg-gray-600 rounded-full h-2.5 mb-4 overflow-hidden">
                                     <div className="bg-gradient-to-r from-[#a3ff00] to-[#00b4d8] h-2.5 rounded-full transition-all duration-500 ease-out" style={{ width: `${(step / 4) * 100}%` }}></div>
                                 </div>
 
@@ -669,24 +659,25 @@
 
     const DiverseDesignsSection = ({ onImageClick }) => {
         return (
-            <section data-cursor-invert id="diverse-section" className="bg-white text-black p-[6rem_8%] max-lg:p-[4rem_5%]">
+            <section id="spectrum-of-work" className="bg-[#0d0d0d] text-white p-[6rem_8%] max-lg:p-[4rem_5%] overflow-hidden min-h-[100vh] bg-[linear-gradient(to_right,rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[30px_30px]">
                 <div className="text-center mb-12 animate-[fadeUp_1s_ease-out_forwards]">
-                    <h2 className="text-3xl lg:text-5xl font-extrabold uppercase text-black tracking-wider">A Spectrum of Work</h2>
-                    <span className="block w-20 h-1 mx-auto mt-4 bg-gradient-to-r from-[#a3ff00] to-[#00b4d8] rounded animate-[glowLine_3s_ease-in-out_infinite_alternate]"></span>
-                    <p className="max-w-3xl mx-auto mt-4 text-[#555] text-[1.1rem]">A collection of various projects, showcasing versatility in branding, editorial design, and digital campaigns.</p>
+                    <h2 className="text-3xl lg:text-5xl font-extrabold uppercase tracking-wider">A Spectrum of Work</h2>
+                    <span className="block w-20 h-1 mx-auto mt-4 bg-gradient-to-r from-[#6a11cb] to-[#2575fc] rounded"></span>
+                    <p className="max-w-3xl mx-auto mt-4 text-gray-300 text-[1.1rem]">A collection of various projects, showcasing versatility in branding, editorial design, and digital campaigns.</p>
                 </div>
-                <div id="diverse-grid" className="grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-[250px]">
+                
+                <div className="[column-count:1] sm:[column-count:2] lg:[column-count:3] gap-6 space-y-6 group">
                     {DIVERSE_DESIGNS.map((design, index) => (
                         <div
                             key={design.src}
-                            className={`group relative overflow-hidden rounded-lg shadow-lg cursor-pointer animate-[fadeUp_1s_ease-out] ${design.className}`}
-                            style={{ animationDelay: `${index * 100}ms` }}
                             data-cursor-hover
                             onClick={() => onImageClick(design.src)}
+                            className="group relative overflow-hidden rounded-lg shadow-lg cursor-zoom-in [break-inside:avoid] transform transition-all duration-500 ease-in-out group-hover:grayscale group-hover:opacity-40 hover:!grayscale-0 hover:!opacity-100 hover:!scale-105 hover:shadow-2xl hover:shadow-[#a3ff00]/30"
                         >
-                            <img src={design.src} alt={design.title} className="w-full h-full object-cover object-center transition-transform duration-500 ease-in-out group-hover:scale-105" />
-                            <div className="absolute inset-0 bg-black/60 opacity-0 transition-opacity duration-500 group-hover:opacity-100 flex items-end p-4">
-                                <h3 className="text-white font-bold text-lg transform translate-y-4 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">{design.title}</h3>
+                            <img src={design.src} alt={design.title} className="w-full h-auto object-cover" />
+                             <div className="absolute bottom-0 left-0 w-full p-5 bg-gradient-to-t from-black/90 to-black/0 text-left transform translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-in-out">
+                                <h3 className="text-white font-bold text-xl drop-shadow-lg">{design.title}</h3>
+                                <p className="text-sm text-[#a3ff00] mt-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-200">View Project &rarr;</p>
                             </div>
                         </div>
                     ))}
@@ -731,27 +722,98 @@
         );
     };
 
+    const SideNav = ({ activeSection, onNavigate }) => {
+      const isLight = ['n12-magazine', 'editing-suite'].includes(activeSection);
+      const textColor = isLight ? 'text-black' : 'text-white';
+      const bgColor = isLight ? 'bg-black/50' : 'bg-white/50';
+      const activeRingColor = isLight ? 'ring-black' : 'ring-[#a3ff00]';
+
+      return (
+        <nav className="fixed top-1/2 right-4 -translate-y-1/2 z-50 flex flex-col gap-4">
+          {SECTIONS.map(section => (
+            <div key={section.id} className="group relative">
+              <a
+                href={`#${section.id}`}
+                onClick={(e) => onNavigate(e, section.id)}
+                data-cursor-hover
+                className={`block w-3 h-3 rounded-full transition-all duration-300 ${activeSection === section.id ? `ring-2 ${activeRingColor} ring-offset-2 ${isLight ? 'bg-black' : 'bg-white'}` : bgColor} hover:scale-125`}
+                aria-label={`Go to ${section.title} section`}
+              >
+              </a>
+              <div className={`absolute right-full mr-3 top-1/2 -translate-y-1/2 px-3 py-1 rounded-md shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none whitespace-nowrap ${isLight ? 'bg-black text-white' : 'bg-white text-black'}`}>
+                {section.title}
+              </div>
+            </div>
+          ))}
+        </nav>
+      );
+    };
+    
+    const Footer = () => {
+        return (
+            <footer className="bg-[#0a0a0a] text-center p-12">
+                <h3 className="text-3xl font-['Playfair_Display'] font-bold">Let's Create Together</h3>
+                <p className="text-gray-400 mt-2 mb-6">Have a project in mind? I'd love to hear about it.</p>
+                <div className="flex justify-center gap-4">
+                     <a data-cursor-hover href="tel:0549775275" className="text-[#ccc] no-underline border border-[#555] px-3 py-2 rounded-md transition-all duration-300 hover:text-black hover:bg-[#a3ff00] hover:border-[#a3ff00] hover:shadow-[0_0_15px_rgba(163,255,0,0.4)]">054-9775275</a>
+                    <a data-cursor-hover href="mailto:shirly3212@gmail.com" className="text-[#ccc] no-underline border border-[#555] px-3 py-2 rounded-md transition-all duration-300 hover:text-black hover:bg-[#a3ff00] hover:border-[#a3ff00] hover:shadow-[0_0_15px_rgba(163,255,0,0.4)]">shirly3212@gmail.com</a>
+                </div>
+                <p className="text-xs text-gray-600 mt-10">&copy; {new Date().getFullYear()} Shirly Herscovici. All Rights Reserved.</p>
+            </footer>
+        )
+    }
+
     // --- APP ---
     const App = () => {
         const [loading, setLoading] = useState(true);
         const [modalImageSrc, setModalImageSrc] = useState(null);
+        const [activeSection, setActiveSection] = useState('home');
+
         useEffect(() => {
             const timer = setTimeout(() => {
                 setLoading(false);
             }, 3000);
             return () => clearTimeout(timer);
         }, []);
+
+        useEffect(() => {
+            const observer = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            setActiveSection(entry.target.id);
+                        }
+                    });
+                },
+                { rootMargin: '-50% 0px -50% 0px', threshold: 0 }
+            );
+
+            SECTIONS.forEach(section => {
+                const el = document.getElementById(section.id);
+                if (el) observer.observe(el);
+            });
+
+            return () => observer.disconnect();
+        }, []);
+
+        const handleNavigation = (e, id) => {
+            e.preventDefault();
+            document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+        };
+        
         const openModal = (src) => {
             setModalImageSrc(src);
         };
         const closeModal = () => {
             setModalImageSrc(null);
         };
+
         return (
             <>
                 <Preloader isVisible={loading} />
                 <CustomCursor />
                 <div className={`transition-opacity duration-500 ease-in ${loading ? 'opacity-0' : 'opacity-100'}`}>
+                    <SideNav activeSection={activeSection} onNavigate={handleNavigation} />
                     <Header />
                     <main>
                         <N12MagazineSection onImageClick={openModal} />
@@ -759,6 +821,7 @@
                         <PhotoEditingSection />
                         <DiverseDesignsSection onImageClick={openModal} />
                     </main>
+                    <Footer />
                 </div>
                 {modalImageSrc && <ImageModal src={modalImageSrc} onClose={closeModal} />}
             </>
