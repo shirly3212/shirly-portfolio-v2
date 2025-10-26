@@ -590,18 +590,18 @@
                 <audio ref={stepCompleteSoundRef} src="sfx/step_complete.mp3" preload="auto"></audio>
                 <audio ref={finalCompleteSoundRef} src="sfx/final_complete.mp3" preload="auto"></audio>
 
-                <div className="max-w-7xl mx-auto flex lg:flex-row flex-col items-center gap-16">
-                    <div className="lg:w-2/5 w-full text-center lg:text-left animate-[fadeUp_1s_ease-out_forwards]">
+                <div className="max-w-7xl mx-auto grid grid-cols-1 xl:grid-cols-[2fr_3fr] items-center gap-12">
+                    <div className="w-full text-center xl:text-left animate-[fadeUp_1s_ease-out_forwards]">
                         <h2 className="text-3xl lg:text-5xl font-extrabold uppercase tracking-wider">
                             Editing Suite
-                            <span className="block w-20 h-1 lg:mx-0 mx-auto mt-4 bg-gradient-to-r from-[#a3ff00] to-[#00b4d8] rounded animate-[glowLine_3s_ease-in-out_infinite_alternate]"></span>
+                            <span className="block w-20 h-1 xl:mx-0 mx-auto mt-4 bg-gradient-to-r from-[#a3ff00] to-[#00b4d8] rounded animate-[glowLine_3s_ease-in-out_infinite_alternate]"></span>
                         </h2>
                         <p className="mt-8 text-[1.1rem] text-[#ccc]">
                             Step into my shoes! Use the tools to transform this image yourself. Experience firsthand how color correction, background removal, and other adjustments bring a photo to its full potential.
                         </p>
                     </div>
 
-                    <div className="lg:w-3/5 w-full flex-shrink-0">
+                    <div className="w-full flex-shrink-0">
                         <div className="w-full max-w-2xl mx-auto rounded-xl shadow-[0_0_40px_rgba(163,255,0,0.2)] bg-black/30 p-4 border border-white/10 backdrop-blur-sm">
                             <div className="relative overflow-hidden rounded-md aspect-square">
                                 <img
